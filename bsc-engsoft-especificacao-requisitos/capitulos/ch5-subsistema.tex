@@ -1,0 +1,37 @@
+\chapter{ Identificação de Subsistemas}
+\label{sec-subsistemas}
+
+Tal projeto foi dividido em 4 subsistemas a fim de facilitar o desenvolvimento de funcionalidades que são, de certa forma, isoladas, originando assim os subsistemas Auth, Log, Classroom e Board.
+A Figura~\ref{figura-subsistema} mostra os subsistemas identificados no contexto do presente projeto e suas interdependências, enquanto a Tabela~\ref{tabela-subsistema} apresenta breve descrição de cada um deles.
+
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{figuras/subsistemas.png}
+	\caption{Diagrama de Pacotes e os Subsistemas Identificados.}
+	\label{figura-subsistema}
+\end{figure} 
+
+\begin{table}[h]
+	\centering	
+	\vspace{0.5cm}
+	\caption{ Subsistemas}
+	\label{tabela-subsistema}
+	\begin{tabular}{|p{3cm}|p{12cm}|}  \hline \rowcolor[rgb]{0.8,0.8,0.8}
+		
+		Subsistema & Descrição \\\hline 
+		
+		Classroom & Subsistema contendo as funcionalidades relacionadas diretamente às turmas.  \\\hline
+		
+		Board & Envolve todas as funcionalidades relativas ao gerenciamento dos itens do board. \\\hline
+		
+		Board Interactions & Corresponde a todas as interações que os usuários podem realizar com os itens do board, como submeter tarefas ou realizar provas. \\\hline
+		
+		Feedback & Permite a avaliação de atividades e a visualização das notas do aluno em uma turma. \\\hline
+		
+		Discussions & Subsistema contendo as funcionalidades relativas ao fórum de discussão, às notícias e às \textit{Live Questions}. \\\hline
+		
+		Logs & Este sistema consiste na visualização de logs gerados a partir das atividades dos usuários do sistema. \\\hline  
+		
+	\end{tabular}	
+\end{table}

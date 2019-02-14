@@ -1,0 +1,174 @@
+\chapter{Requisitos de Usuário}
+\label{sec-requisitos}
+
+\noindent Tomando por base o contexto do sistema acima e considerando como principais \textit{stakeholders} os professores e alunos do Introcomp e de outros cursos relacionados ao ensino de programação, foram identificados os seguintes requisitos de usuário e regras de negócio:
+
+\newcounter{rfcount}
+\renewcommand*\therfcount{RF-\arabic{rfcount}}
+\newcommand*\RF{\refstepcounter{rfcount}\therfcount}
+\setcounter{rfcount}{0}
+
+\begin{longtable}{|c|p{10cm}|c|p{2cm}|}
+	
+	\caption{Requisitos Funcionais} \\ \hline \rowcolor[rgb]{0.8,0.8,0.8}
+	
+	ID &  Descrição  &  Prioridade   &  	Depende   \\ \hline	
+	
+	
+	\RF\label{rf-configuracoes} &  O sistema deve permitir que administradores possam definir as configurações de sistema (fuso horário, definições SMTP e modo de manutenção). Essas configurações devem ser armazenadas de forma genérica, de forma que seja guardada o nome da configuração e seu respectivo valor.  & Alta & \\ \hline
+	
+	\RF\label{rf-criar-turma} & Administradores devem poder criar novas turmas informando seu título, sua senha de acesso e se possui livro de notas e lista de presença. & Alta &  \\ \hline 
+
+	\RF\label{rf-gerenciamento-turma}  &  O sistema deve permitir que professores possam definir as configurações de turmas (título, senha de acesso, categorias de nota e existência de livro de notas e lista de presença). Deve-se também ser definida a forma com que a média final será calculada (baseada nas categorias de nota, informando o título e o peso de cada uma delas) e qual a condição para a aprovação dos alunos inscritos. & Alta & \ref{rf-criar-turma} \\ \hline 
+	
+	\RF\label{rf-inscricao} & O sistema deve permitir que alunos se inscrevam em uma turma por meio de uma senha associada a ela. & Alta & \ref{rf-gerenciamento-turma} \\
+	\hline	
+	
+	\RF\label{rf-gerenciamento-usuario-turma}  & O sistema deve permitir que administradores possam gerenciar os usuários dentro das turmas, sendo possível alterar sua \textit{role} de aluno para professor ou vice-versa. & Alta & \ref{rf-inscricao} \\
+	\hline 
+	
+	\RF\label{rf-adicionar-secao}  & Professores devem ser capazes de criar novas seções no board de uma turma. & Alta & \ref{rf-gerenciamento-usuario-turma} \\
+	\hline 
+	
+	\RF\label{rf-adicionar-arquivo}  & Professores devem ser capazes de adicionar novos arquivos ao \textit{board} de sua turma e configurar corretamente seu título, descrição e realizar o \textit{upload} do arquivo em questão. & Alta & \ref{rf-adicionar-secao} \\
+	\hline 
+	 
+	\RF\label{rf-adicionar-link}  & Professores devem ser capazes de adicionar novos links ao \textit{board} de sua turma e configurar corretamente seu título, descrição e informar a URL do link em questão. & Alta & \ref{rf-adicionar-secao} \\
+	\hline  
+	 
+	\RF\label{rf-adicionar-questionario}  & Professores devem ser capazes de adicionar novos questionários ao \textit{board} de sua turma e configurar corretamente seu título, descrição, data de início e data de término. Além disso, o professor deve informar todas as perguntas e suas respectivas respostas. & Alta & \ref{rf-adicionar-secao} \\
+	\hline  
+	
+	\RF\label{rf-adicionar-prova}  & Professores devem ser capazes de adicionar novas provas ao \textit{board} de sua turma e configurar corretamente seu título, descrição, data de início e data de término. Além disso, o professor deve informar todas as questões da prova, seu tipo (discursiva ou objetivo) e sua pontuação (a soma da pontuação de todas as questões deve totalizar 100 pontos). No caso de perguntas objetivas, o professor deve informar todas as alternativas e qual delas é a correta. & Alta & \ref{rf-adicionar-secao} \\
+	\hline  
+	
+	\RF\label{rf-adicionar-tarefa}  & Professores devem ser capazes de adicionar novas tarefas ao \textit{board} de sua turma e configurar corretamente seu título, descrição, data de início, data de término e tipo (texto, arquivo ou código). Caso seja do tipo Arquivo, o professor também deverá informar o número máximo de arquivos que podem ser enviados. & Alta & \ref{rf-adicionar-secao} \\
+	\hline  
+	
+	\RF\label{rf-adicionar-atividadeexterna}  & Professores devem ser capazes de adicionar novas atividades externas ao \textit{board} de sua turma e configurar corretamente seu título e descrição. & Alta & \ref{rf-adicionar-secao} \\
+	\hline  
+	
+	\RF\label{rf-adicionar-noticia}  & Professores devem ser capazes de publicar notícias no \textit{board} de uma turma. & 	Alta &  \ref{rf-adicionar-secao} \\
+	\hline 
+	
+	\RF\label{rf-gerenciamento-forum}  & Professores e alunos devem ser capazes de visualizar, publicar e responder tópicos no \textit{board} de uma turma. & 	Alta &  \ref{rf-adicionar-secao} \\
+	\hline
+	
+	\RF\label{rf-visualizar-livequestions}  & Professores devem ser capazes de visualizar \textit{live questions} no \textit{board} de uma turma. & 	Alta &  \ref{rf-adicionar-livequestion} \\ \hline
+	
+	\RF\label{rf-deletar-livequestions}  & As \textit{Live Questions} deverão ser deletadas automaticamente decorrido um dia de sua criação. & 	Alta &  \ref{rf-adicionar-livequestion} \\
+	\hline
+	
+	\RF\label{rf-gerenciamento-calendario}  & Professores devem ser capazes de gerenciar as aulas e os eventos de uma turma por meio do calendário, inserindo, removendo e alterando-os. & 	Alta &  \ref{rf-gerenciamento-usuario-turma} \\ \hline
+
+	\RF\label{rf-acessar-arquivo}  &  Alunos devem ser capazes de fazer download dos arquivos de sua turma. & Alta & \ref{rf-adicionar-arquivo} \\
+	\hline
+
+	\RF\label{rf-acessar-link}  &  Alunos devem ser capazes de acessar os links de sua turma. & Alta & \ref{rf-adicionar-link} \\
+	\hline
+
+	\RF\label{rf-acessar-questionario}  &  Alunos devem ser capazes de  responder aos questionários de sua turma. & Alta & \ref{rf-adicionar-questionario} \\
+	\hline
+
+	\RF\label{rf-acessar-prova}  &  Alunos devem ser capazes de resolver as provas de sua turma. & Alta & \ref{rf-adicionar-prova} \\
+	\hline
+
+	\RF\label{rf-acessar-tarefa}  &  Alunos devem ser capazes de submeter as tarefas de sua turma. No caso de tarefas do tipo Código, os alunos devem ter acesso a um compilador acoplado ao sistema para que possam testar seu código antes de submetê-lo. & Alta & \ref{rf-adicionar-tarefa} \\
+	\hline
+
+	\RF\label{rf-acessar-calendario}  &  Alunos devem ser capazes de consultar as aulas e eventos no calendário de sua turma. & Alta & \ref{rf-gerenciamento-calendario} \\
+	\hline
+	
+	\RF\label{rf-resultado-questionario}  &  Após encerrado um questionário, professores devem poder consultar seu resultado. & Alta & \ref{rf-acessar-questionario} \\
+	\hline
+	
+	\RF\label{rf-visualizar-noticia}  & Alunos devem ser capazes de visualizar as notícias no \textit{board} de sua turma. & 	Alta &  \ref{rf-adicionar-noticia} \\
+	\hline 
+	
+	\RF\label{rf-adicionar-livequestion}  & Alunos devem ser capazes de criar novas \textit{Live Questions} no \textit{board} de sua turma. & 	Alta &  \ref{rf-adicionar-secao} \\
+	\hline 
+	  
+	\RF\label{rf-download-lote}  & O sistema deve permitir que professores realizem download em lote das submissões de uma prova ou tarefa. & 	Alta &  \ref{rf-acessar-prova} e \ref{rf-acessar-tarefa} \\
+	\hline
+		
+	\RF\label{rf-avaliar-tarefa} & Professores devem ser capazes de avaliar provas, tarefas e atividades externas, atribuindo-lhes uma nota e, opcionalmente, um feedback. Essas avaliações poderão ser feitas individualmente (aluno por aluno) ou em lote (via planilha externa).  & Alta & \ref{rf-acessar-tarefa} \\ \hline 
+	
+	\RF\label{rf-consultar-nota-prova} & Deve ser possível que alunos consultem sua nota em uma prova (assim como a pontuação em cada questão) a qualquer momento após sua data limite.  & Alta & \ref{rf-avaliar-tarefa} \\ \hline 
+	
+	\RF\label{rf-consultar-nota-tarefa} & Deve ser possível que alunos consultem sua nota e seu respectivo feedback em uma tarefa a qualquer momento após sua data limite.  & Alta & \ref{rf-avaliar-tarefa} \\ \hline 
+	
+	\RF\label{rf-consultar-nota-atividadeexterna} & Deve ser possível que alunos consultem sua nota e seu respectivo feedback em uma atividade externa a qualquer momento após sua data limite. & Alta & \ref{rf-avaliar-tarefa} \\ \hline 
+	
+	\RF\label{rf-consultar-notas} & Deve ser possível que alunos consultem suas notas por meio do livro de notas, sendo possível ver todas as suas notas ao longo do curso e sua média parcial até o momento. & Alta & \ref{rf-avaliar-tarefa} \\ \hline 
+	
+	\RF\label{rf-lancar-presenca}  & Professores devem ser capazes de lançar as presenças de seus alunos em cada aula no sistema. & 	Alta &  \ref{rf-gerenciamento-calendario} \\
+	\hline 
+	
+	\RF\label{rf-consultar-presenca}  & Deve ser possível que alunos consultem suas presenças em aula a qualquer momento. & 	Alta &  \ref{rf-lancar-presenca} \\
+	\hline 
+
+	\RF\label{rf-enviar-mensagem}  & O sistema deve permitir que membros de uma turma enviem mensagens entre si. & 	Média &  \ref{rf-gerenciamento-usuario-turma} \\ \hline 
+				
+	\RF\label{rf-gerar-log-prof}  & O sistema deve permitir que professores de uma turma gerem logs com os acessos, visualizações e submissões de seus alunos. & Baixa &  \ref{rf-gerenciamento-usuario-turma} \\ \hline 
+					
+	\RF\label{rf-gerar-log-admin}  & O sistema deve permitir que administradores gerem relatórios com os acessos, visualizações e interações dos professores e alunos. & 	Baixa &  \ref{rf-gerenciamento-usuario-turma} \\ \hline 
+\end{longtable}
+
+\newcounter{rnfcount}
+\renewcommand*\thernfcount{RNF-\arabic{rnfcount}}
+\newcommand*\RNF{\refstepcounter{rnfcount}\thernfcount}
+\setcounter{rnfcount}{0}
+
+
+\begin{longtable}{|c|p{7.5cm}|p{2.5cm}|c|c|}
+	
+	\caption{Requisitos Não Funcionais}\\ \hline \rowcolor[rgb]{0.8,0.8,0.8}
+	
+	ID &	Descrição  & Categoria  & Escopo  & Prioridade   \\ \hline		
+	
+	\RNF\label{rnf-aplicacao-web}  & A plataforma deve estar disponível como uma aplicação Web, acessível a partir dos principais navegadores disponíveis no mercado.  & Portabilidade  & Sistema &	Alta   \\ \hline 	
+	
+	\RNF\label{rnf-seguranca}  & O sistema deve controlar o acesso às suas funcionalidades por meio de autenticação e autorização, utilizando o papel de cada usuário para definir a que funcionalidades ele terá acesso.  & Segurança  & Sistema &	Alta   \\ \hline 
+	
+	\RNF\label{rnf-criptografia}  & Todas as informações sensíveis (como senhas e tokens de acesso) devem ser criptografados.  & Confidencia\-bilidade  & Sistema &	Alta   \\ \hline 
+	
+	\RNF\label{rnf-apredizado-facil}  & A plataforma dever ser de aprendizado fácil, não sendo necessário nenhum treinamento especial para seu uso.  & Facilidade de Aprendizado  & Sistema &	Alta   \\ \hline 
+	
+	\RNF\label{rnf-consistencia}  & O sistema deve garantir a consistência de dados por meio da obrigatoriedade no momento da inserção de certos dados.  & Confiabilidade & Sistema & Alta \\ \hline  
+		
+	\RNF\label{rnf-facil-operacao}  & A plataforma deve ser de fácil operação, não sendo necessário uso contínuo para uma boa operação do sistema.  & Usabilidade  &	Sistema & Média  \\\hline 
+	
+	\RNF\label{rnf-facilitar-manutencao}  & O desenvolvimento do sistema deve facilitar manutenções futuras, utilizando padrões de design de software.  & Redigibilidade & Sistema &	Média  \\ 	\hline
+	
+\end{longtable}
+
+
+\newcounter{rncount}
+\renewcommand*\therncount{RN-\arabic{rncount}}
+\newcommand*\RN{\refstepcounter{rncount}\therncount}
+\setcounter{rncount}{0}
+
+\begin{longtable}{|c|p{10cm}|c|p{2cm}|}
+	
+	\caption{Regras de Negócio} \\ \hline \rowcolor[rgb]{0.8,0.8,0.8}
+	
+	ID & 	Descrição  &  Prioridade    & Depende  \\ \hline	
+	
+	\RN\label{rn-roles}  & Um usuário não pode estar associado às \textit{roles} de aluno e professor simultaneamente em uma mesma turma. & Alta & \ref{rf-gerenciamento-usuario-turma}  \\ \hline 
+	
+	\RN\label{rn-item-secao}  & Um item de \textit{board} precisa estar, necessariamente, associado a uma seção do \textit{board}. & Alta &  \ref{rf-adicionar-arquivo}, \ref{rf-adicionar-link}, \ref{rf-adicionar-questionario}, \ref{rf-adicionar-prova}, \ref{rf-adicionar-tarefa} e \ref{rf-adicionar-atividadeexterna} \\ \hline
+	
+	\RN\label{rn-submeter} & Alunos não poderão submeter questionários, tarefas e provas após a data limite. & Alta & \ref{rf-acessar-questionario}, \ref{rf-acessar-tarefa} e \ref{rf-acessar-prova} \\ \hline	
+
+	\RN\label{rn-avaliar} & Professores não poderão avaliar tarefas e provas antes da data limite. & Alta & \ref{rf-avaliar-tarefa} \\ \hline	
+	
+	\RN\label{rn-limite-arquivos} & Não é possível enviar um número de arquivos superior ao limite estipulado em uma tarefa. & Alta & \ref{rf-acessar-tarefa} \\ \hline
+	
+	\RN\label{rn-nota} & A nota de uma prova, tarefa ou atividade externa não poderá ser superior a 100. & Alta & \ref{rf-avaliar-tarefa} \\ \hline
+	
+	\RN\label{rn-peso} & A somatória do peso das categorias de notas deve ser igual a 100. & Alta & \ref{rf-gerenciamento-turma} \\ \hline
+
+	\RN\label{rn-mensagem} & Usuários não podem trocar mensagens com alguém que não esteja em uma mesma turma que ele. & Alta & \ref{rf-enviar-mensagem} \\ \hline
+
+\end{longtable}
+
