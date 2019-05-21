@@ -1,0 +1,201 @@
+\documentclass[10pt, a4paper]{article}
+
+\usepackage[pdftex]{graphicx,color}
+
+\usepackage[hidelinks]{hyperref}
+\usepackage{anysize}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage[portuges,brazilian]{babel}
+\usepackage{fancyhdr}
+\usepackage{ifthen}
+\usepackage{array}
+\usepackage{natbib}
+%\usepackage{ tipa }
+\usepackage{amssymb}
+\usepackage{amsmath}
+%\usepackage[usenames,dvipsnames]{xcolor} %to allow for color changes
+%\definecolor{light-gray}{gray}{0.80} % defines the colour.
+%\usepackage{cite} % to allow line breaks inside citations
+
+%% Para redução de espaço entre os itens da bibliografia
+	\let\oldbibliography\thebibliography
+	\renewcommand{\thebibliography}[1]{\oldbibliography{#1}
+	\setlength{\itemsep}{0pt}}
+
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage{enumerate}
+\usepackage{adjustbox}
+
+\usepackage{parskip}% http://ctan.org/pkg/parskip
+\setlength{\parindent}{0pt}
+
+\usepackage{titlesec}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
+
+\newcommand{\mnras}{Mon. Not. R. Astron. Soc.}
+\newcommand{\aap}{Astronomy $\&$ Astrophysics}
+\newcommand{\apjs}{ApJS}
+\newcommand{\apj}{Astrophys. J.}
+\newcommand{\apjl}{Astrophys. J. Letters}
+\newcommand{\aj}{Astron. J.}
+\newcommand{\pasa}{PASA}
+\newcommand{\nat}{Nature}
+
+\usepackage{mathptmx}
+\usepackage{tabularx}
+
+
+\renewcommand{\baselinestretch}{1.5}
+
+%\marginsize{left}{right}{top}{bottom}
+\marginsize{30mm}{30mm}{15mm}{15mm}
+
+
+
+\usepackage{fancyhdr}
+\usepackage{afterpage}
+\pagestyle{fancy}
+\fancyhf{} % clear all fields
+\fancyhead[R]{Universidade Federal do Espírito Santo\\ Programa Institucional de Iniciação Científica}
+\renewcommand{\headrulewidth}{0pt}
+
+%\pagenumbering{arabic}
+
+% Pacote xspace: para colocar espaços no final das macros quando necessário.
+\usepackage{xspace}
+
+
+% Definição de macros.
+\newcommand{\java}{Java\texttrademark\xspace}
+
+
+
+\begin{document}
+
+\afterpage{\cfoot{\thepage}}
+
+
+
+\begin{center}
+ {\Large \bf  Subprojeto de Iniciação Científica}
+ \end{center}
+
+\vspace{.5cm}
+
+
+%\noindent
+\begin{tabularx}{\textwidth}{|l|X|}
+\hline
+{\bf Edital:} & Edital Piic 20\_\_ /20\_\_ \\
+\hline
+{\bf Título do Projeto:} &  \\
+\hline
+{\bf Título do Subprojeto:} &  \\
+\hline
+{\bf Candidato a Orientador:}&   \\
+\hline
+{\bf Candidato a Voluntário:} &   \\
+\hline
+{\bf Membros Equipe do Projeto:} &  \\
+\hline  
+\end{tabularx}
+
+\vspace{.5cm}
+
+%\bigskip
+
+ORIENTAÇÕES GERAIS PARA PREENCHIMENTO DO MODELO DE SUBPROJETO DE PESQUISA: Este documento deve ser utilizado como modelo para a elaboração do texto de descrição do Subprojeto de Pesquisa no âmbito do Programa Institucional de Iniciação Científica da Ufes. Deve ser composto dos seguintes itens: resumo, introdução, objetivos, metodologia, plano de trabalho / cronograma e referências. O texto do Subprojeto de Pesquisa deve ser preparado de acordo com as seguintes instruções: (i) os 6 (seis) itens que compõem o documento não devem exceder 10 páginas de formato A4 com margens de 3 cm (em todos os lados), usando fonte Times New Roman, corpo 10 com espaçamento entre linhas de 1,5 e tabulação de 1 cm no início de cada parágrafo, com alinhamento justificado, (ii) as citações e referências bibliográficas devem seguir o formato da ABNT, (iii) a seção de referências bibliográficas deve conter apenas artigos citados no texto, ou seja, “não liste se não citar” e “não cite se não listar”, (iv) os títulos das seções e seus conteúdos devem seguir as recomendações descritas no corpo do texto deste modelo, (v) o cabeçalho das páginas deve ser mantido de acordo com a formatação deste modelo. (Este parágrafo deve ser excluído)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Resumo}
+
+O resumo do trabalho deve conter uma breve descrição do projeto com objetivos e justificativas, metodologia e resultados esperados. As palavras chave devem fornecer ao leitor uma ideia dos principais temas de interesse de que trata a pesquisa. Máximo de 5 (cinco) palavras-chave, separadas entre si por ponto e finalizadas também por ponto,  como no exemplo abaixo:
+      
+{\it Palavras-chave:} Foraminíferos. Bacia do Espírito Santo. Exploração de Petróleo. Preservação do Meio Ambiente. Pré-sal.
+      
+
+  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introdução}
+
+Na introdução, o autor deve apresentar uma descrição geral do tema de estudo, mostrando sua relevância, citando, sempre que possível, trabalhos de outros autores para permitir a contextualização de sua pesquisa. Nesta seção, deve-se também ressaltar a ligação do Subprojeto de Iniciação Científica com o Projeto de Pesquisa do professor orientador.
+
+Teste de referência: Segundo \cite{souza:phdthesis12}, bla bla... \textbf{ou} Bla bla~\citep{souza:phdthesis12}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Objetivos}
+
+Esta seção deve conter, de forma concisa, o objetivo geral e os objetivos específicos do trabalho, ou seja, as hipóteses que se quer demonstrar, os dispositivos que se quer montar, os compostos que se deseja sintetizar, as ideias que se deseja corroborar ou refutar, etc. Também deve-se dar, de forma concisa, as razões pelas quais se quer atingir estes objetivos. 
+
+ 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Metodologia}
+
+Deve-se definir, com base na revisão bibliográfica ou em trabalhos preliminares, a metodologia que deverá ser utilizada para testar a hipótese formulada e atingir os objetivos estabelecidos. Apresentar o procedimento de trabalho, o material que deverá ser utilizado, o tratamento da informação e o procedimento estatístico, se for o caso. Esta seção deve detalhar os aspectos da metodologia empregada nas atividades especificamente executadas pelo estudante e apresentar sua relação com o Projeto de Pesquisa do orientador.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Plano de trabalho/Cronograma}
+
+Esta seção deve explicitar as atividades que serão desenvolvidas pelo estudante e seu cronograma de execução para que o objetivo do subprojeto possa ser alcançado, especificando período de início e término. As atividades não devem ser apenas listadas, é necessário apresentar uma breve descrição de sua relevância para o subprojeto proposto e a forma de execução. Nas tabelas, inserir o número de linhas necessário.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{ATIVIDADES}
+
+\begin{tabular}{|p{145mm}|}
+\hline
+\textbf{Lista de atividades} \\
+\hline
+1 -  \\
+\hline
+2 -  \\
+\hline
+3 -  \\
+\hline
+4 -  \\
+\hline
+5 -  \\
+\hline
+\end{tabular}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{CRONOGRAMA (Ago/20\_\_ a Jul/20\_\_)}
+
+
+\begin{tabular}{|r|l|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+Atividade & ago & set & out & nov & dez & jan & fev & mar & abr & mai & jun & jul\\
+\hline
+1 &   &   &   &    &  &   &   &   &   &   &   &  \\
+\hline
+2 &   &   &   &   &   &   &    &    &   &   &   &  \\
+\hline
+3 &   &   &   &   &   &   &   &   &    &   &  & \\
+\hline
+4 &   &   &   &   &   &   &   &   &   &    &   &  \\
+\hline
+5 &   &   &   &   &   &   &   &   &   &    &   &  \\
+\hline
+\end{tabular}
+
+
+%\bibliographystyle{apalike2}
+\bibliographystyle{hapalike2-NOand}
+
+\bibliography{biblio}
+
+
+\end{document}
+
+
+
