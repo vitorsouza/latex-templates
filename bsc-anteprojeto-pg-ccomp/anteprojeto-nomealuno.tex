@@ -35,6 +35,7 @@
 
 % Conserta o erro "No room for a new \count"
 \usepackage{etex}
+% Em alguns sistemas operacionais, a linha \reserveinserts{28} pode ser necessária.
 %\reserveinserts{28}
 
 % Usa a fonte Latin Modern.
@@ -57,6 +58,14 @@
 
 % Inclusão de gráficos.
 \usepackage{graphicx}
+
+% Posicionamento de elementos.
+\usepackage{float}
+
+% Melhor controle de layout em tabelas.
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{hhline}
 
 % Inclusão de páginas em PDF diretamente no documento (para uso nos apêndices).
 \usepackage{pdfpages}
@@ -105,7 +114,10 @@
 % Permite usar o comando \hl{} para evidenciar texto com fundo amarelo. Útil para chamar atenção a itens a fazer.
 \usepackage{soulutf8}
 
-% Colorinlistoftodos package: to insert colored comments so authors can collaborate on the content.
+% Permite inserir espaço em branco condicional (incluído no texto final só se necessário) em macros.
+\usepackage{xspace}
+
+% Permite inserir comentários para controle de revisão de documentos.
 \usepackage[colorinlistoftodos, textwidth=20mm, textsize=footnotesize]{todonotes}
 \newcommand{\aluno}[1]{\todo[author=\textbf{Aluno},color=green!30,caption={},inline]{#1}}
 \newcommand{\professor}[1]{\todo[author=\textbf{Professor},color=red!30,caption={},inline]{#1}}
@@ -170,7 +182,7 @@
 \titulo{Título do Trabalho}
 \autor{Nome do Aluno}
 \local{Vitória, ES}
-\data{2019}
+\data{2020}
 \orientador{Prof. Dr. Fulano de Tal}
 \coorientador{Prof. Dr. Ciclano de Tal}
 \instituicao{
@@ -178,12 +190,12 @@
   \par
   Centro Tecnológico
   \par
-  Colegiado do Curso de Ciência da  Computação}
+  Colegiado do Curso de Ciência da Computação}
 \tipotrabalho{Monografia (PG)}
 
 % Preâmbulo (tipo do trabalho, objetivo, nome da instituição, área de concentração, etc.).
 % (*) Verificar se está correto (ex.: substituir por Engenharia de Computação se for o caso).
-\preambulo{Anteprojeto apresentado ao Colegiado do Curso de Ciência da  Computação do Centro Tecnológico da Universidade Federal do Espírito Santo, como requisito para aprovação na Disciplina Projeto de Graduação I.}
+\preambulo{Anteprojeto apresentado ao Colegiado do Curso de Ciência da Computação do Centro Tecnológico da Universidade Federal do Espírito Santo, como requisito para aprovação na Disciplina Projeto de Graduação I.}
 
 % Macros específicas do trabalho.
 % (*) Inclua aqui termos que são utilizados muitas vezes e que demandam formatação especial.
@@ -232,7 +244,12 @@
 % Inicia o documento.
 \begin{document}
 
+	
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing
 
+
+% Brasão da instituição.
 \begin{figure}
 \centering
 \includegraphics[width=.20\textwidth]{figuras/brasao.jpg} 
