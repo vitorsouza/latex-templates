@@ -1,6 +1,6 @@
-% =========================================================
-% Modelo para Anteprojeto de Graduação - Engenharia de Computação (em Português)
-% Prof. Vítor E. Silva Souza - NEMO / PPGI / DI / UFES
+% ==============================================================================
+% Modelo para Monografia de Projeto de Graduação (PG)
+% Agradecimentos: Prof. Vítor E. Silva Souza - NEMO / DI / UFES
 %
 % Baseado em abtex2-modelo-trabalho-academico.tex, v-1.9.2 laurocesar
 % Copyright 2012-2014 by abnTeX2 group at http://abntex2.googlecode.com/ 
@@ -14,27 +14,25 @@
 % Instruções encontram-se espalhadas pelo documento. Para facilitar sua leitura,
 % tais instruções são precedidas por (*) -- utilize a função localizar do seu
 % editor para passar por todas elas.
-% =========================================================
+% ==============================================================================
 
 % Usa o estilo abntex2, configurando detalhes de formatação e hifenização.
 \documentclass[
-article,           % Seções ao invés de capítulos.
-12pt,              % Tamanho da fonte.
-oneside,         % Para impressão em apenas um lado (não inclui páginas em branco).
-a4paper,        % Tamanho do papel.
-english,			% Idioma adicional para hifenização.
-french,				% Idioma adicional para hifenização.
-spanish,			% Idioma adicional para hifenização.
-brazil				% O último idioma é o principal do documento.
-]{abntex2}
-
+	12pt,				% Tamanho da fonte.
+	openright,			% Capítulos começam em página ímpar (insere página vazia caso preciso).
+	oneside,			% Para impressão em verso e anverso. Oposto a oneside.
+	a4paper,			% Tamanho do papel.
+	english,			% Idioma adicional para hifenização.
+	french,				% Idioma adicional para hifenização.
+	spanish,			% Idioma adicional para hifenização.
+	brazil				% O último idioma é o principal do documento.
+	]{abntex2}
 
 
 
 %%% Importação de pacotes. %%%
 
 % Conserta o erro "No room for a new \count"
-% Em alguns sistemas operacionais, a linha \reserveinserts{28} deve ser comentada.
 \usepackage{etex}
 %\reserveinserts{28}
 
@@ -47,6 +45,9 @@ brazil				% O último idioma é o principal do documento.
 % Codificação do documento em Unicode.
 \usepackage[utf8]{inputenc}
 
+% Usado pela ficha catalográfica.
+\usepackage{lastpage}
+
 % Indenta o primeiro parágrafo de cada seção.
 \usepackage{indentfirst}
 
@@ -56,13 +57,8 @@ brazil				% O último idioma é o principal do documento.
 % Inclusão de gráficos.
 \usepackage{graphicx}
 
-% Posicionamento de elementos.
-\usepackage{float}
-
-% Melhor controle de layout em tabelas.
-\usepackage{tabularx}
-\usepackage{multirow}
-\usepackage{hhline}
+% Inclusão de páginas em PDF diretamente no documento (para uso nos apêndices).
+\usepackage{pdfpages}
 
 % Para melhorias de justificação.
 \usepackage{microtype}
@@ -74,16 +70,19 @@ brazil				% O último idioma é o principal do documento.
 \renewcommand{\backref}{}										% Texto padrão antes do número das páginas.
 \renewcommand*{\backrefalt}[4]{									% Define os textos da citação.
 	\ifcase #1
-	Nenhuma citação no texto.
+		Nenhuma citação no texto.
 	\or
-	Citado na página #2.
+		Citado na página #2.
 	\else
-	Citado #1 vezes nas páginas #2.
+		Citado #1 vezes nas páginas #2.
 	\fi}
 
 % \rm is deprecated and should not be used in a LaTeX2e document
 % http://tex.stackexchange.com/questions/151897/always-textrm-never-rm-a-counterexample
 \renewcommand{\rm}{\textrm}
+
+% Pacotes não incluídos no template abntex2. 
+% Podem ser comentados caso não queira utilizá-los.
 
 % Inclusão de símbolos não padrão.
 \usepackage{amssymb}
@@ -105,13 +104,13 @@ brazil				% O último idioma é o principal do documento.
 % Permite usar o comando \hl{} para evidenciar texto com fundo amarelo. Útil para chamar atenção a itens a fazer.
 \usepackage{soulutf8}
 
-% Permite inserir espaço em branco condicional (incluído no texto final só se necessário) em macros.
-\usepackage{xspace}
-
-% Permite inserir comentários para controle de revisão de documentos.
+% Colorinlistoftodos package: to insert colored comments so authors can collaborate on the content.
 \usepackage[colorinlistoftodos, textwidth=20mm, textsize=footnotesize]{todonotes}
 \newcommand{\aluno}[1]{\todo[author=\textbf{Aluno},color=green!30,caption={},inline]{#1}}
 \newcommand{\professor}[1]{\todo[author=\textbf{Professor},color=red!30,caption={},inline]{#1}}
+
+% Permite inserir espaço em branco condicional (incluído no texto final só se necessário) em macros.
+\usepackage{xspace}
 
 % Permite incluir listagens de código com o comando \lstinputlisting{}.
 \usepackage{listings}
@@ -130,104 +129,60 @@ brazil				% O último idioma é o principal do documento.
 	rulecolor=\color{black},
 	showstringspaces=false,
 	tabsize=2,
-	inputencoding=utf8,
-	extendedchars=true,
-	literate=%
-	{é}{{\'{e}}}1
-	{è}{{\`{e}}}1
-	{ê}{{\^{e}}}1
-	{ë}{{\¨{e}}}1
-	{É}{{\'{E}}}1
-	{Ê}{{\^{E}}}1
-	{û}{{\^{u}}}1
-	{ù}{{\`{u}}}1
-	{â}{{\^{a}}}1
-	{à}{{\`{a}}}1
-	{á}{{\'{a}}}1
-	{ã}{{\~{a}}}1
-	{Á}{{\'{A}}}1
-	{Â}{{\^{A}}}1
-	{Ã}{{\~{A}}}1
-	{ç}{{\c{c}}}1
-	{Ç}{{\c{C}}}1
-	{õ}{{\~{o}}}1
-	{ó}{{\'{o}}}1
-	{ô}{{\^{o}}}1
-	{Õ}{{\~{O}}}1
-	{Ó}{{\'{O}}}1
-	{Ô}{{\^{O}}}1
-	{î}{{\^{i}}}1
-	{Î}{{\^{I}}}1
-	{í}{{\'{i}}}1
-	{Í}{{\~{Í}}}1
+    inputencoding=utf8,
+    extendedchars=true,
+    literate=%
+    {é}{{\'{e}}}1
+    {è}{{\`{e}}}1
+    {ê}{{\^{e}}}1
+    {ë}{{\¨{e}}}1
+    {É}{{\'{E}}}1
+    {Ê}{{\^{E}}}1
+    {û}{{\^{u}}}1
+    {ù}{{\`{u}}}1
+    {â}{{\^{a}}}1
+    {à}{{\`{a}}}1
+    {á}{{\'{a}}}1
+    {ã}{{\~{a}}}1
+    {Á}{{\'{A}}}1
+    {Â}{{\^{A}}}1
+    {Ã}{{\~{A}}}1
+    {ç}{{\c{c}}}1
+    {Ç}{{\c{C}}}1
+    {õ}{{\~{o}}}1
+    {ó}{{\'{o}}}1
+    {ô}{{\^{o}}}1
+    {Õ}{{\~{O}}}1
+    {Ó}{{\'{O}}}1
+    {Ô}{{\^{O}}}1
+    {î}{{\^{i}}}1
+    {Î}{{\^{I}}}1
+    {í}{{\'{i}}}1
+    {Í}{{\~{Í}}}1
 }
-
 
 
 
 %%% Definição de variáveis. %%%
 
-\renewcommand{\imprimircapa}{%
-	\begin{capa}%
-		\center
-
-		{\ABNTEXchapterfont\large
-			Centro Tecnológico
-			\par
-			Colegiado do Curso de Engenharia de Computação
-			\par
-			Coordenação de Projeto de Graduação
-			\par
-			Disciplina Projeto de Graduação I
-			\vfill
-			\textbf{ANTEPROJETO}
-			\par
-		
-		}
-		\vfill
-		\begin{center}
-			\ABNTEXchapterfont\bfseries\LARGE\imprimirtitulo
-		\end{center}
-		
-		\hspace{.45\textwidth}
-		\begin{minipage}{.5\textwidth}
-			\flushright
-			
-			% (*) Substituir os textos abaixo com as informações apropriadas.
-			\assinatura{\textbf{Aluno: Nome do Aluno}}
-			\assinatura{\textbf{Orientador: Nome do Professor}}
-		\end{minipage}
-		
-		\vfill
-		\large\imprimirlocal
-		\linebreak
-		\large\imprimirdata
-		\vspace*{1cm}
-	\end{capa}
-}
-
-\newcommand{\versao}{2.0}
-\newcommand{\subtitulo}{Anteprojeto}
-
 % (*) Substituir os textos abaixo com as informações apropriadas.
-\titulo{Título}
+\titulo{Título do Trabalho}
 \autor{Nome do Aluno}
 \local{Vitória, ES}
-\data{9999}
-
+\data{2019}
+\orientador{Prof. Dr. Fulano de Tal}
+\coorientador{Prof. Dr. Ciclano de Tal}
 \instituicao{
   Universidade Federal do Espírito Santo -- UFES
   \par
   Centro Tecnológico
   \par
-  Departamento de Informática}
+  Colegiado do Curso de Engenharia de Computação}
 \tipotrabalho{Monografia (PG)}
 
-
-
-
-
-
+% Preâmbulo (tipo do trabalho, objetivo, nome da instituição, área de concentração, etc.).
+% (*) Verificar se está correto (ex.: substituir por Ciência da Computação se for o caso).
+\preambulo{Anteprojeto apresentado ao Colegiado do Curso de Engenharia de Computação do Centro Tecnológico da Universidade Federal do Espírito Santo, como requisito para aprovação na Disciplina Projeto de Graduação I.}
 
 % Macros específicas do trabalho.
 % (*) Inclua aqui termos que são utilizados muitas vezes e que demandam formatação especial.
@@ -270,58 +225,73 @@ brazil				% O último idioma é o principal do documento.
 
 %%% Páginas iniciais do documento: capa, folha de rosto, ficha, resumo, tabelas, etc. %%%
 
-% Compila o índice. <--- Desnecessário em Plano de Estudo.
-%\makeindex
+% Compila o índice.
+\makeindex
 
 % Inicia o documento.
 \begin{document}
-	
+
+
+\begin{figure}
+\centering
+\includegraphics[width=.20\textwidth]{figuras/brasao.jpg} 
+\label{fig-brasao}
+\end{figure}
+
+\begin{center}
+\textbf{\textsf{UNIVERSIDADE FEDERAL DO ESPÍRITO SANTO}}
+
+\textbf{\textsf{CENTRO TECNOLÓGICO}}
+
+\textbf{\textsf{COLEGIADO DO CURSO DE ENGENHARIA DE COMPUTAÇÃO}}
+
+\large{\textbf{\textsf{  }}}
+
+\large{\textbf{\textsf{  }}}
+\end{center}
+
 % Retira espaço extra obsoleto entre as frases.
 \frenchspacing
-
-
-% Brasão da instituição.
-\begin{figure}[h]
-	\centering
-	\includegraphics[scale=0.055]{figuras/brasao}
-\end{figure} 
 
 % Capa do trabalho.
 \imprimircapa
 
-% Lista de silgas.
-% (*) Indicar as siglas utilizadas no trabalho como no exemplo abaixo.
-\begin{siglas}
-	\item [UML] Linguagem de Modelagem Unificada, do inglês \textit{Unified Modeling Language}
-\end{siglas}
+% Folha de rosto (o * indica que haverá a ficha bibliográfica).
+\imprimirfolhaderosto*
 
-% Índice de capítulos.
-% \tableofcontents*
+
+
 
 
 %%% Início da parte de conteúdo do documento. %%%
 
 % Marca o início dos elementos textuais.
-\clearpage
 \textual
 
 % Inclusão dos capítulos.
 % (*) Para facilitar a organização, os capítulos foram divididos em arquivo separados e colocados dentro da.
 % pasta capitulos/. Caso o aluno prefira trabalhar com um só arquivo, basta substituir os comandos \include 
 % pelos conteúdos dos arquivos que estão sendo incluídos, excluindo a pasta capitulos/ em seguida.
-\input{secoes/sec1-introducao}
-\input{secoes/sec2-fundamentacao}
-\input{secoes/sec3-sumario}
+\include{capitulos/ch1-introducao}
+\include{capitulos/ch2-referencial}
+
+
+
+
+%%% Páginas finais do documento: bibliografia e anexos. %%%
 
 % Finaliza a parte no bookmark do PDF para que se inicie o bookmark na raiz e adiciona espaço de parte no sumário.
 \phantompart
 
-% Marca o fim dos elementos textuais.
+% Marca o início dos elementos pós-textuais.
 \postextual
 
 % Referências bibliográficas
-\clearpage
 \bibliography{bibliografia}
+
+
+
+
 
 % Fim do documento.
 \end{document}
