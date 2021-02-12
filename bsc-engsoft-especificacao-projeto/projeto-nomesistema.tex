@@ -56,8 +56,11 @@
 % Inclusão de gráficos.
 \usepackage{graphicx}
 
-% Tabularx package: melhor controle de leiaute de tabelas.
+% Melhor controle de leiaute de tabelas.
 \usepackage{tabularx}
+\usepackage{colortbl}
+\usepackage{longtable}
+\usepackage{pdflscape}
 
 % Inclusão de páginas em PDF diretamente no documento (para uso nos apêndices).
 \usepackage{pdfpages}
@@ -169,7 +172,7 @@
 \titulo{Nome do Projeto}
 \autor{Nome do Aluno}
 \local{Vitória, ES}
-\data{2014}
+\data{\the\year}
 \instituicao{
 	Universidade Federal do Espírito Santo -- UFES
 	\par
@@ -196,7 +199,7 @@
 		\begin{table}[h]
 			\centering
 			\vspace{0.5cm}
-			\begin{tabular}{|c|c|c|c|} \hline
+			\begin{tabular}{|c|c|c|c|} \hline \rowcolor[rgb]{0.8,0.8,0.8}
 			
  				Versão & Responsável & Data  & Alterações \\ \hline   
  				                            
@@ -279,15 +282,19 @@
 % Marca o início dos elementos textuais.
 \textual
 
-% Inclusão dos capítulos.
+% Inclusão dos capítulos como seções (sem quebra de página).
 \begingroup
 \let\clearpage\relax
-\include{capitulos/ch1-introducao}
-\vspace*{2cm}
+\input{capitulos/ch1-introducao}
+\vspace*{1.5cm}
+\input{capitulos/ch2-plataforma}
+\vspace*{1.5cm}
+\input{capitulos/ch3-rnfs}
+\vspace*{1.5cm}
+\input{capitulos/ch4-arquitetura}
+\vspace*{1.5cm}
+\input{capitulos/ch5-frameweb}
 \endgroup
-\include{capitulos/ch2-plataforma}
-\include{capitulos/ch3-atributos}
-\include{capitulos/ch4-arquitetura}
 
 
 
