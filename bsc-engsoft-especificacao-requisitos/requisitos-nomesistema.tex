@@ -1,30 +1,39 @@
+% ==============================================================================
+% Modelo para Especificação de Requisitos de Software
+% Prof. Vítor E. Silva Souza - NEMO/UFES :: DI/UFES :: PPGI/UFES
+%
+% Baseado em abtex2-modelo-trabalho-academico.tex, v-1.9.2 laurocesar
+% Copyright 2012-2014 by abnTeX2 group at http://abntex2.googlecode.com/ 
+%
+% This work may be distributed and/or modified under the conditions of the LaTeX 
+% Project Public License, either version 1.3 of this license or (at your option) 
+% any later version. The latest version of this license is in
+% http://www.latex-project.org/lppl.txt.
+%
+% IMPORTANTE:
+% Instruções encontram-se espalhadas pelo documento. Para facilitar sua leitura,
+% tais instruções são precedidas por (*) -- utilize a função localizar do seu
+% editor para passar por todas elas.
+% ==============================================================================
+
 % Usa o estilo abntex2, configurando detalhes de formatação e hifenização.
 \documentclass[
-	12pt,				
-	oneside,		
-	a4paper,			
-	english,			% Idioma adicional para hifenização.
-	french,				% Idioma adicional para hifenização.
-	spanish,			% Idioma adicional para hifenização.
-	brazil				% O último idioma é o principal do documento.
-	]{abntex2}
-
+12pt,				
+oneside,		
+a4paper,			
+english,			% Idioma adicional para hifenização.
+french,				% Idioma adicional para hifenização.
+spanish,			% Idioma adicional para hifenização.
+brazil				% O último idioma é o principal do documento.
+]{abntex2}
 
 
 %%% Importação de pacotes. %%%
 
-% Pacotes não documentados:
+% Conserta o erro "No room for a new \count". 
+% O comando \reserveinserts deve ser comentado ou não, dependendo da versão do LaTeX.
 \usepackage{etex}
 %\reserveinserts{28}
-\usepackage{colortbl}
-\usepackage{framed}
-\usepackage{multirow}
-
-\usepackage{longtable}
-\usepackage{pdflscape}
-
-% Posicionamento de elementos.
-\usepackage{float}
 
 % Usa a fonte Latin Modern.
 \usepackage{lmodern}
@@ -47,6 +56,12 @@
 % Inclusão de gráficos.
 \usepackage{graphicx}
 
+% Melhor controle de leiaute de tabelas.
+\usepackage{tabularx}
+\usepackage{colortbl}
+\usepackage{longtable}
+\usepackage{pdflscape}
+
 % Inclusão de páginas em PDF diretamente no documento (para uso nos apêndices).
 \usepackage{pdfpages}
 
@@ -60,15 +75,16 @@
 \renewcommand{\backref}{}										% Texto padrão antes do número das páginas.
 \renewcommand*{\backrefalt}[4]{									% Define os textos da citação.
 	\ifcase #1
-		Nenhuma citação no texto.
+	Nenhuma citação no texto.
 	\or
-		Citado na página #2.
+	Citado na página #2.
 	\else
-		Citado #1 vezes nas páginas #2.
+	Citado #1 vezes nas páginas #2.
 	\fi}
 
-% Pacotes não incluídos no template abntex2. 
-% Podem ser comentados caso não queira utilizá-los.
+% \rm is deprecated and should not be used in a LaTeX2e document
+% http://tex.stackexchange.com/questions/151897/always-textrm-never-rm-a-counterexample
+\renewcommand{\rm}{\textrm}
 
 % Inclusão de símbolos não padrão.
 \usepackage{amssymb}
@@ -87,24 +103,17 @@
 \usepackage{bigfoot}
 \usepackage{hyperref}
 
-% Color control.
-\usepackage[usenames,dvipsnames]{xcolor}
-
 % Permite usar o comando \hl{} para evidenciar texto com fundo amarelo. Útil para chamar atenção a itens a fazer.
-% O comando \phl é definido para que o professor evidencie texto com uma cor diferente para adicionar notas.
 \usepackage{soulutf8}
-\newcommand{\phl}[2][Peach]{{\sethlcolor{#1} \hl{#2}}}
 
-
-% Permite usar o comando \hl{} para evidenciar texto com fundo amarelo. Útil para chamar atenção a itens a fazer.
-\usepackage{soul}
-
+% Colorinlistoftodos package: to insert colored comments so authors can collaborate on the content.
+% (*) Indicar o nome do aluno e substituir o nome do professor se for o caso.
+\usepackage[colorinlistoftodos, textwidth=20mm, textsize=footnotesize]{todonotes}
+\newcommand{\aluno}[1]{\todo[author=\textbf{Aluno},color=green!30,caption={},inline]{#1}}
+\newcommand{\vitor}[1]{\todo[author=\textbf{Vítor},color=red!30,caption={},inline]{#1}}
 
 % Permite inserir espaço em branco condicional (incluído no texto final só se necessário) em macros.
 \usepackage{xspace}
-
-% Permite usar tabelas que ocupam mais de uma pág
-\usepackage{longtable}
 
 % Permite incluir listagens de código com o comando \lstinputlisting{}.
 \usepackage{listings}
@@ -123,48 +132,59 @@
 	rulecolor=\color{black},
 	showstringspaces=false,
 	tabsize=2,
-    inputencoding=utf8,
-    extendedchars=true,
-    literate=%
-    {é}{{\'{e}}}1
-    {è}{{\`{e}}}1
-    {ê}{{\^{e}}}1
-    {ë}{{\¨{e}}}1
-    {É}{{\'{E}}}1
-    {Ê}{{\^{E}}}1
-    {û}{{\^{u}}}1
-    {ù}{{\`{u}}}1
-    {â}{{\^{a}}}1
-    {à}{{\`{a}}}1
-    {á}{{\'{a}}}1
-    {ã}{{\~{a}}}1
-    {Á}{{\'{A}}}1
-    {Â}{{\^{A}}}1
-    {Ã}{{\~{A}}}1
-    {ç}{{\c{c}}}1
-    {Ç}{{\c{C}}}1
-    {õ}{{\~{o}}}1
-    {ó}{{\'{o}}}1
-    {ô}{{\^{o}}}1
-    {Õ}{{\~{O}}}1
-    {Ó}{{\'{O}}}1
-    {Ô}{{\^{O}}}1
-    {î}{{\^{i}}}1
-    {Î}{{\^{I}}}1
-    {í}{{\'{i}}}1
-    {Í}{{\~{Í}}}1
+	inputencoding=utf8,
+	extendedchars=true,
+	literate=%
+	{é}{{\'{e}}}1
+	{è}{{\`{e}}}1
+	{ê}{{\^{e}}}1
+	{ë}{{\¨{e}}}1
+	{É}{{\'{E}}}1
+	{Ê}{{\^{E}}}1
+	{û}{{\^{u}}}1
+	{ù}{{\`{u}}}1
+	{â}{{\^{a}}}1
+	{à}{{\`{a}}}1
+	{á}{{\'{a}}}1
+	{ã}{{\~{a}}}1
+	{Á}{{\'{A}}}1
+	{Â}{{\^{A}}}1
+	{Ã}{{\~{A}}}1
+	{ç}{{\c{c}}}1
+	{Ç}{{\c{C}}}1
+	{õ}{{\~{o}}}1
+	{ó}{{\'{o}}}1
+	{ô}{{\^{o}}}1
+	{Õ}{{\~{O}}}1
+	{Ó}{{\'{O}}}1
+	{Ô}{{\^{O}}}1
+	{î}{{\^{i}}}1
+	{Î}{{\^{I}}}1
+	{í}{{\'{i}}}1
+	{Í}{{\~{Í}}}1
 }
-
-% Colorinlistoftodos package: to insert colored comments so authors can collaborate on the content.
-\usepackage[colorinlistoftodos, textwidth=20mm, textsize=footnotesize]{todonotes}
-\newcommand{\luiz}[1]{\todo[author=\textbf{Luiz Felipe},color=green!30,caption={},inline]{#1}}
-\newcommand{\vitor}[1]{\todo[author=\textbf{Vítor},color=red!30,caption={},inline]{#1}}
 
 
 
 
 %%% Definição de variáveis. %%%
+% (*) Substituir os textos abaixo com as informações apropriadas.
+\titulo{Nome do Projeto}
+\autor{Nome do Aluno}
+\local{Vitória, ES}
+\data{\the\year}
 
+\instituicao{
+	Universidade Federal do Espírito Santo -- UFES
+	\par
+	Centro Tecnológico
+	\par
+	Departamento de Informática}
+\newcommand{\subtitulo}{Documento de Requisitos de Sistema}
+\newcommand{\versao}{1.0}
+
+% Define a capa.
+% (*) Incluir linhas no registro de alterações a cada nova versão.
 \renewcommand{\imprimircapa}{%
 	\begin{capa}%
 		\center
@@ -180,21 +200,11 @@
 		\begin{table}[h]
 			\centering
 			\vspace{0.5cm}
-			\begin{tabular}{|c|c|c|p{4.5cm}|}  \hline  \rowcolor[rgb]{0.8,0.8,0.8}
+			\begin{tabular}{|c|c|c|p{4.5cm}|} \hline \rowcolor[rgb]{0.8,0.8,0.8}
  				
  				Versão & Responsável & Data  & Alterações \\	\hline  
  				                            
-				1.0 & Luiz Felipe F. Mai    & 13/03/2017  & Versão inicial da documentação \\ \hline 
-				1.1 & Vítor E. Silva Souza & 17/03/2017  & \textit{Revisado até Seção~\ref{sec-requisitos}.} \\ \hline 
-				1.2 & Luiz Felipe F. Mai & 22/03/2017  & \textit{Correções realizadas na versão 1.1} \\ \hline 
-				1.3 & Vítor E. Silva Souza & 17/04/2017 & \textit{Revisado até Seção~\ref{sec-caso-de-uso}.} \\ \hline
-				1.4 & Luiz Felipe F. Mai & 25/04/2017 & \textit{Correções realizadas na versão 1.3} \\ \hline
-				1.5 & Vítor E. Silva Souza & 15/05/2017 & \textit{Revisado até o final.} \\ \hline
-				1.6 & Luiz Felipe F. Mai & 30/05/2017 & \textit{Correções realizadas na versão 1.4} \\ \hline
-				1.7 & Vítor E. Silva Souza & 14/06/2017 & \textit{Nova revisão completa.} \\ \hline
-				1.8 & Luiz Felipe F. Mai & 27/06/2017 & \textit{Redivisão dos subsistemas e correções realizadas na versão 1.7} \\ \hline
-				2.0 & Luiz Felipe F. Mai & 16/12/2017 & \textit{Correções após apresentação} \\ \hline
-
+				1.0  & \imprimirautor & dd/MM/yyyy & Versão Inicial  \\ \hline 
 			 
 			\end{tabular}
 		\end{table}
@@ -207,43 +217,20 @@
 	\end{capa}
 }
 
-\newcommand{\versao}{2.0}
-\newcommand{\subtitulo}{Documento de Especificação de Requisitos}
-
-\titulo{Khoeus - Plataforma de Aprendizado}
-\autor{Luiz Felipe Ferreira Mai}
-\local{Vitória, ES}
-\data{2017}
-
-\instituicao{
-  Universidade Federal do Espírito Santo -- UFES
-  \par
-  Centro Tecnológico
-  \par
-  Departamento de Informática}
-\tipotrabalho{Monografia (PG)}
-
-
-
-
-
-
-
 % Macros específicas do trabalho.
 % (*) Inclua aqui termos que são utilizados muitas vezes e que demandam formatação especial.
-% Os exemplos abaixo incluem i* (substituindo o asterisco por uma estrela) e Java com TM em superscript.
+% Exemplo: Java com TM (trademark) em superscript.
 % Use sempre \xspace para que o LaTeX inclua espaço em branco após a macro somente quando necessário.
-\newcommand{\istar}{\textit{i}$^\star$\xspace}
 \newcommand{\java}{Java\texttrademark\xspace}
-\newcommand{\latex}{\LaTeX\xspace}
 
 
 
 
 %%% Configurações finais de aparência. %%%
 
-% Altera o aspecto da cor azul.
+% Altera o aspecto de algumas cores.
 \definecolor{blue}{RGB}{41,5,195}
+\definecolor{lightgray}{gray}{0.9}
 
 % Informações do PDF.
 \makeatletter
@@ -273,39 +260,20 @@
 % Compila o índice.
 \makeindex
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 % Inicia o documento.
 \begin{document}
 
 % Retira espaço extra obsoleto entre as frases.
 \frenchspacing
 
-
+% Inclui o brasão da UFES.
 \begin{figure}[h]
-  \centering
-  \includegraphics[scale=0.055]{figuras/brasao.jpg}
-  \label{ppts3}
-  \end{figure} 
-
+	\centering
+	\includegraphics[scale=0.055]{brasao.jpg}
+	\label{ppts3}
+\end{figure} 
 
 % Capa do trabalho.
-
-
-
-
 \imprimircapa
 
 
@@ -315,6 +283,7 @@
 %%% Início da parte de conteúdo do documento. %%%
 % Marca o início dos elementos textuais.
 \textual
+
 % Inclusão dos capítulos.
 % (*) Para facilitar a organização, os capítulos foram divididos em arquivo separados e colocados dentro da.
 % pasta capitulos/. Caso o aluno prefira trabalhar com um só arquivo, basta substituir os comandos \include 
@@ -322,7 +291,7 @@
 
 \include{capitulos/ch1-introducao}
 
-\include{capitulos/ch2-descricao}
+\include{capitulos/ch2-proposito}
 
 \include{capitulos/ch3-minimundo}
 

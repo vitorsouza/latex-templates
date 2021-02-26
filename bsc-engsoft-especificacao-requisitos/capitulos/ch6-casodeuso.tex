@@ -1,736 +1,177 @@
 \chapter{Modelo de Casos de Uso}
-\label{sec-caso-de-uso}
+\label{sec-casos-de-uso}
 
-\newcounter{uccount}                                      \renewcommand*\theuccount{UC-\arabic{uccount}}
-\newcommand*\UC{\refstepcounter{uccount}\theuccount}      \setcounter{uccount}{0}
+% Define contador e identificador para casos de uso.
+% Usar \UC\label{rf-nome-do-label} para cada caso de uso definido.
+\newcounter{uccount}
+\renewcommand*\theuccount{UC-\arabic{uccount}}
+\newcommand*\UC{\refstepcounter{uccount}\theuccount}
+\setcounter{uccount}{0}
 
-O modelo de casos de uso corresponde a uma tentativa de descrever a relação das funcionalidades do sistema com cada um de seus atores. Os atores identificados no contexto deste projeto estão descritos na Tabela~\ref{tabela-atores}.
+\vitor{Listar e descrever os atores na Tabela~\ref{tbl-casos-de-uso-atores}. Criar uma subseção para cada subsistema e, dentro dela, apresentar o diagrama de casos de uso (ex.: Figura~\ref{fig-casos-de-uso-subsistema-01}), a tabela de casos de uso cadastrais (ex.: Tabela~\ref{tbl-casos-de-uso-subsistema-01-cruds}), a tabela de casos de uso de consulta (ex.: Tabela~\ref{tbl-casos-de-uso-subsistema-01-consultas}) e, por fim, a descrição dos demais casos de uso, uma por página (ex.: \ref{uc-subsistema-01-exemplo-05}). As tabelas possuem instruções e exemplos de como devem ser preenchidas.}
 
-\begin{table}[H]
-	\centering \vspace{0.5cm} \caption{ Atores}
-	\begin{tabular}{|p{3cm}|p{12cm}|} \hline \rowcolor[rgb]{0.8,0.8,0.8}
-		Ator & Descrição \\\hline                              
-		Visitante & Qualquer pessoa que acesse o sistema e não tenha realizado o \textit{login}. \\\hline                              
-		Administrador & Usuário que realizou o \textit{login} e pode gerenciar todo o sistema. \\\hline                              
-		Membro & Usuário que realizou o \textit{login} no sistema mas que não possui permissões para configurá-lo. \\\hline	                              
-		Aluno & Corresponde a um Membro vinculado a alguma turma com permissões de aluno, como enviar tarefas e consultas notas. \\\hline	                              
-		Professor & Corresponde a um Membro vinculado a alguma turma com permissões de professor, como criar itens do \textit{board} e configurar as informações da turma. \\\hline			 
-	\end{tabular}
-	\label{tabela-atores}	
-\end{table}
+O modelo de casos de uso corresponde a uma tentativa de descrever a relação das funcionalidades do sistema com cada um de seus atores. Os atores identificados no contexto deste projeto estão descritos na Tabela~\ref{tbl-casos-de-uso-atores}.
+
+% Tabela de atores.
+\begin{longtable}{|p{3cm}|p{12cm}|}
+	\caption{Descrição dos atores envolvidos nos casos de uso.}
+	\label{tbl-casos-de-uso-atores} \\\hline 
+	
+	% Cabeçalho e repetição do mesmo em cada nova página. Manter como está.
+	\rowcolor{lightgray}
+	\textbf{Ator} & \textbf{Descrição} \\\hline		
+	\endfirsthead
+	\hline
+	\rowcolor{lightgray}
+	\textbf{Ator} & \textbf{Descrição} \\\hline		
+	\endhead
+	
+	% Especificar os atores abaixo, substituindo os exemplos.
+	Ator 01 & Descrição do ator 01. \\\hline
+	
+	Ator 02 & Descrição do ator 02. \\\hline
+	
+	Ator 03 & Descrição do ator 03. \\\hline
+\end{longtable}
 
 A seguir, são apresentados os diagramas de casos de uso e descrições associadas, organizados por subsistema.
+
+
+
+% Definir uma subseção para cada subsistema.	
+\section{Subsistema 01}
+\label{sec-casos-de-uso-subsistema-01}
+
+A Figura~\ref{fig-casos-de-uso-subsistema-01} apresenta o diagrama de casos de uso do subsistema 01.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=.7\textwidth]{figuras/fig-casos-de-uso-subsistema-01.png}
+	\caption{Diagrama de Casos de Uso do subsistema 01.}
+	\label{fig-casos-de-uso-subsistema-01}
+\end{figure}
+
+A seguir, são apresentadas as descrições de cada um dos casos de uso identificados. Os casos de uso cadastrais de baixa complexidade, envolvendo inclusão, consulta, alteração e exclusão (CRUDs), são descritos na Tabela~\ref{tbl-casos-de-uso-subsistema-01-cruds}.
+
+% Tabela de casos de uso cadastrais.
+\begin{longtable}{|c|p{2.5cm}|p{6cm}|p{2.2cm}|p{2cm}|}
+	\caption{Caso de uso cadastrais do subsistema 01.}
+	\label{tbl-casos-de-uso-subsistema-01-cruds} \\\hline 
 	
-\section{Subsistema Classroom}
-
-A Figura~\ref{figura-caso-de-uso-classroom} apresenta o diagrama de casos de uso do subsistema Classroom.
-
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=\textwidth]{figuras/casos-de-uso-classroom.png}
-	\caption{Diagrama de Casos de Uso do subsistema Classroom.}
-	\label{figura-caso-de-uso-classroom}
-\end{figure}
-
-Com exceção do \ref{uc-definir-configuracoes}, todos os outros casos de uso abaixo mencionados geram um \textit{Log} indicando o usuário que realizou a ação, qual ação foi tomada e o momento em que isso aconteceu. Além disso, cada \textit{Log} fica associado a uma determinada categoria. Por exemplo, o \ref{uc-enviar-mensagens} pertenceria à categoria "Envio de mensagens".
-
-
-A seguir, são apresentadas as descrições de cada um dos casos de uso identificados. Os casos de uso cadastrais de baixa complexidade, envolvendo inclusão, alteração, consulta e exclusão, são descritos na Tabela~\ref{tabela-classroom-cadastrais}.
-
-
-\begin{table}[H]
-	\centering  \vspace{0.5cm} 	\footnotesize 
-	\caption{Casos de Uso Cadastrais}
-	\begin{tabular}{|c|c|c|p{6cm}|p{1.5cm}|p{2cm}|} \hline  \rowcolor[rgb]{0.8,0.8,0.8}
-		
-		Id & Nome  &  Ações  &  Observações & Requisitos   & Classes  \\ 	\hline \hline	
-		
-		{}  &  {}  &  I   & Informar: título e senha de acesso. Opcionalmente, também é possível escolher professores da turma caso estes já estejam cadastrados no sistema. &   {}   & {}    \\\cline{3-4}
-		{}  &  {}  &  A   &  {}   &   {}   &  {}  \\ \cline{3-4}
-		{}  &  {}  &  C  &   {}   &   {}  &   {}    \\\cline{3-4}
-		\multirow{-4}{*}{\UC\label{uc-gerenciar-turmas}}   &  \multirow{-4}{*}{\parbox{2cm}{Gerenciar turmas}}   &    E    &    A exclusão de uma turma deve acarretar na exclusão de todos os itens de \textit{board} e suas interações (como submissões de tarefa e respostas de provas).   &  \multirow{-4}{1.5cm}{\ref{rf-criar-turma}}  & \multirow{-4}{2cm}{Classroom}  \\ \hline 
-		
-		{}  &  {}  &  I   &  Informar: título, descrição, data e tipo (Evento ou Aula). &   {}   & {}    \\\cline{3-4}
-		{}  &  {}  &  A   &  {}   &   {}   &  {}  \\ \cline{3-4}
-		{}  &  {}  &  C  &   {}   &   {}  &   {}    \\\cline{3-4}
-		\multirow{-5}{*}{\UC\label{uc-gerenciar-calendario}}   &  \multirow{-5}{*}{\parbox{2cm}{Gerenciar eventos no calendário}}   &    E    &   {}   &  \multirow{-5}{1.5cm}{\ref{rf-gerenciamento-calendario}}  & \multirow{-5}{2cm}{Classroom, Event, Class}  \\ \hline 
-		
-		
-	\end{tabular}
-	\label{tabela-classroom-cadastrais}
-\end{table}
-
-Os casos de uso de consulta mais abrangente que as consultas a um único objeto, mas ainda de baixa complexidade, tais como consultas que combinam informações de vários objetos envolvendo filtros, estão descritos na Tabela~\ref{tabela-khoeus-consulta}.
-
-\begin{table}[H]
-	\centering  \vspace{0.5cm} 	\footnotesize 
-	\caption{Casos de Uso de Consulta}
-	\begin{tabular}{|c|p{2.3cm}|p{6.8cm}|c|p{1.8cm}|} \hline  \rowcolor[rgb]{0.8,0.8,0.8}
-		
-		Id & Nome   &  Observações & Requisitos   & Classes  \\ 	\hline	
-		
-		
-		\UC\label{uc-consultar-presencas} & Consultar suas presenças & Os alunos de uma turma terão acesso ao seu quadro de presenças contendo a lista de aulas do curso em que estão inscritos e se estiveram presentes (ou não) nas aulas que já ocorreram.  &    \ref{rf-consultar-presenca}        & User, Classroom, Class e Presence\\ \hline
-		
-		
-		\UC\label{uc-consultar-calendario} & Consultar calendário & Os alunos de uma turma terão acesso ao calendário contendo as aulas e eventos registrados para aquela turma. Para cada um, exibe-se o nome, a descrição (caso tenha) e a data em que acontecerá. &   \ref{rf-acessar-calendario}        & User, Classroom, Class e Event	\\ \hline
-		
-	\end{tabular}
-	\label{tabela-khoeus-consulta}
-\end{table}
-
-\clearpage
-\begin{flushright}    \textbf{Descrição de Caso de Uso}   \end{flushright}         
-\noindent \textbf{Projeto:} \imprimirtitulo  \\
-\textbf{Identificador do Caso de Uso:} \UC\label{uc-definir-configuracoes} \\
-\textbf{Caso de Uso:} Definir configurações do sistema \\
-\noindent \textbf{Descrição Sucinta:} Este caso de uso permite que o usuário altere as principais configurações do sistema, acessíveis apenas para administradores.\\
-
-\begin{table}[H]
-	\centering \vspace{0.5cm} \footnotesize
-	\caption{Fluxos de Eventos Normais}
-	\begin{tabular}{|p{2.3cm}|p{2.5cm}|p{10cm}|} \hline  \rowcolor[rgb]{0.8,0.8,0.8}
-		
-		Nome do Fluxo & Precondição & Descrição  \\ \hline		
-		
-		Definir configurações & O usuário  deverá estar logado e& 1. O administrador poderá alterar todas as configurações do sistema listadas no \ref{rf-configuracoes}  \\
-		{} & ser um administrador & 2. Ao finalizar, o sistema salva todas essas alterações de forma genérica, armazenando o nome da configuração bem como seu respectivo valor.\\ \hline
-		
-		
-	\end{tabular}
-\end{table}
-
-\noindent  \textbf{Requisitos Relacionados:} \ref{rf-configuracoes}       \\ \textbf{Classes Relacionadas:} User, Configuration.
-
-\newpage
-\clearpage
-\begin{flushright}    \textbf{Descrição de Caso de Uso}   \end{flushright}         
-\noindent \textbf{Projeto:} \imprimirtitulo  \\
-\textbf{Identificador do Caso de Uso:} \UC\label{uc-ingressar-turma} \\
-\textbf{Caso de Uso:} Ingressar em uma turma \\
-\noindent \textbf{Descrição Sucinta:} Este caso de uso permite que um usuário se vincule a uma turma por meio de uma chave de inscrição.\\
-
-\begin{table}[H]
-	\centering \vspace{0.5cm} \footnotesize
-	\caption{Fluxos de Eventos Normais}
-	\begin{tabular}{|p{2.3cm}|p{2.5cm}|p{10cm}|} \hline  \rowcolor[rgb]{0.8,0.8,0.8}
-		
-		Nome do Fluxo & Precondição & Descrição  \\ \hline		
-		
-		Ingressar em uma turma & O usuário  deverá estar logado & 1. O usuário deverá escolher a turma que deseja ingressar e informar a senha de acesso fornecida por um  dos professores.  \\
-		{} & {} & 2. O sistema vincula aquele usuário àquela turma em uma \textit{role} de aluno, garantindo que este possa acessá-la a qualquer momento.\\ \hline	
-	\end{tabular}
-\end{table}
-
-\begin{table}[H]
-	\centering \vspace{0.5cm} \footnotesize
-	\caption{Fluxos de Eventos Variantes}
-	\begin{tabular}{|p{2.3cm}|p{1.8cm}|p{10.7cm}|} \hline  \rowcolor[rgb]{0.8,0.8,0.8}
-		
-		Nome do Fluxo & Variante & Descrição  \\ \hline		
-		
-		Chave incorreta & O usuário digitou a chave de inscrição incorreta & 1.  O sistema informa que a chave de inscrição está errada e solicita que o usuário tente novamente.  \\ \hline 
-		
-	\end{tabular}
-\end{table}
-
-
-\noindent  \textbf{Requisitos Relacionados:} \ref{rf-inscricao}       \\ \textbf{Classes Relacionadas:} User, Classroom, Subscription.
-
-\newpage
-\clearpage
-\begin{flushright}    \textbf{Descrição de Caso de Uso}   \end{flushright}         
-\noindent \textbf{Projeto:} \imprimirtitulo  \\
-\textbf{Identificador do Caso de Uso:} \UC\label{uc-lancar-presenca} \\
-\textbf{Caso de Uso:} Lançar presença \\
-\noindent \textbf{Descrição Sucinta:} Este caso de uso permite que o professor lance a presença dos alunos de sua turma para cada uma das aulas cadastradas no calendário.\\
-
-\begin{table}[H]
-	\centering \vspace{0.5cm} \footnotesize
-	\caption{Fluxos de Eventos Normais}
-	\begin{tabular}{|p{2.3cm}|p{2.5cm}|p{10cm}|} \hline  \rowcolor[rgb]{0.8,0.8,0.8}
-		
-		Nome do Fluxo & Precondição & Descrição  \\ \hline		
-		
-		Lançar presença & O usuário  deverá estar logado e& 1. O usuário deverá informar em uma tabela aluno x aula se o aluno esteve presente (ou não) na aula em questão.  \\
-		{} & ser um professor da turma correspondente & 2. O sistema salva uma presença para cada um dos alunos que compareceram à(s) aula(s).\\ \hline
-		
-		
-	\end{tabular}
-\end{table}
-
-
-\noindent  \textbf{Requisitos Relacionados:} \ref{rf-lancar-presenca}       \\ \textbf{Classes Relacionadas:} User, Classroom, Class, Presence.
-
-\newpage
-\clearpage
-\begin{flushright}    \textbf{Descrição de Caso de Uso}   \end{flushright}         
-\noindent \textbf{Projeto:} \imprimirtitulo  \\
-\textbf{Identificador do Caso de Uso:} \UC\label{uc-definir-roles} \\
-\textbf{Caso de Uso:} Definir \textit{roles} de usuários nas turmas \\
-\noindent \textbf{Descrição Sucinta:} Este caso de uso permite que um administrador possa conceder a \textit{role} de professor ou de usuário a um determinado aluno.\\
-
-\begin{table}[H]
-	\centering \vspace{0.5cm} \footnotesize
-	\caption{Fluxos de Eventos Normais}
-	\begin{tabular}{|p{2.3cm}|p{2.5cm}|p{10cm}|} \hline  \rowcolor[rgb]{0.8,0.8,0.8}
-		
-		Nome do Fluxo & Precondição & Descrição  \\ \hline		
-		
-		Definir \textit{roles} & O usuário  deverá estar logado e ser um & 1. Em uma lista de todos os usuários inscritos naquela turma, o administrador poderá escolher qual será a \textit{role} associada àquele usuário naquela turma.  \\
-		{} &  administrador do sistema  & 2.  O sistema salva a nova \textit{role} do(s) usuário(s), garantindo novas permissões para aqueles que foram alterados.\\ \hline
-		
-		
-	\end{tabular}
-\end{table}
-
-
-\noindent  \textbf{Requisitos Relacionados:} \ref{rf-gerenciamento-usuario-turma}, \ref{rn-roles}       \\ \textbf{Classes Relacionadas:} User, Classroom, Subscription.
-
-\newpage
-\clearpage
-\begin{flushright}    \textbf{Descrição de Caso de Uso}   \end{flushright}         
-\noindent \textbf{Projeto:} \imprimirtitulo  \\
-\textbf{Identificador do Caso de Uso:} \UC\label{uc-configurar-turma} \\
-\textbf{Caso de Uso:} Configurar turma \\
-\noindent \textbf{Descrição Sucinta:} Este caso de uso permite que o professor altere as configurações de uma turma.\\
-
-\begin{table}[H]
-	\centering \vspace{0.5cm} \footnotesize
-	\caption{Fluxos de Eventos Normais}
-	\begin{tabular}{|p{2.3cm}|p{2.5cm}|p{10cm}|} \hline  \rowcolor[rgb]{0.8,0.8,0.8}
-		
-		Nome do Fluxo & Precondição & Descrição  \\ \hline		
-		
-		Configurar turma & O usuário  deverá estar logado e& 1. O usuário poderá alterar todas as configurações de turma listadas no \ref{rf-gerenciamento-turma}  \\
-		{} & ser um professor da turma correspondente & 2.  Ao finalizar, o sistema salva todas essas alterações.\\ \hline
-	\end{tabular}
-\end{table}
-
-
-\noindent  \textbf{Requisitos Relacionados:} \ref{rf-gerenciamento-turma}, \ref{rn-peso}       \\ \textbf{Classes Relacionadas:} User, Classroom.
-
-\newpage
-\clearpage
-\begin{flushright}    \textbf{Descrição de Caso de Uso}   \end{flushright}         
-\noindent \textbf{Projeto:} \imprimirtitulo  \\
-\textbf{Identificador do Caso de Uso:} \UC\label{uc-enviar-mensagens} \\
-\textbf{Caso de Uso:} Enviar mensagens \\
-\noindent \textbf{Descrição Sucinta:} Este caso de uso permite que usuários de uma mesma turma troquem mensagens entre si.\\
-
-\begin{table}[H]
-	\centering \vspace{0.5cm} \footnotesize
-	\caption{Fluxos de Eventos Normais}
-	\begin{tabular}{|p{2.3cm}|p{2.5cm}|p{10cm}|} \hline  \rowcolor[rgb]{0.8,0.8,0.8}
-		
-		Nome do Fluxo & Precondição & Descrição  \\ \hline		
-		
-		Enviar mensagens & O usuário  deverá estar logado e& 1. O usuário deverá escolher para quem deseja enviar a mensagem e preencher o campo com o texto desejado. \\
-		{} & estar inscrito na turma correspondente & 2. O sistema armazena a mensagem enviada e envia um e-mail para o(s) destinatário(s) informando-o(s) sobre a nova mensagem. \\ \hline
-		
-		
-	\end{tabular}
-\end{table}
-
-\noindent  \textbf{Requisitos Relacionados:} \ref{rf-enviar-mensagem}, \ref{rn-mensagem}       \\ \textbf{Classes Relacionadas:} User, Message.
-
-\newpage
-
-\section{Subsistema Board}
-
-A Figura~\ref{figura-caso-de-uso-board} apresenta o diagrama de casos de uso do subsistema Board.
-
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=\textwidth]{figuras/casos-de-uso-board.png}
-	\caption{Diagrama de Casos de Uso do Subsistema Board.}
-	\label{figura-caso-de-uso-board}
-\end{figure}
-
-Todos os casos de uso mencionados geram um \textit{Log} indicando o usuário que realizou a ação, qual ação foi tomada e o momento em que isso aconteceu. Além disso, cada \textit{Log} fica associado a uma determinada categoria. Por exemplo, o \ref{uc-gerenciar-arquivos} pertenceria à categoria ``Gerenciamento de arquivos''.
-
-A seguir, são apresentadas as descrições de cada um dos casos de uso identificados. Os casos de uso cadastrais de baixa complexidade, envolvendo inclusão, alteração, consulta e exclusão, são descritos na Tabela~\ref{tabela-board-cadastrais}.
-
-
-\begin{longtable}{|c|c|c|p{6.3cm}|p{1.2cm}|p{2cm}|}
-	\caption{Casos de Uso Cadastrais}\\
-	 \hline  \rowcolor[rgb]{0.8,0.8,0.8}
-		
-		Id & Nome  &  Ações  &  Observações & Requisitos   & Classes  \\ 	\hline \hline
-		\endhead
-		\hline
-		\endlastfoot
-		
-		{}  &  {}  &  I   & Informar: título e, opcionalmente, descrição. No momento da criação da seção, deve-se escolher a posição do \textit{board} em que esta será inserida. &   {}   & {}    \\\cline{3-4}
-		{}  &  {}  &  A   &  {}   &   {}   &  {}  \\ \cline{3-4}
-		{}  &  {}  &  C  &   {}   &   {}  &   {}    \\\cline{3-4}
-		\multirow{-4}{*}{\UC\label{uc-gerenciar-secoes}}   &  \multirow{-4}{*}{\parbox{2cm}{Gerenciar seções do \textit{board}}}   &    E    &    A exclusão de uma seção deverá excluir todos os itens de \textit{board} associados a ela.   &  \multirow{-4}{1.5cm}{ \ref{rf-adicionar-secao}}  & \multirow{-4}{2cm}{User, Classroom e Section}  \\ \hline 
-		
-		{}  &  {}  &  I   &  A seção à qual o arquivo estará vinculado será escolhida antes de sua criação. Informar título, descrição e realizar o upload do arquivo desejado. No momento da criação do arquivo, deve-se escolher a posição da seção em que esta será inserido.&   {}   & {}    \\\cline{3-4}
-		{}  &  {}  &  A   &  {}   &   {}   &  {}  \\ \cline{3-4}
-		{}  &  {}  &  C  &   {}   &   {}  &   {}    \\\cline{3-4}
-		\multirow{-7}{*}{\UC\label{uc-gerenciar-arquivos}}   &  \multirow{-7}{*}{\parbox{2cm}{Gerenciar arquivos do \textit{board}}}   &    E    &    {}   &  \multirow{-7}{1.5cm}{ \ref{rf-adicionar-arquivo} \ref{rn-item-secao}}  & \multirow{-7}{2cm}{User, Classroom, Section e File}  \\ \hline 
-		
-		{}  &  {}  &  I   &  A seção à qual o link estará vinculado será escolhida antes de sua criação. Informar título, descrição e o link desejado. No momento da criação do link, deve-se escolher a posição da seção em que esta será inserido. &   {}   & {}    \\\cline{3-4}
-		{}  &  {}  &  A   &  {}   &   {}   &  {}  \\ \cline{3-4}
-		{}  &  {}  &  C  &   {}   &   {}  &   {}    \\\cline{3-4}
-		\multirow{-6}{*}{\UC\label{uc-gerenciar-links}}   &  \multirow{-6}{*}{\parbox{2cm}{Gerenciar links do \textit{board}}}   &    E    &    {}   &  \multirow{-6}{1.5cm}{ \ref{rf-adicionar-link}, \ref{rn-item-secao}}  & \multirow{-6}{2cm}{User, Classroom, Section e Link}  \\ \hline 
-		
-		{}  &  {}  &  I   &  A seção à qual o questionário estará vinculado será escolhida antes de sua criação. Informar título, descrição, data de início, data de encerramento, as perguntas do questionário e suas respectivas alternativas. No momento da criação do questionário, deve-se escolher a posição da seção em que esta será inserido. &   {}   & {}    \\\cline{3-4}
-		{}  &  {}  &  A   &  {}   &   {}   &  {}  \\ \cline{3-4}
-		{}  &  {}  &  C  &   {}   &   {}  &   {}    \\\cline{3-4}
-		\multirow{-8}{*}{\UC\label{uc-gerenciar-questionarios}}   &  \multirow{-8}{*}{\parbox{2cm}{Gerenciar questionários do \textit{board}}}   &    E    &    A exclusão de um questionário deverá resultar na exclusão de todas as respostas que já foram enviadas.   &  \multirow{-8}{1.5cm}{ \ref{rf-adicionar-questionario}, \ref{rn-item-secao}}  & \multirow{-8}{2cm}{User, Classroom, Section, Survey, SurveyQuestion e SurveyAnswer}  \\ \hline 
-		
-		{}  &  {}  &  I   &  A seção à qual a prova estará vinculada será escolhida antes de sua criação. Informar título, descrição, data de início, data de encerramento, as questões da prova, seus valores (nota máxima) e seus respectivos tipos (discursiva ou objetiva). No caso de questões objetivas, o professor deverá informar suas alternativas e qual delas é a correta em cada questão. No momento da criação da prova, deve-se escolher a posição da seção em que esta será inserida.&   {}   & {}    \\\cline{3-4}
-		{}  &  {}  &  A   &  {}   &   {}   &  {}  \\ \cline{3-4}
-		{}  &  {}  &  C  &   {}   &   {}  &   {}    \\\cline{3-4}
-		\multirow{-10}{*}{\UC\label{uc-gerenciar-provas}}   &  \multirow{-10}{*}{\parbox{2cm}{Gerenciar provas do \textit{board}}}   &    E    &    A exclusão de uma prova deverá resultar na exclusão de todas as resoluções que já foram enviadas.   &  \multirow{-10}{1.5cm}{ \ref{rf-adicionar-prova}, \ref{rn-item-secao}}  & \multirow{-10}{2cm}{User, Classroom, Section, Test, TestQuestion e Text Alternative}  \\ \hline 
-		
-		{}  &  {}  &  I   &  A seção à qual a tarefa estará vinculada será escolhida antes de sua criação. Informar título, descrição, data de início, data de encerramento e o tipo de tarefa. No caso de tarefas do tipo arquivo, deve-se informar o número máximo de arquivos que poderão ser submetidos. No momento da criação da tarefa, deve-se escolher a posição da seção em que esta será inserida.&   {}   & {}    \\\cline{3-4}
-		{}  &  {}  &  A   &  {}   &   {}   &  {}  \\ \cline{3-4}
-		{}  &  {}  &  C  &   {}   &   {}  &   {}    \\\cline{3-4}
-		\multirow{-8}{*}{\UC\label{uc-gerenciar-tarefas}}   &  \multirow{-8}{*}{\parbox{2cm}{Gerenciar tarefas do \textit{board}}}   &    E    &    A exclusão de uma tarefa deverá resultar na exclusão de todas as submissões que já foram feitas e de seus respectivos feedbacks.   &  \multirow{-8}{1.5cm}{ \ref{rf-adicionar-tarefa}, \ref{rn-item-secao}}  & \multirow{-8}{2cm}{User, Classroom, Section e Assignment}  \\ \hline 
-		
-		
-		{}  &  {}  &  I   &  A seção à qual a atividade externa estará vinculada será escolhida antes de sua criação. Informar título e descrição. No momento da criação da atividade externa, deve-se escolher a posição da seção em que esta será inserida. &   {}   & {}    \\\cline{3-4}
-		{}  &  {}  &  A   &  {}   &   {}   &  {}  \\ \cline{3-4}
-		{}  &  {}  &  C  &   {}   &   {}  &   {}    \\\cline{3-4}
-		\multirow{-7}{*}{\UC\label{uc-gerenciar-atividadesexternas}}   &  \multirow{-7}{*}{\parbox{2cm}{Gerenciar atividades externas do \textit{board}}}   &    E    &    A exclusão de uma atividade externa deverá resultar na exclusão de todas as atividades associadas a ela.   &  \multirow{-7}{1.5cm}{ \ref{rf-adicionar-atividadeexterna}, \ref{rn-item-secao}}  & \multirow{-7}{2cm}{User, Classroom, Section, External Activity} 
-		
-	\label{tabela-board-cadastrais}
-\end{longtable}
-
-\section{Subsistema Board Interactions}
-
-A Figura~\ref{figura-caso-de-uso-board-interactions} apresenta o diagrama de casos de uso do subsistema Board Interactions.
-
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=\textwidth]{figuras/casos-de-uso-board-interactions.png}
-	\caption{Diagrama de Casos de Uso do Subsistema Board Interactions.}
-	\label{figura-caso-de-uso-board-interactions}
-\end{figure}
-
-Todos os casos de uso mencionados geram um \textit{Log} indicando o usuário que realizou a ação, qual ação foi tomada e o momento em que isso aconteceu. Além disso, cada \textit{Log} fica associado a uma determinada categoria. Por exemplo, o \ref{uc-submeter-tarefa} pertenceria à categoria ``Submissão de tarefa''.
-
-Para os casos de uso \ref{uc-responder-questionario}, \ref{uc-resolver-prova} e \ref{uc-submeter-tarefa}, a classe correspondente deve ser vinculada ao usuário que interagiu com ela. Por exemplo, no caso de uso \ref{uc-submeter-tarefa}, a classe Submission deve estar associada ao usuário que submeter aquela tarefa.
-
-A seguir, são apresentadas as descrições de cada um dos casos de uso identificados. 
-
-
-\clearpage
-\begin{flushright}    \textbf{Descrição de Caso de Uso}   \end{flushright}         
-\noindent \textbf{Projeto:} \imprimirtitulo  \\
-\textbf{Identificador do Caso de Uso:} \UC\label{uc-download-arquivo} \\
-\textbf{Caso de Uso:} Fazer download de arquivo \\
-\noindent \textbf{Descrição Sucinta:} Este caso de uso permite que o usuário realize o download de um arquivo adicionado no \textit{board} da turma.\\
-
-\begin{table}[H]
-	\centering \vspace{0.5cm} \footnotesize
-	\caption{Fluxos de Eventos Normais}
-	\begin{tabular}{|p{2.3cm}|p{2.5cm}|p{10cm}|} \hline  \rowcolor[rgb]{0.8,0.8,0.8}
-		
-		Nome do Fluxo & Precondição & Descrição  \\ \hline		
-		
-		Fazer download & O usuário deverá estar logado e & 1. O usuário escolhe o item do \textit{board} de sua turma correspondente ao arquivo.  \\
-		{}    & inscrito na turma correspondente & 2.  O download é iniciado pelo sistema.\\ \hline 
-	\end{tabular}
-\end{table}
-
-
-\noindent  \textbf{Requisitos Relacionados:} \ref{rf-acessar-arquivo}       \\ \textbf{Classes Relacionadas:} User, Classroom e File.
-
-\newpage
-\clearpage
-\begin{flushright}    \textbf{Descrição de Caso de Uso}   \end{flushright}         
-\noindent \textbf{Projeto:} \imprimirtitulo  \\
-\textbf{Identificador do Caso de Uso:} \UC\label{uc-acessar-link} \\
-\textbf{Caso de Uso:} Acessar um link \\
-\noindent \textbf{Descrição Sucinta:} Este caso de uso permite que o usuário acesse um link adicionado no \textit{board} da turma.\\
-
-\begin{table}[H]
-	\centering \vspace{0.5cm} \footnotesize
-	\caption{Fluxos de Eventos Normais}
-	\begin{tabular}{|p{2.3cm}|p{2.5cm}|p{10cm}|} \hline  \rowcolor[rgb]{0.8,0.8,0.8}
-		
-		Nome do Fluxo & Precondição & Descrição  \\ \hline		
-		
-		Acessar link & O usuário deverá estar logado e & 1. O usuário escolhe o item do \textit{board} de sua turma correspondente ao link.  \\
-		{}    & inscrito na turma correspondente& 2. O navegador acessará a URL quando o usuário escolher o item do \textit{board} correspondente ao link.\\ \hline 
-		
-		
-	\end{tabular}
-\end{table}
-
-\noindent  \textbf{Requisitos Relacionados:} \ref{rf-acessar-link}       \\ \textbf{Classes Relacionadas:} User, Classroom e Link.
-
-\newpage
-\clearpage
-\begin{flushright}    \textbf{Descrição de Caso de Uso}   \end{flushright}         
-\noindent \textbf{Projeto:} \imprimirtitulo  \\
-\textbf{Identificador do Caso de Uso:} \UC\label{uc-responder-questionario} \\
-\textbf{Caso de Uso:} Responder a um questionário \\
-\noindent \textbf{Descrição Sucinta:} Este caso de uso permite que um aluno responda a um questionário em sua turma.\\
-
-\begin{table}[H]
-	\centering \vspace{0.5cm} \footnotesize
-	\caption{Fluxos de Eventos Normais}
-	\begin{tabular}{|p{2.3cm}|p{2.5cm}|p{10cm}|} \hline  \rowcolor[rgb]{0.8,0.8,0.8}
-		
-		Nome do Fluxo & Precondição & Descrição  \\ \hline		
-		
-		Responder questionário & O usuário deverá estar logado & 1. O usuário escolhe o item do \textit{board} de sua turma correspondente ao questionário que deseja responder.  \\
-		{}    &  e inscrito na turma  & 2. O usuário deverá responder a todas as perguntas obrigatórias e submeter o questionário. \\
-		{}    & correspondente & 3. O sistema armazena todas as respostas para aquele questionário.\\ \hline 
-		
-		Visualizar resultado de questionário & O usuário deverá estar logado & 1. O usuário escolhe o item do \textit{board} de sua turma correspondente ao questionário.  \\
-		{}    &  e inscrito na turma correspondente  & 2. O usuário poderá visualizar o resultado do questionário. \\ \hline 
-		
-		
-	\end{tabular}
-\end{table}
-
-\begin{table}[H]
-	\centering \vspace{0.5cm} \footnotesize
-	\caption{Fluxos de Eventos Variantes}
-	\begin{tabular}{|p{2.3cm}|p{2.5cm}|p{10.0cm}|} \hline  \rowcolor[rgb]{0.8,0.8,0.8}
-		
-		Nome do Fluxo & Variante & Descrição  \\ \hline		
-		
-		Data limite atingida & O usuário tenta acessar um questionário em uma data posterior à limite & 1. Passada a data limite, o sistema avisa que o período para responder ao questionário já terminou.  \\ \hline 
-		
-	\end{tabular}
-\end{table}
-
-\noindent  \textbf{Requisitos Relacionados:} \ref{rf-acessar-questionario}, \ref{rn-submeter}       \\ \textbf{Classes Relacionadas:} User, Classroom, Survey, SurveyQuestion, SurveyAnswer e SurveyResponse.
-
-\newpage
-\clearpage
-\begin{flushright}    \textbf{Descrição de Caso de Uso}   \end{flushright}         
-\noindent \textbf{Projeto:} \imprimirtitulo  \\
-\textbf{Identificador do Caso de Uso:} \UC\label{uc-resolver-prova} \\
-\textbf{Caso de Uso:} Resolver uma prova \\
-\noindent \textbf{Descrição Sucinta:} Este caso de uso permite que o usuário resolva as questões de uma prova, sendo elas discursivas ou objetivas.\\
-
-\begin{table}[H]
-	\centering \vspace{0.5cm} \footnotesize
-	\caption{Fluxos de Eventos Normais}
-	\begin{tabular}{|p{2.3cm}|p{2.5cm}|p{10cm}|} \hline  \rowcolor[rgb]{0.8,0.8,0.8}
-		
-		Nome do Fluxo & Precondição & Descrição  \\ \hline		
-		
-		Resolver  prova & O usuário  deverá estar logado e& 1. O usuário escolhe o item do \textit{board} de sua turma correspondente à prova desejada.  \\
-		{}    &  inscrito na turma  & 2. O usuário deverá responder às perguntas objetivas e discursivas e submeter a prova.\\
-		{}    &  correspondente & 3. O sistema armazena as respostas do aluno.\\ \hline
-		
-		
-	\end{tabular}
-\end{table}
-
-
-\begin{table}[H]
-	\centering \vspace{0.5cm} \footnotesize
-	\caption{Fluxos de Eventos Variantes}
-	\begin{tabular}{|p{2.3cm}|p{2.5cm}|p{10.0cm}|} \hline  \rowcolor[rgb]{0.8,0.8,0.8}
-		
-		Nome do Fluxo & Variante & Descrição  \\ \hline		
-		
-		Data limite atingida & O usuário tenta resolver uma prova em uma data posterior à limite & 1. Passada a data limite, o sistema exibe apenas a nota de cada questão e seu feedback.  \\ \hline 
-		
-	\end{tabular}
-\end{table}
-
-
-\noindent  \textbf{Requisitos Relacionados:} \ref{rf-acessar-prova}, \ref{rn-submeter}       \\ \textbf{Classes Relacionadas:} User, Classroom, Test, TestQuestion, TestAlternative, Test TextResponse e Test AlternativeResponse.
-
-\newpage	
-\clearpage
-\begin{flushright}    \textbf{Descrição de Caso de Uso}   \end{flushright}         
-\noindent \textbf{Projeto:} \imprimirtitulo  \\
-\textbf{Identificador do Caso de Uso:} \UC\label{uc-submeter-tarefa} \\
-\textbf{Caso de Uso:} Submeter uma tarefa \\
-\noindent \textbf{Descrição Sucinta:} Este caso de uso permite que o usuário submeta uma tarefa do tipo especificado pelo professor no momento de sua criação.\\
-
-\begin{table}[H]
-	\centering \vspace{0.5cm} \footnotesize
-	\caption{Fluxos de Eventos Normais}
-	\begin{tabular}{|p{2.3cm}|p{2.5cm}|p{10cm}|} \hline  \rowcolor[rgb]{0.8,0.8,0.8}
-		
-		Nome do Fluxo & Precondição & Descrição  \\ \hline		
-		
-		Submeter tarefa & O usuário deverá estar logado e & 1. O usuário escolhe o item do \textit{board} de sua turma correspondente à tarefa desejada.  \\
-		{}    &  inscrito na turma correspondente & 2. O usuário deverá submeter a tarefa da seguinte forma: caso a tarefa seja do tipo Texto ou Código, ele deverá preencher o campo com o texto/código correspondente. Caso a tarefa seja do tipo Arquivo, o usuário deverá fazer upload do(s) arquivo(s) correspondente(s). Caso a tarefa seja do tipo Código, o usuário deverá selecionar qual a linguagem de programação foi utilizada.\\
-		{}    & {} & 3. O sistema armazena as informações da tarefa enviada. Caso esta seja do tipo Código, cada linha é armazenada separadamente. \\ \hline
-		
-		
-	\end{tabular}
-\end{table}
-
-\begin{table}[H]
-	\centering \vspace{0.5cm} \footnotesize
-	\caption{Fluxos de Eventos Variantes}
-	\begin{tabular}{|p{2.3cm}|p{2.5cm}|p{10cm}|} \hline  \rowcolor[rgb]{0.8,0.8,0.8}
-		
-		Nome do Fluxo & Variante & Descrição  \\ \hline		
-		
-		Data limite atingida & O usuário tenta submeter uma tarefa em uma data posterior à limite & 1. Passada a data limite, o sistema exibe apenas a nota da tarefa e seu feedback.  \\ \hline 
-		
-		Número de arquivos superior ao permitido & O usuário tenta submeter uma tarefa do tipo Arquivo fazendo upload de mais arquivos que o permitido & 1. O sistema informa o número máximo de arquivos que o usuário pode submeter.  \\ \hline 
-		
-	\end{tabular}
-\end{table}
-
-
-\noindent  \textbf{Requisitos Relacionados:} \ref{rf-acessar-tarefa}, \ref{rn-limite-arquivos}, \ref{rn-submeter}       \\ \textbf{Classes Relacionadas:} User, Classroom, Assignment, TextSubmission, CodeSubmission e FileSubmission.
-
-\newpage
-
-
-\section{Subsistema Feedback}
-
-A Figura~\ref{figura-caso-de-uso-feedback} apresenta o diagrama de casos de uso do subsistema Feedback.
-
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=\textwidth]{figuras/casos-de-uso-feedback.png}
-	\caption{Diagrama de Casos de Uso do Subsistema Feedback.}
-	\label{figura-caso-de-uso-feedback}
-\end{figure}
-
-Todos os casos de uso mencionados geram um \textit{Log} indicando o usuário que realizou a ação, qual ação foi tomada e o momento em que isso aconteceu. Além disso, cada \textit{Log} fica associado a uma determinada categoria. Por exemplo, o \ref{uc-consultar-notas} pertenceria à categoria ``Consulta de notas''.
-
-A seguir, são apresentadas as descrições de cada um dos casos de uso identificados. Os casos de uso de consulta mais abrangente que as consultas a um único objeto, mas ainda de baixa complexidade, tais como consultas que combinam informações de vários objetos envolvendo filtros, estão descritos na Tabela~\ref{tabela-feedback-consulta}.
-
-\begin{table}[H]
-	\centering  \vspace{0.5cm} 	\footnotesize 
-	\caption{Casos de Uso de Consulta}
-	\begin{tabular}{|c|p{2cm}|p{5.7cm}|c|p{3.2cm}|} \hline  \rowcolor[rgb]{0.8,0.8,0.8}
-		
-		Id & Nome   &  Observações & Requisitos   & Classes  \\ 	\hline	
-		
-	
-		\UC\label{uc-visualizar-resultado-prova} & Visualizar resultado da prova & O resultado de uma prova fica disponível para ser visualizado na tela de detalhamento da prova correspondente. Para cada prova, espera-se ver a resposta dada para cada questão, a nota atribuída a cada questão e o feedback dado pelo professor. &   \ref{rf-consultar-nota-prova}        & User, Classroom, Test, TestQuestion, TestAlternative, Test TextResponse e Test AlternativeResponse\\ \hline
-		\UC\label{uc-visualizar-feedback-tarefa} & Visualizar feedback de tarefa & O resultado de uma tarefa fica disponível para ser visualizado na tela de detalhamento da tarefa correspondente. Para cada tarefa, espera-se ver a submissão feita (seja ela texto, arquivo ou código), a nota atribuída à tarefa e o feedback dado pelo professor.   &    \ref{rf-consultar-nota-tarefa}        & User, Classroom, Assignment, Submission, Text Submission, File Submission, Code Submission, Code Line, Code Line Feedback e Text Feedback\\ \hline
-		\UC\label{uc-visualizar-nota-externa} & Visualizar nota de atividade externa & A nota de uma atividade externa fica disponível para ser visualizada na tela de detalhamento da atividade correspondente. Para cada atividade externa, espera-se ver a nota atribuída a ela e o feedback dado pelo professor. &   \ref{rf-consultar-nota-atividadeexterna}        & User, Classroom, External Activity e Activity\\ \hline
-		\UC\label{uc-consultar-notas} & Consultar suas notas & Os alunos de uma turma terão acesso ao seu livro de notas. Para cada prova, tarefa e atividade externa realizada ao longo do curso, espera-se ver a nota atribuída a ela. Além disso, deve ser possível também consultar a média parcial no curso. &    \ref{rf-consultar-notas}        & User, Classroom, Grade Category, Assignment, Submission, Test,  Test Question, Test Alternative, Test TextResponse, Test AlternativeResponse, ExternalActivity e Activity	\\ \hline
-		
-		
-	\end{tabular}
-	\label{tabela-feedback-consulta}
-\end{table}
-
-
-\clearpage
-\begin{flushright}    \textbf{Descrição de Caso de Uso}   \end{flushright}         
-\noindent \textbf{Projeto:} \imprimirtitulo  \\
-\textbf{Identificador do Caso de Uso:} \UC\label{uc-download-lote} \\
-\textbf{Caso de Uso:} Fazer download em lote das submissões de uma tarefa ou prova \\
-\noindent \textbf{Descrição Sucinta:} Este caso de uso permite que o professor efetue o download de todas as submissões de uma tarefa ou das respostas de uma prova simultaneamente.\\
-
-\begin{table}[H]
-	\centering \vspace{0.5cm} \footnotesize
-	\caption{Fluxos de Eventos Normais}
-	\begin{tabular}{|p{2.3cm}|p{2.5cm}|p{10cm}|} \hline  \rowcolor[rgb]{0.8,0.8,0.8}
-		
-		Nome do Fluxo & Precondição & Descrição  \\ \hline		
-		
-		Download em lote & O usuário deverá estar logado e & 1. O professor escolhe o item do \textit{board} de sua turma correspondente à tarefa/prova desejada.  \\
-		{} &  ser professor na turma correspondente & 2. Ao clicar sobre o botão correspondente, dar-se-á início ao download de um arquivo compactado contendo todas as provas/tarefas submetidas.\\ \hline
-		
-		
-	\end{tabular}
-\end{table}
-
-
-\noindent  \textbf{Requisitos Relacionados:} \ref{rf-download-lote}       \\ \textbf{Classes Relacionadas:} User, Classroom, Test, TestQuestion, TestAnswer, Assignment, TextSubmission, CodeSubmission e FileSubmission.
-
-\newpage
-\clearpage
-\begin{flushright}    \textbf{Descrição de Caso de Uso}   \end{flushright}         
-\noindent \textbf{Projeto:} \imprimirtitulo  \\
-\textbf{Identificador do Caso de Uso:} \UC\label{uc-avaliar-individualmente} \\
-\textbf{Caso de Uso:} Avaliar tarefas, provas ou atividades externas \\
-\noindent \textbf{Descrição Sucinta:} Este caso de uso permite que um professor avalie uma tarefa, prova ou atividade externa de um determinado aluno, sendo possível verificar o que foi submetido.\\
-
-\begin{table}[H]
-	\centering \vspace{0.5cm} \footnotesize
-	\caption{Fluxos de Eventos Normais}
-	\begin{tabular}{|p{2.3cm}|p{2.5cm}|p{10cm}|} \hline  \rowcolor[rgb]{0.8,0.8,0.8}
-		
-		Nome do Fluxo & Precondição & Descrição  \\ \hline		
-		
-		Avaliação individual & O usuário deverá estar logado& 1. O usuário escolhe o item do \textit{board} de sua turma correspondente à tarefa/prova/atividade externa desejada.  \\
-		{}    &  e ser professor na turma correspondente & 2. O professor deverá escolher um dos alunos para que possa avaliar. A menos que seja uma atividade externa, ele terá acesso à submissão do aluno: no caso de uma prova, todas as questões e respostas são exibidas. No caso de uma tarefa, o usuário poderá fazer download dos arquivos submetidos (caso a tarefa seja do tipo Arquivo) ou visualizar diretamente na tela o conteúdo enviado (caso seja do tipo Texto ou Código). \\
-		{}    &  & 3. O professor deverá informar a nota correspondente àquela tarefa/prova/atividade e, se desejar, um texto de feedback. No caso de uma tarefa do tipo Código, o professor poderá realizar comentários para cada linha de código. No caso de uma prova, cada questão terá uma nota individual e a soma será feita automaticamente. No caso de uma atividade externa, a avaliação da atividade deverá estar associada ao usuário que realizou a tarefa.\\ \hline
-		
-		Avaliação em lote& O usuário deverá estar logado e & 1. O usuário escolhe o item do \textit{board} de sua turma correspondente à tarefa/prova/atividade externa.  \\
-		{}     &  ser professor na turma correspondente & 2. O usuário deverá realizar o download de uma planilha no formato .xls já preenchida com o nome dos alunos e que deverá ser completada com a nota de cada um dos alunos e, opcionalmente, um texto de feedback. No caso de uma prova, a planilha conterá uma coluna para cada questão, sendo possível avaliá-las individualmente. No caso de tarefas de código, o feedback fica restrito a um feedback do tipo texto, não sendo possivel avaliar linhas de código separadamente. No caso de uma atividade externa, a avaliação da atividade deverá estar associada ao usuário que realizou a tarefa.\\
-		{}    &  {} & 3. O professor deverá efetuar o upload da planilha devidamente preenchida. \\ 
-		{}    & {} & 4. O sistema irá armazenar as notas de todos os alunos para aquela atividade. \\ \hline
-		
-	\end{tabular}
-\end{table}
-
-\noindent  \textbf{Requisitos Relacionados:} \ref{rf-avaliar-tarefa}, \ref{rn-avaliar}, \ref{rn-nota}       \\ \textbf{Classes Relacionadas:} User, Classroom, Test, TestQuestion, Test TextResponse, Assignment, Submission, TextFeedback, CodeLineFeedback.
-
-
-\newpage
-\section{Subsistema Discussion}
-
-A Figura~\ref{figura-caso-de-uso-discussion} apresenta o diagrama de casos de uso do subsistema Discussions.
-
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=\textwidth]{figuras/casos-de-uso-discussion.png}
-	\caption{Diagrama de Casos de Uso do Subsistema Discussion.}
-	\label{figura-caso-de-uso-discussion}
-\end{figure}
-
-Com exceção do caso de uso \ref{uc-deletar-livequestion}, todos os outros casos de uso mencionados geram um \textit{Log} indicando o usuário que realizou a ação, qual ação foi tomada e o momento em que isso aconteceu. Além disso, cada \textit{Log} fica associado a uma determinada categoria. Por exemplo, o \ref{uc-criar-topico} pertenceria à categoria ``Criação de tópico''.
-
-No caso das \textit{Live Questions}, o fluxo consiste no fato do aluno \textbf{Adicionar nova Live Question} enquanto o professor poderá \textbf{Visualizar Live Questions}. Como o intuito é de que essas perguntas sejam feitas em momento de aula, elas serão excluídas passadas 24 horas de sua criação, conforme Figura~\ref{fig-requisitos-discussion-diagrama-estado}.
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.2\textwidth]{figuras/diagrama-estado-livequestion}
-	\caption{Diagrama de Estados para uma LiveQuestion.}
-	\label{fig-requisitos-discussion-diagrama-estado}
-\end{figure}
-
-Para os casos de uso \ref{uc-criar-topico} e \ref{uc-gerenciar-noticias}, a classe correspondente deve ser vinculada ao usuário que interagiu com ela. Por exemplo, no caso de uso \ref{uc-criar-topico}, a classe Forum Topic deve estar associada ao usuário que o criou. No caso do caso de uso \ref{uc-adicionar-livequestion}, o usuário só será vinculado à classe caso o usuário não tenha escolhido permanecer no anonimato.
-
-A seguir, são apresentadas as descrições de cada um dos casos de uso identificados.  Os casos de uso cadastrais de baixa complexidade, envolvendo inclusão, alteração, consulta e exclusão, são descritos na Tabela~\ref{tabela-discussion-cadastrais}.
-
-\newpage
-
-\begin{longtable}{|c|c|c|p{6.3cm}|p{1.2cm}|p{2cm}|}
-	\caption{Casos de Uso Cadastrais}\\
-	\hline  \rowcolor[rgb]{0.8,0.8,0.8}
-	
-	Id & Nome  &  Ações  &  Observações & Requisitos   & Classes  \\ 	\hline \hline
-	\endhead
+	% Cabeçalho e repetição do mesmo em cada nova página. Manter como está.
+	\rowcolor{lightgray}
+	\textbf{Id} & \textbf{Nome} & \textbf{Ações} & \textbf{Requisitos} & \textbf{Classes} \\\hline	
+	\endfirsthead
 	\hline
-	\endlastfoot
+	\rowcolor{lightgray}
+	\textbf{Id} & \textbf{Nome} & \textbf{Ações} & \textbf{Requisitos} & \textbf{Classes} \\\hline	
+	\endhead
 	
-	{}  &  {}  &  I   &  Informar: título e conteúdo. A inclusão de uma nova notícia deve enviar um email para todos os alunos daquela turma contendo seu conteúdo. A notícia criada deve estar associada ao usuário que a criou. &   {}   & {}    \\\cline{3-4}
-	{}  &  {}  &  A   &  {}   &   {}   &  {}  \\ \cline{3-4}
-	{}  &  {}  &  C  &   {}   &   {}  &   {}    \\\cline{3-4}
-	\multirow{-7}{*}{\UC\label{uc-gerenciar-noticias}}   &  \multirow{-7}{*}{\parbox{2cm}{Gerenciar notícias}}   &    E    &   {}   &  \multirow{-7}{1.5cm}{\ref{rf-adicionar-noticia}}  & \multirow{-7}{2cm}{User, Classroom, News} \\ \hline
+	% Especificar os atores abaixo, substituindo os exemplos.
+	\UC\label{uc-subsistema-01-exemplo-01} & Caso de uso 01 & 
+		\begin{itemize}[nosep,leftmargin=8mm]\vspace{-6mm}
+			\item[(I)] Restrições de Inclusão;
+			\item[(C)] Consulta;
+			\item[(A)] Alteração;
+			\item[(E)] e Exclusão.
+		\vspace{-4mm}\end{itemize}
+		& Listar os requisitos satisfeitos por este UC. 
+		& Listar possíveis classes envolvidas.
+		\\\hline
+
+	\UC\label{uc-subsistema-01-exemplo-02} & Caso de uso 02 & 
+		\begin{itemize}[nosep,leftmargin=8mm]\vspace{-6mm}
+			\item[(I)] Sem restrições;
+			\item[(C)] Sem restrições;
+			\item[(A)] Atributos X, Y, Z não podem ser alterados;
+			\item[(E)] Não disponível.
+		\vspace{-4mm}\end{itemize}
+		& \ref{rf-exemplo-01}, \ref{rf-exemplo-02}
+		& Classe 01, Classe 02.
+		\\\hline
+\end{longtable}
+
+Os casos de uso de consulta mais abrangente que as consultas a um único objeto, mas ainda de baixa complexidade, tais como consultas que combinam informações de vários objetos envolvendo filtros, estão descritos na Tabela~\ref{tbl-casos-de-uso-subsistema-01-consultas}.
+
+% Tabela de casos de uso de consulta.
+\begin{longtable}{|c|p{2.5cm}|p{6cm}|p{2.2cm}|p{2cm}|}
+	\caption{Caso de uso de consultas envolvendo múltiplos objetos do subsistema 01.}
+	\label{tbl-casos-de-uso-subsistema-01-consultas} \\\hline 
 	
-	{}  &  {}  &  I   & Descrito em  \ref{uc-criar-topico} &   {}   & {}    \\\cline{3-4}
-	{}  &  {}  &  A   &  {}   &   {}   &  {}  \\ \cline{3-4}
-	{}  &  {}  &  C  &   {}   &   {}  &   {}    \\\cline{3-4}
-	\multirow{-3}{*}{\UC\label{uc-gerenciar-topicos}}   &  \multirow{-3}{*}{\parbox{2cm}{Gerenciar tópicos do fórum}}   &    E    &   A exclusão de um tópico deve acarretar na exclusão de todas as réplicas vinculadas a ele.   &  \multirow{-3}{1.5cm}{\ref{rf-gerenciamento-forum}}  & \multirow{-3}{2cm}{User, Classroom, ForumTopic e ForumReply} 
+	% Cabeçalho e repetição do mesmo em cada nova página. Manter como está.
+	\rowcolor{lightgray}
+	\textbf{Id} & \textbf{Nome} &  \textbf{Descrição} & \textbf{Requisitos} & \textbf{Classes} \\\hline	
+	\endfirsthead
+	\hline
+	\rowcolor{lightgray}
+	\textbf{Id} & \textbf{Nome} &  \textbf{Descrição} & \textbf{Requisitos} & \textbf{Classes} \\\hline	
+	\endhead
 	
-	\label{tabela-discussion-cadastrais}
+	% Especificar os atores abaixo, substituindo os exemplos.
+	\UC\label{uc-subsistema-01-exemplo-03} & Caso de uso 03 & Descrição da consulta a ser realizada. & Listar os requisitos satisfeitos por este UC. & Listar possíveis classes envolvidas. \\\hline
+	
+	\UC\label{uc-subsistema-01-exemplo-04} & Caso de uso 04 & Descrição da consulta a ser realizada. & \ref{rf-exemplo-03} & Classe 03, Classe 04. \\\hline
+\end{longtable}
+
+Os casos de uso deste subsistema que não se encaixam nas categorias acima são descritos nas páginas subsequentes.
+
+
+% Descrição de um caso de uso. 
+% Reproduzir quantas forem necessárias para descrever os casos de uso que não se encaixarem como CRUDs ou consultas.
+\clearpage
+\begin{center}\textbf{Descrição de Caso de Uso}\end{center}
+
+\noindent\textbf{Projeto:} \imprimirtitulo \\
+\textbf{Identificador:} \UC\label{uc-subsistema-01-exemplo-05} \\
+\textbf{Nome:} Caso de uso 05 \\
+\textbf{Descrição:} descrição sucinta do propósito deste caso de uso.\\
+
+% Tabela de descrição de um caso de uso.
+\begin{longtable}{|p{2.3cm}|p{2.5cm}|p{10cm}|}
+	\caption{Fluxos de eventos normais para o caso de uso 05.}
+	\label{tbl-casos-de-uso-subsistema-01-exemplo-05} \\\hline 
+	
+	% Cabeçalho e repetição do mesmo em cada nova página. Manter como está.
+	\rowcolor{lightgray}
+	Cenário & Precondição & Descrição \\\hline	
+	\endfirsthead
+	\hline
+	\rowcolor{lightgray}
+	Cenário & Precondição & Descrição \\\hline
+	\endhead
+	
+	% Especificar os cenários abaixo, substituindo os exemplos.
+	Cenário 01 & Precondição do cenário 01 & 
+	\begin{enumerate}[nosep,leftmargin=8mm]\vspace{-6mm}
+			\item O ator faz algo;
+			\item O sistema responde de certa forma;
+			\item O ator reage de um jeito;
+			\item O sistema etc...
+	\vspace{-4mm}\end{enumerate} \\\hline
+
+	Cenário 02 & Precondição do cenário 02 & 
+	\begin{enumerate}[nosep,leftmargin=8mm]\vspace{-6mm}
+		\item O ator faz algo;
+		\item O sistema responde de certa forma;
+		\item O ator reage de um jeito;
+		\item O sistema etc...
+	\vspace{-4mm}\end{enumerate} \\\hline
 \end{longtable}
 
 
-Os casos de uso de consulta mais abrangente que as consultas a um único objeto, mas ainda de baixa complexidade, tais como consultas que combinam informações de vários objetos envolvendo filtros, estão descritos na Tabela~\ref{tabela-board-consulta}.
+\noindent\textbf{Fluxos variantes:}\vspace{-4mm}
+\begin{itemize}
+	\item No \textbf{cenário 01}, no caso de \textbf{isso ou aquilo acontecer}, o sistema deve ...
+\end{itemize}
 
-\begin{table}[H]
-	\centering  \vspace{0.5cm} 	\footnotesize 
-	\caption{Casos de Uso de Consulta}
-	\begin{tabular}{|c|p{2cm}|p{5.7cm}|c|p{3.2cm}|} \hline  \rowcolor[rgb]{0.8,0.8,0.8}
-		
-		Id & Nome   &  Observações & Requisitos   & Classes  \\ 	\hline	
-		
-		
-		\UC\label{uc-visualizar-noticia} & Visualizar as notícias da turma & As notícias de uma turma ficam disponíveis para serem visualizadas na lista de notícias no topo do \textit{board}. Para cada notícia, espera-se ver o título, conteúdo, data de publicação, nome do autor e foto do autor. &    \ref{rf-visualizar-noticia}        & User, Classroom e News	\\ \hline
-		\UC\label{uc-visualizar-livequestions} & Visualizar \textit{Live Questions} & O professor de uma turma terá acesso a uma lista com todas as \textit{Live Questions} ativas no momento para que possa visualizá-las e responder as dúvidas em sala de aula. &    \ref{rf-visualizar-livequestions}       & User, Classroom e LiveQuestion	\\ \hline
-		
-		
-	\end{tabular}
-	\label{tabela-board-consulta}
-\end{table}
+\noindent\textbf{Requisitos relacionados:} \ref{rf-exemplo-01}, \ref{rf-exemplo-03}
 
-\clearpage
-\begin{flushright}    \textbf{Descrição de Caso de Uso}   \end{flushright}         
-\noindent \textbf{Projeto:} \imprimirtitulo  \\
-\textbf{Identificador do Caso de Uso:} \UC\label{uc-criar-topico} \\
-\textbf{Caso de Uso:} Criar tópico no fórum de discussão \\
-\noindent \textbf{Descrição Sucinta:} Este caso de uso permite que o usuário crie um novo tópico no fórum de discussões de uma turma.\\
-
-\begin{table}[H]
-	\centering \vspace{0.5cm} \footnotesize
-	\caption{Fluxos de Eventos Normais}
-	\begin{tabular}{|p{2.3cm}|p{2.5cm}|p{10cm}|} \hline  \rowcolor[rgb]{0.8,0.8,0.8}
-		
-		Nome do Fluxo & Precondição & Descrição  \\ \hline		
-		
-		Criar tópico & O usuário & 1. O usuário irá acessar o fórum de discussões da turma.  \\
-		no fórum de     & deverá estar  & 2. O usuário deve inserir o título e o conteúdo do tópico.\\
-		discussões    & logado e inscrito na turma correspondente & 3. O sistema salva o novo tópico.\\ \hline 
-		
-		Responder tópico no fórum & O usuário deverá estar logado e & 1. O usuário irá acessar o fórum de discussões de sua turma e selecionar o tópico que deseja responder.  \\
-		de discussões    &   e inscrito & 2. O usuário deverá inserir o conteúdo de sua resposta ao tópico.\\
-		{}    & na turma correspondente & 3. O sistema salva as informações da nova réplica. \\  \hline 
-		
-		Visualizar os tópicos & O usuário deverá estar logado e & 1. O usuário irá acessar o fórum de discussões de sua turma e selecionar o tópico que deseja visualizar.  \\
-	 	do fórum de discussão    &   e inscrito & 2. O usuário poderá visualizar o tópico e suas respostas. \\ \hline 
-		
-		
-	\end{tabular}
-\end{table}
-
-
-\noindent  \textbf{Requisitos Relacionados:} \ref{rf-gerenciamento-forum}       \\ \textbf{Classes Relacionadas:} User, Classroom e ForumTopic.
-
-\newpage
-\clearpage
-\begin{flushright}    \textbf{Descrição de Caso de Uso}   \end{flushright}         
-\noindent \textbf{Projeto:} \imprimirtitulo  \\
-\textbf{Identificador do Caso de Uso:} \UC\label{uc-adicionar-livequestion} \\
-\textbf{Caso de Uso:} Adicionar nova Live Question \\
-\noindent \textbf{Descrição Sucinta:} Este caso de uso permite que o aluno de uma turma crie uma nova \textit{Live Question}.\\
-
-\begin{table}[H]
-	\centering \vspace{0.5cm} \footnotesize
-	\caption{Fluxos de Eventos Normais}
-	\begin{tabular}{|p{2.3cm}|p{2.5cm}|p{10cm}|} \hline  \rowcolor[rgb]{0.8,0.8,0.8}
-		
-		Nome do Fluxo & Precondição & Descrição  \\ \hline		
-		
-		Adiciona nova \textit{LiveQuestion}& O usuário deverá estar logado e & 1. O usuário escolhe o item do \textit{board} de sua turma correspondente à lista de \textit{LiveQuestions}  \\
-		{}    &  inscrito na turma  & 2. O usuário deverá informar qual é a sua dúvida e se deseja permanecer no anonimato ou não.\\
-		{}    & correspondente & 3. O sistema armazena as informações da dúvida e o momento de sua criação. Após 24h que a dúvida foi submetida, o sistema deve deletá-la automaticamente. \\ \hline
-		
-		
-	\end{tabular}
-\end{table}
-
-
-
-\noindent  \textbf{Requisitos Relacionados:} \ref{rf-adicionar-livequestion}      \\ \textbf{Classes Relacionadas:} User, Classroom, LiveQuestion.
-
+\noindent\textbf{Classes relacionadas:} \hl{listar possíveis classes relacionadas}.
 \newpage
 
-\section{Subsistema Log}
 
-A Figura~\ref{figura-caso-de-uso-log} apresenta o diagrama de casos de uso do subsistema Log.
+% Definir uma subseção para cada subsistema.	
+\section{Subsistema 02}
+\label{sec-casos-de-uso-subsistema-02}
 
-\begin{figure}[h!]
-	\centering
-	\includegraphics[scale=0.7]{figuras/casos-de-uso-log.png}
-	\caption{Diagrama de Casos de Uso do Subsistema Log.}
-	\label{figura-caso-de-uso-log}
-\end{figure}
-
-Os casos de uso de consulta mais abrangente que as consultas a um único objeto, mas ainda de baixa complexidade, tais como consultas que combinam informações de vários objetos envolvendo filtros, estão descritos na Tabela~\ref{tabela-log-consulta}.
-
-\begin{table}[H]
-	\centering  \vspace{0.5cm} 	\footnotesize 
-	\caption{Casos de Uso de Consulta}
-	\begin{tabular}{|c|p{2.3cm}|p{6.8cm}|c|p{1.8cm}|} \hline  \rowcolor[rgb]{0.8,0.8,0.8}
-		
-		Id & Nome   &  Observações & Requisitos   & Classes  \\ 	\hline	
-		
-		
-		\UC\label{uc-logs-alunos} & Visualizar logs dos alunos & Dentro de uma turma em que o usuário é professor, ele poderá visualizar os logs de todas as ações realizadas pelos alunos daquela turma, podendo filtrá-los pela data do log, categoria ou pelo usuário que está vinculado a ele. Para cada log, espera-se ver sua data de criação e qual ação foi realizada.&    \ref{rf-gerar-log-prof}        & User e Log	\\ \hline
-		\UC\label{uc-logs-sistema} & Visualizar logs do sistema & Administradores do sistema podem visualizar os logs de todas as ações de todos os usuários dentro do sistema, podendo filtrá-los pela data do log, categoria ou pelo usuário que está vinculado a ele. Para cada log, espera-se ver sua data de criação e qual ação foi realizada. &    \ref{rf-gerar-log-admin}        & User e Log	\\ \hline
-		
-	\end{tabular}
-	\label{tabela-log-consulta}
-\end{table}
-
-\newpage
+Etc...
