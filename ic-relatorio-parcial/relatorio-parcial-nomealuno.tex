@@ -1,10 +1,14 @@
-% =========================================================
-% Modelo para Dissertação de Mestrado (em Português)
+% =====================================================================
+% Modelo para Relatório Parcial de Iniciação Científica (em Português)
 % Prof. Vítor E. Silva Souza - NEMO / PPGI / DI / UFES
 %
-% Procurar por trechos destacados com \hl{} e substitui-los (removendo o \hl{}) pela informação
-% apropriada. O modelo já preenche grande área e área CNPq para a Computação.
-% =========================================================
+% Baseado no modelo fornecido pela PRPPG/UFES:
+% https://prppg.ufes.br/programa-institucional-de-ic-piic
+%
+% O modelo já preenche grande área e área CNPq para a Computação.
+% Procurar por textos envolvidos em \hl{}, ler as instruções e 
+% substituir pelo texto do relatório.
+% =====================================================================
 \documentclass[10pt, a4paper]{article}
 
 % Seleção de códigos de fonte.
@@ -61,7 +65,7 @@
 % Permite inserir comentários para controle de revisão de documentos.
 \usepackage[colorinlistoftodos, textwidth=20mm, textsize=footnotesize]{todonotes}
 \newcommand{\aluno}[1]{\todo[author=\textbf{Aluno},color=green!30,caption={},inline]{#1}}
-\newcommand{\professor}[1]{\todo[author=\textbf{Professor},color=red!30,caption={},inline]{#1}}
+\newcommand{\vitor}[1]{\todo[author=\textbf{Vítor},color=red!30,caption={},inline]{#1}}
 
 % Permite incluir listagens de código com o comando \lstinputlisting{}.
 \usepackage{listings}
@@ -172,6 +176,7 @@ Curso e período: \hl{Curso}, \hl{N}\textordmasculine\ período
 
 %%% Início de seção. %%%
 \section*{Introdução e justificativa:}
+\label{sec-intro}
 
 \hl{Em, no máximo, 15 linhas resumir o problema abordado durante a vigência do projeto descrevendo sucintamente o racional do estudo.}
 
