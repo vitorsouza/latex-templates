@@ -1,0 +1,218 @@
+% ==============================================================================
+% Dicas de Uso do LaTeX
+% ==============================================================================
+\section{Dicas de uso do \LaTeX}
+\label{sec-dicaslatex}
+
+Além do template pronto para uso, este documento inclui exemplos de uso de \LaTeX\ que podem ser úteis para aqueles que possuem pouca experiência com a ferramenta. Quando for começar a escrever seu documento, apague este apêndice.
+
+
+
+%%% Início de seção. %%%
+\subsection{Seções e subseções}
+\label{sec-dicaslatex-secoes}
+
+Documentos podem ser organizados em capítulos (\texttt{\textbackslash chapter\{\}}), seções (\texttt{\textbackslash section\{\}}), subseções (\texttt{\textbackslash subsection\{\}}), sub-subseções (\texttt{\textbackslash subsubsection\{\}}) e assim por diante. Atenção, porém, a não criar estruturas muito profundas (sub-sub-sub-...) pois o documento não fica bem estruturado.
+
+
+%%% Início de seção. %%%
+\subsubsection{Referências a seções}
+\label{sec-dicaslatex-secoes-refs}
+
+Cada parte do documento (capítulo, seção, etc.) deve possuir um rótulo logo abaixo de sua definição. Por exemplo, esta seção é definida com \texttt{\textbackslash subsection\{Referências a seções\}} seguido por \texttt{\textbackslash label\{sec-dicaslatex-secoes-refs\}}. Assim, podemos fazer referências cruzadas usando o comando \texttt{\textbackslash ref\{rótulo\}}: ``A Seção~\ref{sec-dicaslatex} começa com a Subseção~\ref{sec-dicaslatex-secoes}, que é ainda subdividida nas subseções~\ref{sec-dicaslatex-secoes-refs} e~\ref{sec-dicaslatex-secoes-sobrerefs}.
+
+Para melhor organização das partes do documento, sugere-se primeiro utilizar o prefixo \texttt{sec-} (para diferenciar de referências à figuras, tabelas, etc. quando usarmos o comando \texttt{\textbackslash ref\{\}}) e também representar a hierarquia das seções nos rótulos. Por exemplo, a Seção~\ref{sec-dicaslatex} tem rótulo \texttt{sec-dicaslatex}, sua Subseção~\ref{sec-dicaslatex-secoes} tem rótulo \texttt{sec-dicaslatex-secoes} e a Subsubseção~\ref{sec-dicaslatex-secoes-refs} tem rótulo \texttt{sec-dicaslatex-secoes-refs}.
+
+
+
+%%% Início de seção. %%%
+\subsubsection{Sobre referências cruzadas}
+\label{sec-dicaslatex-secoes-sobrerefs}
+
+Nas próximas seções, veremos que é possível fazer referência cruzada não só a seções mas também a listagens de código, figuras, tabelas, etc. Em todos estes casos, quando nos referimos à Seção X, Listagem Y ou Figura Z, consideramos que estes são os nomes próprios destes elementos e, portanto, usa-se a primeira letra maiúscula. Isso pode ser visto na Subseção~\ref{sec-dicaslatex-secoes-refs}, acima. A exceção é quando nos referimos a vários elementos ao mesmo tempo, por exemplo: ``as subseções~\ref{sec-dicaslatex-secoes-refs} e~\ref{sec-dicaslatex-secoes-sobrerefs}''.
+
+Por fim, ao usar o comando \texttt{\textbackslash ref\{\}}, sugere-se separá-lo da palavra que vem antes dele com um \textasciitilde\ ao invés de espaço. Por exemplo: \texttt{a Seção\textasciitilde \textbackslash ref\{sec-dicaslatex\}}. Isso faz com que o \LaTeX\ não quebre linha entre a palavra \texttt{Seção} e o número da seção. Note que ao usar a palavra \emph{seção} junto com seu número, ela deve ser usada com a inicial maiúscula por se tratar de um nome próprio: Seção~\ref{sec-dicaslatex}. O mesmo vale para figuras, tabelas, etc.
+
+
+
+
+%%% Início de seção. %%%
+\subsection{Citações bibliográficas}
+\label{sec-dicaslatex-citacoes}
+
+Este documento utiliza a ferramenta de gerenciamento de referências bibliográficas do \LaTeX, chamada \emph{BibTeX}. O arquivo \texttt{bibliografia.bib}, referenciado no arquivo \LaTeX\ principal deste documento, contém algumas referências bibliográficas de exemplo. Assim como capítulos, seções, etc., tais referências também possuem rótulos, especificados como primeiro parâmetro de cada entrada (ex.: \texttt{@incollection\{souza-et-al:iism08, ...\}}.
+
+Sugere-se um padrão para rótulos de referências bibliográficas para que fique claro também no código \LaTeX\ qual referência está sendo citada. Por exemplo, ao citar a referência \texttt{souza-et-al:sesas13}, sabemos que é um artigo escrito por \emph{Souza} e outros, publicado no \emph{SESAS} em \emph{2013} (geralmente a pessoa que citou sabe que publicação é SESAS e quem é Souza).
+
+Para citar uma referência bibliográfica contida no arquivo \emph{BibTeX}, basta usar seu rótulo como parâmetro de um de dois comandos possíveis de citação:
+
+\begin{itemize}
+\item O comando \texttt{\textbackslash cite\{\}} efetua uma citação tradicional, colocando o nome do(s) autor(es) e o ano entre parênteses. Por exemplo, \texttt{\textbackslash cite\{souza-et-al:iism08\}} é transformado em \cite{souza-et-al:iism08};
+
+\item O comando \texttt{\textbackslash citeonline\{\}} efetua uma citação integrada ao texto, colocando o nome do(s) autor(es) direto no texto e somente o ano entre parênteses. Por exemplo, ``de acordo com \texttt{\textbackslash citeonline\{souza-et-al:iism08\}}'' é transformado em: de acordo com \citeonline{souza-et-al:iism08};
+\end{itemize}
+
+Também é possível citar vários trabalhos de uma só vez, separando os rótulos das referências bibliográficas com uma vírgula dentro do comando apropriado. Por exemplo, \texttt{\textbackslash cite\{souza-et-al:sesas13,souza-et-al:csrd13\}} \cite{souza-et-al:sesas13,souza-et-al:csrd13}.
+
+Os trabalhos citados são automaticamente incluídos na seção de referências bibliográficas, ao final do documento. Tudo é formatado automaticamente segundo padrões da ABNT.
+
+
+
+%%% Início de seção. %%%
+\subsection{Listagens de código}
+\label{sec-dicaslatex-listagens}
+
+O pacote \texttt{listings}, incluído neste template, permite a inclusão de listagens de código. Análogo ao já feito anteriormente, listagens possuem rótulos para que possam ser referenciadas e sugerimos uma regra de nomenclatura para tais rótulos: usar como prefixo o rótulo do capítulo, substituindo \texttt{sec-} por \texttt{lst-}.
+
+A Listagem~\ref{lst-dicaslatex-exemplo}, por exemplo, possui o rótulo \texttt{lst-dicaslatex-exemplo} e representa o código que foi usado no próprio documento para exibir as listagens desta seção. Como podemos ver, a sugestão é que os arquivos de código sejam colocados dentro da pasta \texttt{codigos/} e tenham nome idêntico ao rótulo, colocando a extensão adequada ao tipo de código.
+
+\lstinputlisting[label=lst-dicaslatex-exemplo, caption=Exemplo de código \LaTeX\ para inclusão de listagens de código., float=htpb]{codigos/lst-dicaslatex-exemplo.tex}
+
+A Listagem~\ref{lst-dicaslatex-outroexemplo} mostra um exemplo de listagem com especificação da linguagem utilizada no código. O pacote \texttt{listings} reconhece algumas linguagens\footnote{Veja a lista de linguagens suportadas em \url{http://en.wikibooks.org/wiki/LaTeX/Source\_Code\_Listings\#Supported_languages}.} e faz ``coloração'' de código (na verdade, usa \textbf{negrito} e não cores) de acordo com a linguagem. O parâmetro \texttt{float=htpb} incluído em ambos os exemplos impede que a listagem seja quebrada em diferentes páginas.
+
+\lstinputlisting[label=lst-dicaslatex-outroexemplo, caption=Exemplo de código \java especificando linguagem utilizada., language=Java, float=htpb]{codigos/lst-dicaslatex-outroexemplo.java}
+
+
+
+%%% Início de seção. %%%
+\subsection{Figuras}
+\label{sec-dicaslatex-figuras}
+
+Figuras podem ser inseridas no documento usando o \emph{ambiente} \texttt{figure} (ou seja, \texttt{\textbackslash begin\{figure\}} e \texttt{\textbackslash end\{figure\}}) e o comando \texttt{\textbackslash includegraphics\{\}}. Existem alguns outros elementos e propriedades úteis de serem configuradas, resultando no código exibido na Listagem~\ref{lst-dicaslatex-figuras}.
+
+\lstinputlisting[label=lst-dicaslatex-figuras, caption=Código \LaTeX\ utilizado para inclusão das figuras na Seção~\ref{sec-dicaslatex-figuras}., float=htpb]{codigos/lst-dicaslatex-figuras.tex}
+
+O comando \texttt{\textbackslash centering} centraliza a figura na página. A opção \texttt{width} do comando \texttt{\textbackslash includegraphics\{\}} determina o tamanho da figura e usa-se \texttt{\textbackslash textwidth} (opcionalmente multiplicado por um número) para se referir à largura da página. O parâmetro do comando \texttt{\textbackslash includegraphics\{\}} indica onde a imagem pode ser encontrada. Foi criado o diretório \texttt{figuras/} para conter as figuras do documento, dando uma melhor organização aos arquivos.
+
+Por fim, o comando \texttt{\textbackslash caption\{\}} especifica a descrição da figura e \texttt{\textbackslash label\{\}}, como de costume, estabelece um rótulo para permitir referência cruzada de figuras. Note ainda que é utilizada a mesma estratégia de nomenclatura de rótulos usada nas listagens, porém utilizando o prefixo \texttt{fig-}.
+
+As figuras~\ref{fig-dicaslatex-nemologo} e~\ref{fig-dicaslatex-exemplosideways} mostram o resultado do código da Listagem~\ref{lst-dicaslatex-figuras}. A Figura~\ref{fig-dicaslatex-exemplosideways}, em particular, utiliza o pacote \texttt{rotating} para mostrar figuras largas em modo paisagem. Basta usar o ambiente \texttt{sidewaysfigure} ao invés de \texttt{figure}. Já a Figura~\ref{fig-dicaslatex-nemologo} utiliza o parâmetro \texttt{[h!]} que indica para o \LaTeX\ que a figura deve ser colocada na posição em que está em relação aos parágrafos (a regra geral é incluir a figura abaixo do primeiro parágrafo que a cita), se houver espaço. Sem este parâmetro o \LaTeX\ pode decidir colocar as figuras sempre no topo da página. Questão de gosto/estilo.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=.25\textwidth]{figuras/fig-dicaslatex-nemologo} 
+	\caption{Exemplo de figura: logo do NEMO.}
+	\label{fig-dicaslatex-nemologo}
+\end{figure}
+
+\begin{sidewaysfigure}
+\centering
+\includegraphics[width=\textwidth]{figuras/fig-dicaslatex-exemplosideways} 
+\caption{Exemplo de figura em modo paisagem: um modelo de objetivos~\cite{souza-mylopoulos:spe13}.}
+\label{fig-dicaslatex-exemplosideways}
+\end{sidewaysfigure}
+
+
+
+%%% Início de seção. %%%
+\subsection{Tabelas}
+\label{sec-dicaslatex-tabelas}
+
+Tabelas são um ponto fraco do \LaTeX. Elas são complicadas de fazer e, dependendo da complexidade da tabela (muitas células mescladas, por exemplo), vale a pena construi-las em outro programa (por exemplo, em seu editor de texto favorito) e inclui-las no documento como figuras (ex.: tirando um screenshot da tela). Mostramos, no entanto, alguns exemplos de tabela a seguir. O código utilizado para criar as tabelas encontra-se nas listagens~\ref{lst-dicaslatex-tabelas01}, \ref{lst-dicaslatex-tabelas02} e~\ref{lst-dicaslatex-tabelas03}.
+
+\lstinputlisting[label=lst-dicaslatex-tabelas01, caption=Código \LaTeX\ utilizado para inclusão das tabelas~\ref{tbl-dicaslatex-exemplo01} e~\ref{tbl-dicaslatex-exemplo02}., float=htpb]{codigos/lst-dicaslatex-tabelas01.tex}
+
+\lstinputlisting[label=lst-dicaslatex-tabelas02, caption=Código \LaTeX\ utilizado para inclusão da Tabela~\ref{tbl-dicaslatex-exemplo03}., float=htpb]{codigos/lst-dicaslatex-tabelas02.tex}
+
+\lstinputlisting[label=lst-dicaslatex-tabelas03, caption=Código \LaTeX\ utilizado para inclusão da Tabela~\ref{tbl-dicaslatex-exemplo04}., float=htpb]{codigos/lst-dicaslatex-tabelas03.tex}
+
+Em particular, a Tabela~\ref{tbl-dicaslatex-exemplo04} utiliza um pacote chamado \texttt{tabularx}, que permite maior controle do layout das tabelas. Ao definir o ambiente \texttt{\textbackslash begin\{tabularx\}}, são definidos os tamanhos de cada coluna proporcional à largura ocupada pela tabela. Veja na Listagem~\ref{lst-dicaslatex-tabelas03} que as primeiras duas colunas não definem o atributo \texttt{\textbackslash hsize}, o que faz com que elas fiquem com o tamanho padrão de coluna, que é a largura da tabela dividida pelo número de colunas. Já a terceira coluna define \texttt{\textbackslash hsize=1.2\textbackslash hsize}, ou seja, esta coluna deve ser 20\% maior do que o tamanho padrão. Para isso, é preciso retirar de outras colunas, portanto a quarta e quinta colunas são definidas como 10\% menores (ou seja, \texttt{\textbackslash hsize=0.9\textbackslash hsize}).
+
+% Exemplo de tabela 01:
+\begin{table}
+\caption{Exemplo de tabela com diferentes alinhamentos de conteúdo.}
+\label{tbl-dicaslatex-exemplo01}
+\centering
+\begin{tabular}{ | c | l | r | p{40mm} |}\hline
+\textbf{Centralizado} & \textbf{Esquerda} & \textbf{Direita} & \textbf{Parágrafo}\\\hline
+C & L & R & Alinhamento de tipo parágrafo especifica largura da coluna e quebra o texto automaticamente.\\
+\hline
+Linha 2 & Linha 2 & Linha 2 & Linha 2\\
+\hline
+\end{tabular}
+\end{table}
+
+% Exemplo de tabela 02:
+\begin{table}
+\caption{Exemplo que especifica largura de coluna e usa lista enumerada (adaptada de~\cite{souza-mylopoulos:spe13}).}
+\label{tbl-dicaslatex-exemplo02}
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{small}
+\begin{tabular}{ | p{15mm} | p{77mm} | p{55mm} |}\hline
+\textbf{\textit{AwReq}} & \textbf{Adaptation strategies} & \textbf{Applicability conditions}\\\hline
+
+AR1 &
+\vspace{-2mm}\begin{enumerate}[topsep=0cm, partopsep=0cm, itemsep=0cm, parsep=0cm, leftmargin=0.5cm]
+\item \textit{Warning(``AS Management'')}
+\item \textit{Reconfigure($\varnothing$)}
+\end{enumerate}\vspace{-4mm} &
+\vspace{-2mm}\begin{enumerate}[topsep=0cm, partopsep=0cm, itemsep=0cm, parsep=0cm, leftmargin=0.5cm]
+\item Once per adaptation session;
+\item Always.
+\end{enumerate}\vspace{-4mm}
+\\\hline
+
+AR2 &
+\vspace{-2mm}\begin{enumerate}[topsep=0cm, partopsep=0cm, itemsep=0cm, parsep=0cm, leftmargin=0.5cm]
+\item \textit{Warning(``AS Management'')}
+\item \textit{Reconfigure($\varnothing$)}
+\end{enumerate}\vspace{-4mm} &
+\vspace{-2mm}\begin{enumerate}[topsep=0cm, partopsep=0cm, itemsep=0cm, parsep=0cm, leftmargin=0.5cm]
+\item Once per adaptation session;
+\item Always.
+\end{enumerate}\vspace{-4mm}
+\\\hline
+\end{tabular}
+\end{small}
+\end{table}
+
+% Exemplo de tabela 03:
+\begin{table}
+\caption{Exemplo que mostra equações em duas colunas (adaptada de~\cite{souza-mylopoulos:spe13}).}
+\label{tbl-dicaslatex-exemplo03}
+\centering
+\vspace{1mm}
+\fbox{\begin{minipage}{.98\linewidth}
+\begin{minipage}{0.51\linewidth}
+\vspace{-4mm}
+\begin{eqnarray}
+\Delta \left( I_{AR1} / NoSM \right) \left[ 0, maxSM \right] > 0\\
+\Delta \left( I_{AR2} / NoSM \right) \left[ 0, maxSM \right] > 0\\
+\Delta \left( I_{AR3} / LoA \right) < 0\\
+\end{eqnarray}
+\vspace{-6mm}
+\end{minipage}
+\hspace{2mm}
+\vline 
+\begin{minipage}{0.41\linewidth}
+\vspace{-4mm}
+\begin{eqnarray}
+\Delta \left( I_{AR11} / VP2 \right) < 0\\
+\Delta \left( I_{AR12} / VP2 \right) > 0\\
+\Delta \left( I_{AR6} / VP3 \right) > 0\\
+\end{eqnarray}
+\vspace{-6mm}
+\end{minipage}
+\end{minipage}}
+\end{table}
+
+% Exemplo de tabela 04:
+\begin{table}[h]
+	\caption{Exemplo que utiliza o pacote \texttt{tabularx}, extraído de um artigo não publicado.}
+	\label{tbl-dicaslatex-exemplo04}
+	\centering\tiny\def\tabularxcolumn#1{m{#1}}
+	\begin{tabularx}{\columnwidth}{ >{\centering}X | >{\centering}X | >{\hsize=1.2\hsize\centering}X | >{\hsize=0.9\hsize\centering}X | >{\hsize=0.9\hsize\centering\arraybackslash}X }
+		\hline
+		\textbf{Applied Criteria} & \textbf{Analyzed Content} & \textbf{Initial\\Occurrences} & \textbf{Final Results} & \textbf{Reduction (\%)} \\
+		\hline
+		Duplicate Removal & Title, authors and year & 903 & 420 & 54,84\% \\ 
+		\hline 
+		IC and ECs & Title, abstract and keywords & 420 & 130 & 69,05\% \\ 
+		\hline 
+		IC and ECs & Full text & 130 & 117 & 10\% \\ 
+		\hline 
+		Final Results & -- & 903 & 117 & 87,04\% \\ 
+		\hline 
+	\end{tabularx}
+\end{table}

@@ -1,0 +1,286 @@
+% ==============================================================================
+% Modelo para Relatório de Estudo Dirigido (em Português)
+% Prof. Vítor E. Silva Souza - NEMO/UFES :: DI/UFES :: PPGI/UFES
+%
+% Baseado em abtex2-modelo-trabalho-academico.tex, v-1.9.2 laurocesar
+% Copyright 2012-2014 by abnTeX2 group at http://abntex2.googlecode.com/ 
+%
+% Modificado por prof. Vítor E. Silva Souza
+% http://www.inf.ufes.br/~vitorsouza/
+%
+% This work may be distributed and/or modified under the conditions of the LaTeX 
+% Project Public License, either version 1.3 of this license or (at your option) 
+% any later version. The latest version of this license is in
+% http://www.latex-project.org/lppl.txt.
+%
+% IMPORTANTE:
+% Instruções encontram-se espalhadas pelo documento. Para facilitar sua leitura,
+% tais instruções são precedidas por (*) -- utilize a função localizar do seu
+% editor para passar por todas elas.
+% ==============================================================================
+
+% Usa o estilo abntex2, configurando detalhes de formatação e hifenização.
+\documentclass[
+	article,           % Seções ao invés de capítulos.
+	12pt,              % Tamanho da fonte.
+	oneside,         % Para impressão em apenas um lado (não inclui páginas em branco).
+	a4paper,        % Tamanho do papel.
+	english,         % Idioma adicional para hifenização.
+	french,	          % Idioma adicional para hifenização.
+	spanish,        % Idioma adicional para hifenização.
+	brazil             % O último idioma é o principal do documento.
+	]{abntex2}
+
+
+
+%%% Importação de pacotes. %%%
+
+% Conserta o erro "No room for a new \count"
+% Em alguns sistemas operacionais, a linha \reserveinserts{28} deve ser comentada.
+\usepackage{etex}
+%\reserveinserts{28}
+
+% Usa a fonte Latin Modern.
+\usepackage{lmodern}
+
+% Seleção de códigos de fonte.
+\usepackage[T1]{fontenc}
+
+% Codificação do documento em Unicode.
+\usepackage[utf8]{inputenc}
+
+% Indenta o primeiro parágrafo de cada seção.
+\usepackage{indentfirst}
+
+% Controle das cores.
+\usepackage[usenames,dvipsnames,table]{xcolor}
+
+% Inclusão de gráficos.
+\usepackage{graphicx}
+
+% Para melhor personalização das tabelas.
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{hhline}
+
+% Para melhorias de justificação.
+\usepackage{microtype}
+
+% Citações padrão ABNT.
+\usepackage[brazilian,hyperpageref]{backref}
+\usepackage[alf]{abntex2cite}	
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}    % Usado sem a opção hyperpageref de backref.
+\renewcommand{\backref}{}                                                              % Texto padrão antes do número das páginas.
+\renewcommand*{\backrefalt}[4]{                                                     % Define os textos da citação.
+	\ifcase #1
+		Nenhuma citação no texto.
+	\or
+		Citado na página #2.
+	\else
+		Citado #1 vezes nas páginas #2.
+	\fi}
+
+% \rm is deprecated and should not be used in a LaTeX2e document
+% http://tex.stackexchange.com/questions/151897/always-textrm-never-rm-a-counterexample
+\renewcommand{\rm}{\textrm}
+
+% Inclusão de símbolos não padrão.
+\usepackage{amssymb}
+\usepackage{eurosym}
+
+% Para utilizar \eqref para referenciar equações.
+\usepackage{amsmath}
+
+% Permite mostrar figuras muito largas em modo paisagem com \begin{sidewaysfigure} ao invés de \begin{figure}.
+\usepackage{rotating}
+
+% Permite customizar listas enumeradas/com marcadores.
+\usepackage{enumitem}
+
+% Permite inserir hiperlinks com \url{}.
+\usepackage{bigfoot}
+\usepackage{hyperref}
+
+% Permite usar o comando \hl{} para evidenciar texto com fundo amarelo. Útil para chamar atenção a itens a fazer.
+\usepackage{soulutf8}
+
+% Permite inserir comentários para viabilizar escrita colaborativa ou revisão pelo professor orientador.
+\usepackage[colorinlistoftodos, textwidth=20mm, textsize=footnotesize]{todonotes}
+\newcommand{\aluno}[1]{\todo[author=\textbf{Aluno},color=green!30,caption={},inline]{#1}}
+\newcommand{\professor}[1]{\todo[author=\textbf{Professor},color=red!30,caption={},inline]{#1}}
+\newcommand{\instrucoes}[1]{\todo[author=\textbf{Instruções para elaboração},color=blue!30,caption={},inline]{#1}}
+
+% Permite inserir espaço em branco condicional (incluído no texto final só se necessário) em macros.
+\usepackage{xspace}
+
+% Permite incluir listagens de código com o comando \lstinputlisting{}.
+\usepackage{listings}
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+\renewcommand{\lstlistingname}{Listagem}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\lstset{
+	basicstyle=\scriptsize,
+	breaklines=true,
+	numbers=left,
+	numbersep=5pt,
+	numberstyle=\tiny\color{mygray}, 
+	rulecolor=\color{black},
+	showstringspaces=false,
+	tabsize=2,
+    inputencoding=utf8,
+    extendedchars=true,
+    literate=%
+    {é}{{\'{e}}}1
+    {è}{{\`{e}}}1
+    {ê}{{\^{e}}}1
+    {ë}{{\¨{e}}}1
+    {É}{{\'{E}}}1
+    {Ê}{{\^{E}}}1
+    {û}{{\^{u}}}1
+    {ù}{{\`{u}}}1
+    {â}{{\^{a}}}1
+    {à}{{\`{a}}}1
+    {á}{{\'{a}}}1
+    {ã}{{\~{a}}}1
+    {Á}{{\'{A}}}1
+    {Â}{{\^{A}}}1
+    {Ã}{{\~{A}}}1
+    {ç}{{\c{c}}}1
+    {Ç}{{\c{C}}}1
+    {õ}{{\~{o}}}1
+    {ó}{{\'{o}}}1
+    {ô}{{\^{o}}}1
+    {Õ}{{\~{O}}}1
+    {Ó}{{\'{O}}}1
+    {Ô}{{\^{O}}}1
+    {î}{{\^{i}}}1
+    {Î}{{\^{I}}}1
+    {í}{{\'{i}}}1
+    {Í}{{\~{Í}}}1
+}
+
+
+
+%%% Definição de variáveis. %%%
+
+% (*) Substituir os <<textos>> abaixo com as informações apropriadas.
+% (*) Como título, colocar o subtítulo do estudo dirigido (ex.: Engenharia de Ontologias).
+\titulo{<<Título>>}
+\autor{<<Nome do Estudante>>}
+\local{Vitória, ES}
+\data{<<mês/ano>>}
+\orientador{<<Nome do orientador no PPGI>>}
+\instituicao{
+  Universidade Federal do Espírito Santo -- UFES
+  \par
+  Centro Tecnológico
+  \par
+  Programa de Pós-Graduação em Informática}
+\tipotrabalho{Relatório de Estudo Dirigido}
+
+% Preâmbulo (tipo do trabalho, objetivo, nome da instituição, área de concentração, etc.).
+% (*) Indicar se é Estudo Dirigido I, II ou III.
+\preambulo{Relatório entregue ao final da disciplina Estudo Dirigido <<I / II / III>> do Programa de Pós-Graduação em Informática da Universidade Federal do Espírito Santo, descrevendo o trabalho feito ao longo do semestre para avaliação do orientador e registro do próprio estudante.}
+
+% Macros específicas do trabalho.
+% (*) Inclua aqui termos que são utilizados muitas vezes e que demandam formatação especial.
+% O exemplo abaixo inclue Java com TM em superscript.
+% Use sempre \xspace para que o LaTeX inclua espaço em branco após a macro somente quando necessário.
+\newcommand{\java}{Java\texttrademark\xspace}
+
+
+
+
+%%% Configurações finais de aparência. %%%
+
+% Altera o aspecto da cor azul.
+\definecolor{blue}{RGB}{41,5,195}
+
+% Informações do PDF.
+\makeatletter
+\hypersetup{
+	pdftitle={\@title}, 
+	pdfauthor={\@author},
+	pdfsubject={\imprimirpreambulo},
+	pdfcreator={LaTeX with abnTeX2},
+	pdfkeywords={abnt}{latex}{abntex}{abntex2}{trabalho acadêmico}, 
+	colorlinks=true,           % Colore os links (ao invés de usar caixas).
+	linkcolor=blue,            % Cor dos links.
+	citecolor=blue,            % Cor dos links na bibliografia.
+	filecolor=magenta,      % Cor dos links de arquivo.
+	urlcolor=blue,             % Cor das URLs.
+	bookmarksdepth=4
+}
+\makeatother
+
+% Espaçamentos entre linhas e parágrafos.
+\setlength{\parindent}{1.3cm}
+\setlength{\parskip}{0.2cm}
+
+
+
+%%% Páginas iniciais do documento: capa, folha de rosto, ficha, resumo, tabelas, etc. %%%
+
+% Compila o índice. <--- Desnecessário em Plano de Estudo.
+%\makeindex
+
+% Inicia o documento.
+\begin{document}
+
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing
+
+
+% Capa do trabalho (com brasão da UFES).
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.055]{figuras/brasao.jpg}
+\end{figure} 
+\imprimircapa
+
+% Folha de rosto (o * indica que haverá a ficha bibliográfica). <--- Ficha bibliográfica desnecessária em Plano de Estudo.
+\imprimirfolhaderosto
+
+
+%%% Início da parte de conteúdo do documento. %%%
+
+% Marca o início dos elementos textuais.
+\clearpage
+\textual
+
+% Inclusão das seções.
+% (*) Para facilitar a organização, as seções foram divididas em arquivo separados e colocadas dentro da
+% pasta secoes. Caso o candidato prefira trabalhar com um só arquivo, basta substituir os comandos \include 
+% pelos conteúdos dos arquivos que estão sendo incluídos, excluindo a pasta secoes/ em seguida.
+\input{secoes/sec1-introducao}
+\input{secoes/sec2-visao}
+\input{secoes/sec3-resultados}
+\input{secoes/sec4-conclusoes}
+
+
+
+%%% Páginas finais do documento: bibliografia e anexos. %%%
+
+% Finaliza a parte no bookmark do PDF para que se inicie o bookmark na raiz e adiciona espaço de parte no sumário.
+\phantompart
+
+% Marca o início dos elementos pós-textuais.
+\postextual
+
+% Referências bibliográficas
+\bibliography{bibliografia}
+
+
+% Apêndices.
+% (*) Incluído apenas para dar dicas de LaTeX. Remover/comentar antes de entregar o plano de estudo.
+\begin{apendicesenv}
+\partapendices
+\include{secoes/ap-dicaslatex}
+\end{apendicesenv}
+
+
+% Fim do documento.
+\end{document}
