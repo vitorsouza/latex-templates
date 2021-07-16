@@ -1,0 +1,132 @@
+\chapter{Requisitos de Usuário}
+\label{sec-requisitos}
+
+\vitor{Está sendo utilizado o \textit{template} que lista as estórias de usuário. Existe também um \textit{template} para os requisitos funcionais, basta modificar o arquivo \texttt{ch4-} que está sendo incluído no documento principal.}
+
+\vitor{Listar os principais \textit{stakeholders} do projeto no parágrafo abaixo e preencher as tabelas de estórias de usuário, requisitos não-funcionais e regras de negócio, com atenção aos identificadores e \textit{labels}.}
+
+Tomando por base o contexto do sistema descrito na Seção~\ref{sec-minimundo} e considerando como principais \textit{stakeholders} \hl{(listar aqui os principais stakeholders do projeto)}, foram identificadas estórias de usuário, requisitos não funcionais e regras de negócio.
+
+As estórias de usuário são apresentadas na Tabela~\ref{tbl-requisitos-uss}, os requisitos não-funcionais na Tabela~\ref{tbl-requisitos-rnfs} e as regras de negócio globais (aquelas que não são caracterizadas como critérios de aceitação de estórias de usuário específica) na Tabela~\ref{tbl-requisitos-rns}. As tabelas são apresentadas nas páginas a seguir, em formato paisagem, para melhor visualização.
+
+% Mostra as tabelas em formato paisagem.
+\begin{landscape}
+
+% Define contador e identificador para estórias de usuário.
+% Usar \US\label{rf-nome-do-label} para cada requisito definido.
+\newcounter{uscount}
+\renewcommand*\theuscount{US-\arabic{uscount}}
+\newcommand*\US{\refstepcounter{uscount}\theuscount}
+\setcounter{uscount}{0}
+
+% Tabela de requisitos funcionais.
+\begin{longtable}{|c|p{8cm}|p{9.7cm}|c|p{2.2cm}|}
+	\caption{Estórias de Usuário.}
+	\label{tbl-requisitos-uss} \\\hline 
+	
+	% Cabeçalho e repetição do mesmo em cada nova página. Manter como está.
+	\rowcolor{lightgray}
+	\textbf{ID} & \textbf{Descrição} & \textbf{Critérios de Aceitação} & \textbf{Prioridade} & \textbf{Depende} \\\hline	
+	\endfirsthead
+	\hline
+	\rowcolor{lightgray}
+	\textbf{ID} & \textbf{Descrição} & \textbf{Critérios de Aceitação} & \textbf{Prioridade} & \textbf{Depende} \\\hline	
+	\endhead
+	
+	% Especificar as estórias de usuário abaixo, substituindo os exemplos.
+	\US\label{us-exemplo-01} & 
+		\hl{Genérico: } Como \hl{ator}, quero \hl{função}, para \hl{finalidade}. &
+		\parbox{9.7cm}{
+		\begin{enumerate}[leftmargin=15mm,label=-- CA\arabic*:]\itemsep-2mm
+			\item Critério de aceitação 1;
+			\item Critério de aceitação 2;
+			\item Critério de aceitação N.
+		\end{enumerate}
+		} & Baixa & \\\hline
+	
+	\US\label{us-exemplo-02} & 
+		\hl{Cadastro/CRUD: } Como \hl{ator}, quero cadastrar \hl{objeto}, para \hl{finalidade}. &
+		\parbox{9.7cm}{
+		\begin{enumerate}[leftmargin=15mm,label=-- CA\arabic*:]\itemsep-2mm
+			\item Para cadastrar um \hl{objeto} devem ser informados \hl{campos};
+			\item Um \hl{objeto} não pode ter as seguintes informações alteradas: \hl{campos};
+			\item A consulta pode ser feita por \hl{campos};
+			\item \hl{Objetos} relacionados a \hl{outros objetos} não podem ser excluídos;
+			\item Alterações ou exclusões devem ser comunicadas e/ou deve ser requerida confirmação.
+		\end{enumerate}
+		} & Média & \ref{us-exemplo-01} \\\hline
+
+	\US\label{us-exemplo-03} & 
+		\hl{Consulta: } Como \hl{ator}, quero consultar \hl{informações}, para \hl{finalidade}. &
+		\parbox{9.7cm}{
+		\begin{enumerate}[leftmargin=15mm,label=-- CA\arabic*:]\itemsep-2mm
+			\item Para realizar a consulta, o usuário deve informar como parâmetros: \hl{parâmetros};
+			\item Devem ser apresentadas as seguintes informações para o usuário: \hl{campos}.
+		\end{enumerate}
+		} & ou Alta & \ref{us-exemplo-01}, \ref{us-exemplo-02} \\\hline
+\end{longtable}
+
+
+
+% Define contador e identificador para requisitos não funcionais.
+% Usar \RNF\label{rnf-nome-do-label} para cada requisito definido.
+\newcounter{rnfcount}
+\renewcommand*\thernfcount{RNF-\arabic{rnfcount}}
+\newcommand*\RNF{\refstepcounter{rnfcount}\thernfcount}
+\setcounter{rnfcount}{0}
+
+% Tabela de requisitos não funcionais.
+\begin{longtable}{|c|p{14.3cm}|c|c|c|}
+	\caption{Requisitos Não Funcionais.}
+	\label{tbl-requisitos-rnfs} \\\hline 
+	
+	% Cabeçalho e repetição do mesmo em cada nova página. Manter como está.
+	\rowcolor{lightgray}
+	\textbf{ID} & \textbf{Descrição} & \textbf{Categoria} & \textbf{Escopo} & \textbf{Prioridade} \\\hline		
+	\endfirsthead
+	\hline
+	\rowcolor{lightgray}
+	\textbf{ID} & \textbf{Descrição} & \textbf{Categoria} & \textbf{Escopo} & \textbf{Prioridade} \\\hline		
+	\endhead
+	
+	% Especificar os requisitos abaixo, substituindo os exemplos.
+	\RNF\label{rnf-exemplo-01} & Descrição sucinta. & Característica & Funcionalidade & Baixa \\\hline 	
+
+	\RNF\label{rnf-exemplo-02} & Descrição sucinta. & de & ou & Média \\\hline 	
+
+	\RNF\label{rnf-exemplo-03} & Descrição sucinta. & qualidade & Sistema & ou Alta \\\hline
+\end{longtable}
+
+
+
+% Define contador e identificador para regras de negócio.
+% Usar \RN\label{rn-nome-do-label} para cada regra definida.
+\newcounter{rncount}
+\renewcommand*\therncount{RN-\arabic{rncount}}
+\newcommand*\RN{\refstepcounter{rncount}\therncount}
+\setcounter{rncount}{0}
+
+% Tabela de regras de negócio.
+\begin{longtable}{|c|p{18cm}|c|p{2.2cm}|}
+	\caption{Regras de Negócio.}
+	\label{tbl-requisitos-rns} \\\hline 
+	
+	% Cabeçalho e repetição do mesmo em cada nova página. Manter como está.
+	\rowcolor{lightgray}
+	\textbf{ID} & \textbf{Descrição} & \textbf{Prioridade} & \textbf{Depende} \\\hline	
+	\endfirsthead
+	\hline
+	\rowcolor{lightgray}
+	\textbf{ID} & \textbf{Descrição} & \textbf{Prioridade} & \textbf{Depende} \\\hline	
+	\endhead
+	
+	% Especificar as regras abaixo, substituindo os exemplos.
+	\RN\label{rn-exemplo-01} & Descrição sucinta. & Baixa & \ref{us-exemplo-01} \\\hline
+
+	\RN\label{rn-exemplo-02} & \hl{Devem ser incluídas apenas regras de negócio globais.} & Média & \ref{us-exemplo-01}, \ref{us-exemplo-02} \\\hline
+
+	\RN\label{rn-exemplo-03} & \hl{Regras de negócio associadas a uma estória de usuário específica devem constar como critério de aceitação da referida estória.} & ou Alta & \ref{us-exemplo-03} \\\hline
+\end{longtable}
+
+% Fim do formato paisagem.
+\end{landscape}

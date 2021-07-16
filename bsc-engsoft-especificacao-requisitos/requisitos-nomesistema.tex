@@ -60,6 +60,8 @@ brazil				% O último idioma é o principal do documento.
 \usepackage{tabularx}
 \usepackage{colortbl}
 \usepackage{longtable}
+
+% Adds PDF support to the environment landscape.
 \usepackage{pdflscape}
 
 % Inclusão de páginas em PDF diretamente no documento (para uso nos apêndices).
@@ -295,7 +297,9 @@ brazil				% O último idioma é o principal do documento.
 
 \include{capitulos/ch3-minimundo}
 
-\include{capitulos/ch4-requisito}
+% Escolher entre requisitos funcionais ou estórias de usuário.
+%\include{capitulos/ch4-requisito}
+\include{capitulos/ch4-estorias}
 
 \include{capitulos/ch5-subsistema}
 
