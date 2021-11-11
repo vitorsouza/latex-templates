@@ -187,7 +187,6 @@ brazil				% O último idioma é o principal do documento.
 \newcommand{\versao}{1.0}
 
 % Define a capa.
-% (*) Incluir linhas no registro de alterações a cada nova versão.
 \renewcommand{\imprimircapa}{%
 	\begin{capa}%
 		\center
@@ -197,20 +196,6 @@ brazil				% O último idioma é o principal do documento.
 		\begin{center}
 			\ABNTEXchapterfont\bfseries\LARGE\imprimirtitulo
 		\end{center}
-		
-		\vfill
-		Registro de Alterações:
-		\begin{table}[h]
-			\centering
-			\vspace{0.5cm}
-			\begin{tabular}{|c|c|c|p{4.5cm}|} \hline \rowcolor[rgb]{0.8,0.8,0.8}
- 				
- 				Versão & Responsável & Data  & Alterações \\	\hline  
- 				                            
-				1.0  & \imprimirautor & dd/MM/yyyy & Versão Inicial  \\ \hline 
-			 
-			\end{tabular}
-		\end{table}
 		
 		\vfill
 		\large\imprimirlocal
@@ -279,7 +264,19 @@ brazil				% O último idioma é o principal do documento.
 % Capa do trabalho.
 \imprimircapa
 
-
+% (*) Incluir linhas no registro de alterações a cada nova versão.
+\begin{center}
+	{\large\bfseries Registro de Alterações:}
+	
+	\vspace{0.5cm}
+	\begin{tabular}{|c|p{45mm}|c|p{60mm}|} \hline
+		
+		\textbf{Versão} & \textbf{Responsável} & \textbf{Data}  & \textbf{Alterações} \\ \hline   
+		
+		1.0  & Nome do Responsável & dd/MM/yyyy & Versão inicial. \\\hline 
+	\end{tabular}
+\end{center}
+\newpage
 
 
 
