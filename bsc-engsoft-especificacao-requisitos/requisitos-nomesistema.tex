@@ -284,24 +284,30 @@ brazil				% O último idioma é o principal do documento.
 % Marca o início dos elementos textuais.
 \textual
 
-% Inclusão dos capítulos.
-% (*) Para facilitar a organização, os capítulos foram divididos em arquivo separados e colocados dentro da.
-% pasta capitulos/. Caso o aluno prefira trabalhar com um só arquivo, basta substituir os comandos \include 
-% pelos conteúdos dos arquivos que estão sendo incluídos, excluindo a pasta capitulos/ em seguida.
+% Inclusão dos capítulos como seções (sem quebra de página).
+\begingroup
+\let\clearpage\relax
 
-\include{capitulos/ch1-introducao}
+\input{capitulos/ch1-introducao}
+\vspace*{1.5cm}
 
-% Escolher entre requisitos funcionais ou estórias de usuário.
-%\include{capitulos/ch2-requisito}
-\include{capitulos/ch2-estorias}
+%\input{capitulos/ch2-requisito} % Escolher entre requisitos funcionais ou estórias de usuário.
+\input{capitulos/ch2-estorias}
+\vspace*{1.5cm}
 
-\include{capitulos/ch3-subsistema}
+\input{capitulos/ch3-subsistema}
+\vspace*{1.5cm}
 
-\include{capitulos/ch4-casodeuso}
+\input{capitulos/ch4-casodeuso}
+\vspace*{1.5cm}
 
-\include{capitulos/ch5-modeloestrutural}
+\input{capitulos/ch5-modeloestrutural}
+\vspace*{1.5cm}
 
-\include{capitulos/ch6-dicionario}
+\input{capitulos/ch6-dicionario}
+\endgroup
+
+
 
 % Finaliza a parte no bookmark do PDF para que se inicie o bookmark na raiz e adiciona espaço de parte no sumário.
 \phantompart
