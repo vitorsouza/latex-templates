@@ -20,7 +20,7 @@
 \documentclass[
 	12pt,				% Tamanho da fonte.
 	openright,			% Capítulos começam em página ímpar (insere página vazia caso preciso).
-	twoside,			% Para impressão em verso e anverso. Oposto a oneside.
+	oneside,			% Para impressão em verso e anverso. Oposto a oneside.
 	a4paper,			% Tamanho do papel.
 	english,			% Idioma adicional para hifenização.
 	french,				% Idioma adicional para hifenização.
@@ -34,7 +34,7 @@
 
 % Conserta o erro "No room for a new \count"
 \usepackage{etex}
-\reserveinserts{28}
+%\reserveinserts{28}
 
 % Usa a fonte Latin Modern.
 \usepackage{lmodern}
@@ -172,7 +172,7 @@
 \titulo{Título do Trabalho}
 \autor{Nome do Aluno}
 \local{Vitória, ES}
-\data{2017}
+\data{\the\year}
 \orientador{Prof. Dr. Vítor E. Silva Souza}
 \coorientador{Nome do Co-orientador}
 \instituicao{
@@ -233,6 +233,25 @@
 
 % Inicia o documento.
 \begin{document}
+
+% Brasão da instituição.
+\begin{figure}
+	\centering
+	\includegraphics[width=.20\textwidth]{figuras/brasao.jpg} 
+	\label{fig-brasao}
+\end{figure}
+
+\begin{center}
+	\textbf{\textsf{UNIVERSIDADE FEDERAL DO ESPÍRITO SANTO}}
+	
+	\textbf{\textsf{CENTRO TECNOLÓGICO}}
+	
+	\textbf{\textsf{PROGRAMA DE PÓS-GRADUAÇÃO EM INFORMÁTICA}}
+	
+	\large{\textbf{\textsf{  }}}
+	
+	\large{\textbf{\textsf{  }}}
+\end{center}
 
 % Retira espaço extra obsoleto entre as frases.
 \frenchspacing
