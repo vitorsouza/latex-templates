@@ -76,8 +76,6 @@
 
 \renewcommand{\arraystretch}{1.5}
 
-\linespread{1.25} % requisito de espaçamento added by jp
-
 
 \usepackage{fancyhdr}
 \usepackage{afterpage}
@@ -100,7 +98,6 @@
 
 \begin{document}
 
-\setlength{\parskip}{7mm}
 \afterpage{\cfoot{\thepage}}
 
 
@@ -108,11 +105,12 @@
 \begin{center}
  {\Large \bf  Subprojeto de Iniciação Científica - PIIC/UFES}
  \end{center}
-\vspace{-5mm}
+
+\vspace{.5cm}
 
 
 \bgroup
-\def\arraystretch{1.6}
+\def\arraystretch{2}
 \begin{tabularx}{\textwidth}{|>{\columncolor{gray!25}}l|X|}
 \hline
 {\bf Edital:} & Edital Piic 20\_\_ /20\_\_ \\
@@ -204,14 +202,10 @@ Quanto ao formato e à apresentação de tabelas e quadros, como se verifica na 
 		\hline
 		\textbf{Grupos de idade [meses]} & \textbf{Número de indivíduos no grupo} & \textbf{Indivíduos viáveis [\%]} \\
 		\hline
-		0 -- 10		& 20	& 9,0
-\\
-		10 -- 15	& 20	& 10,0
-\\
-		15 -- 20	& 25	& 4,0
-\\
-		Acima de 20	& 15	& 3,4
-\\
+		0 -- 10		& 20	& 9,0\\
+		10 -- 15	& 20	& 10,0\\
+		15 -- 20	& 25	& 4,0\\
+		Acima de 20	& 15	& 3,4\\
 		\hline	
 	\end{tabular}
 	\caption*{Fonte: Produção do próprio autor.}
@@ -227,22 +221,14 @@ Quanto ao formato e à apresentação de tabelas e quadros, como se verifica na 
 		\centering \textbf{Elemento ou Grandeza} &  \centering \textbf{Valor ou Modelo}
 		\tabularnewline
 		\hline
-		Tensão de entrada 		& $48 V$
-		\\\hline
-		Tensão de saída 		& $200 V$
-		\\\hline
-		Potência de saída 		& $200 W$
-		\\\hline
-		Frequência de comutação	& $50 kHz$
-		\\\hline
-		Indutor de entrada 		& $880 \mu H$
-	\\\hline
-		Capacitor de saída 		& $22 \mu F$
-	\\\hline
-		Diodo					& $FES8HT$
-		\\\hline
-		Interruptor				& $IRFP360$	
-	\\\hline
+		Tensão de entrada 		& $48 V$		\\\hline
+		Tensão de saída 		& $200 V$		\\\hline
+		Potência de saída 		& $200 W$		\\\hline
+		Frequência de comutação	& $50 kHz$		\\\hline
+		Indutor de entrada 		& $880 \mu H$	\\\hline
+		Capacitor de saída 		& $22 \mu F$	\\\hline
+		Diodo					& $FES8HT$		\\\hline
+		Interruptor				& $IRFP360$		\\\hline
 	\end{tabular}
 	\caption*{Fonte: \cite{menegaz:thesis2005}.}
 \end{quadro}
