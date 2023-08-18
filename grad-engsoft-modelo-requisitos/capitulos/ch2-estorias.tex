@@ -1,0 +1,127 @@
+\chapter{Definição de Requisitos}
+\label{sec-requisitos}
+\vspace{-1cm}
+
+Esta seção descreve o resultado da atividade de levantamento de requisitos.
+A Subseção~\ref{sec-requisitos-minimundo} descreve o minimundo do sistema e seu propósito, apresentando superficialmente suas principais características. 
+A Subseção~\ref{sec-requisitos-usuario} lista os requisitos de usuário do sistema, na forma de estórias de usuário e requisitos não-funcionais. 
+
+
+
+
+\section{Descrição do Minimundo e do Propósito do Sistema}
+\label{sec-requisitos-minimundo}
+
+\vitor{De forma detalhada (vários parágrafos, possivelmente dividir em subseções), descrever o minimundo do sistema, ou seja, o domínio no qual ele se encaixa e quais os problemas que pretende resolver. Descrever também por meio de quais funcionalidades o sistema resolverá os problemas, justificando, assim, sua existência.}
+
+
+
+\section{Requisitos de Usuário}
+\label{sec-requisitos-usuario}
+
+\vitor{Listar os principais \textit{stakeholders} do projeto no parágrafo abaixo e preencher as tabelas de estórias de usuário, requisitos não-funcionais e regras de negócio, com atenção aos identificadores e \textit{labels}. Ao preencher as lacunas, remover a marcação em amarelo (comando \textbackslash hl\{\} no \LaTeX).}
+
+Tomando por base o contexto do sistema descrito na Seção~\ref{sec-requisitos-minimundo} e considerando como principais \textit{stakeholders} \hl{(listar aqui os principais stakeholders do projeto)}, foram identificadas estórias de usuário e requisitos não-funcionais.
+
+As estórias de usuário são apresentadas na Tabela~\ref{tbl-requisitos-uss} e os requisitos não-funcionais globais (ou seja, aqueles que não são caracterizados como critérios de aceitação de estórias de usuário específicas) na Tabela~\ref{tbl-requisitos-rnfs}.
+
+% Define contador e identificador para estórias de usuário.
+\newcounter{uscount}
+\renewcommand*\theuscount{US-\arabic{uscount}}
+\newcommand*\US{\refstepcounter{uscount}\theuscount}
+\setcounter{uscount}{0}
+
+% Define uma macro para as linhas de user stories.
+% Usar \userstory{label}{dependências}{prioridade}{descrição}{critérios de qualidade (usando \item)}.
+\newcommand{\userstory}[5]{
+	\\\hline
+	\cellcolor{lightgray}\textbf{ID:} & \US\label{#1} & 
+	\cellcolor{lightgray}\textbf{Depende:} & #2 & 
+	\cellcolor{lightgray}\textbf{Prioridade:} & #3 \\\hline
+	\cellcolor{lightgray}\textbf{Descrição:} & 
+	\multicolumn{5}{|p{12cm}|}{#4}\\\hline
+	\cellcolor{lightgray}\parbox{2.5cm}{\raggedleft \textbf{Critérios de\\Aceitação:}} & 
+	\multicolumn{5}{|p{12cm}|}{
+		\parbox{12cm}{
+			\begin{enumerate}[leftmargin=15mm,label=-- CA\arabic*:]\itemsep-2mm
+				#5
+			\end{enumerate}
+		}		
+	}\\\hline
+	\multicolumn{6}{c}{}
+}
+
+\vitor{A Tabela~\ref{tbl-requisitos-uss} traz exemplos de estórias de usuário: genérico (\ref{us-exemplo-generico}), de cadastro/CRUD (\ref{us-exemplo-cadastro}) e de consulta (\ref{us-exemplo-consulta}). Note que:
+	\begin{itemize}
+		\item As estórias possuem um \textit{label} (ex.: \texttt{us-exemplo-generico}). Sugere-se não utilizar números sequenciais (ex.: \texttt{us-01}, \texttt{us-02}, etc.) mas sim algo que identifique aquela estória (ex.: \texttt{us-cadastrar-usuarios}); 
+		\item Há um padrão de critérios de aceitação para estórias de cadastro e de consulta. Sugere-se seguir o padrão, preenchendo as lacunas e ajustando onde necessário;
+		\item As dependências são especificadas por meio dos IDs das outras estórias de usuário das quais aquela estória depende, separadas por vírgula;
+		\item Já a prioridade deve ser especificada com um dos seguintes valores: Alta, Média ou Baixa.
+	\end{itemize}}
+
+\begin{longtable}{|r|p{1.3cm}|r|p{4cm}|r|p{1.3cm}|}
+\caption{Estórias de Usuário.}
+\label{tbl-requisitos-uss}
+
+% Especificar as estórias de usuário abaixo, utilizando a macro, substituindo os exemplos.
+\userstory{us-exemplo-generico}{}{Baixa}
+{Como \hl{ator}, quero \hl{função}, para \hl{finalidade}. \hl{(Genérico)}}
+{
+\item Critério de aceitação 1;
+\item Critério de aceitação 2;
+\item Critério de aceitação N.
+}
+
+\userstory{us-exemplo-cadastro}{\ref{us-exemplo-generico}}{Média}
+{Como \hl{ator}, quero cadastrar \hl{objeto}, para \hl{finalidade}.  \hl{(Cadastro)}}
+{
+\item O sistema deve prover funcionalidades ``CRUD'';
+\item No cadastro (C), devem ser informados: \hl{campos obrigatórios}. Opcionalmente, podem ser informados: \hl{campos opcionais}. O sistema deve registrar automaticamente: \hl{campos com valores gerados automaticamente, se houver};
+\item Na listagem (R), devem ser exibidos: \hl{campos}. Pode-se ordernar por: \hl{campos, se houver}. Pode-se filtrar por: \hl{campos, se houver};
+\item Na visualização (R), devem ser exibidos todos os dados elencados no cadastro, além de: \hl{campos extras, se houver};
+\item Na atualização (U), podem ser modificados todos os dados, exceto: \hl{campos imutáveis}. Deve-se respeitar aqueles indicados como obrigatórios no cadastro (não podem ser alterados para valores vazios). O sistema deve registrar automaticamente: \hl{campos com valores atualizados automaticamente, se houver};
+\item Na exclusão (D), devem ser excluídos também: \hl{objetos subordinados ao objeto que está sendo excluído, que serão excluídos em cascata};
+\item A exclusão (D) não deve ser permitida quando: \hl{descrição das situações, geralmente quando o objeto está associado a outros que não serão excluídos em cascata};
+\item Os dados devem ser validados no cadastro e na atualização e o sistema deve exibir mensagens de erro informativas no caso de dados inválidos.
+}
+
+\userstory{us-exemplo-consulta}{\ref{us-exemplo-generico}, \ref{us-exemplo-cadastro}}{Alta}
+{Como \hl{ator}, quero consultar \hl{informações}, para \hl{finalidade}. \hl{(Consulta)}}
+{
+\item Para realizar a consulta, o usuário deve informar como parâmetros: \hl{parâmetros};
+\item Devem ser apresentadas as seguintes informações para o usuário: \hl{objetos e seus dados, relacionados aos parâmetros informados}.
+}
+\end{longtable}
+
+\vitor{A Tabela~\ref{tbl-requisitos-rnfs} deve ser preenchida com os requisitos não-funcionais, seguindo as mesmas recomendações quanto aos \textit{labels} e quanto à prioridade feita para as estórias de usuário. Na coluna \textbf{Categoria}, sugere-se usar características de qualidade definidas pelo modelo de qualidade de produtos de software da norma ISO/IEC 25010, conforme discutido por Falbo em suas Notas de Aula de Projeto de Sistemas, Seção 2.3.}
+
+% Define contador e identificador para requisitos não funcionais.
+% Usar \RNF\label{rnf-nome-do-label} para cada requisito definido.
+\newcounter{rnfcount}
+\renewcommand*\thernfcount{RNF-\arabic{rnfcount}}
+\newcommand*\RNF{\refstepcounter{rnfcount}\thernfcount}
+\setcounter{rnfcount}{0}
+
+% Tabela de requisitos não funcionais.
+\begin{longtable}{|c|p{8.3cm}|c|c|}
+	\caption{Requisitos Não Funcionais.}
+	\label{tbl-requisitos-rnfs} \\\hline 
+	
+	% Cabeçalho e repetição do mesmo em cada nova página. Manter como está.
+	\rowcolor{lightgray}
+	\textbf{ID} & \textbf{Descrição} & \textbf{Categoria} & \textbf{Prioridade} \\\hline		
+	\endfirsthead
+	\hline
+	\rowcolor{lightgray}
+	\textbf{ID} & \textbf{Descrição} & \textbf{Categoria} & \textbf{Prioridade} \\\hline		
+	\endhead
+	
+	% Especificar os requisitos abaixo, substituindo os exemplos.
+	\RNF\label{rnf-exemplo-primeiro} & Descrição sucinta. & Característica & Baixa \\\hline 	
+
+	\RNF\label{rnf-exemplo-segundo} & Descrição sucinta. & de & Média \\\hline 	
+
+	\RNF\label{rnf-exemplo-terceiro} & Descrição sucinta. & qualidade & ou Alta \\\hline
+\end{longtable}
+
+\FloatBarrier
