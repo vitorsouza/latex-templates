@@ -1,0 +1,240 @@
+\documentclass[table,usenames,dvipsnames]{article}
+
+%
+% LaTeX Packages
+%
+
+% To insert blank spaces in macros.
+\usepackage{xspace}
+
+% To insert colored comments so authors can collaborate on the content.
+\usepackage[colorinlistoftodos, textwidth=20mm, textsize=footnotesize]{todonotes}
+\newcommand{\camila}[1]{\todo[author=\textbf{Camila},color=green!30,caption={},inline]{#1}}
+\newcommand{\vitor}[1]{\todo[author=\textbf{Vítor},color=red!30,caption={},inline]{#1}}
+
+% To use the \hl{} command to highlight pieces of text.
+\usepackage{soulutf8}
+
+% To change the margins in paragraphs.
+\usepackage{changepage}
+
+% To define a box with colored background.
+\usepackage{tcolorbox}
+
+% To insert hyperlinks and use \nameref{}. Hides the default red boxes for links.
+\usepackage[hidelinks]{hyperref}
+
+% To include tables that span across pages.
+\usepackage{longtable}
+
+% To have cells span multiple rows in tables.
+\usepackage{multirow}
+
+% To include listings with the command \lstinputlisting{}.
+\usepackage{listings}
+\usepackage{caption}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\lstset{
+	xrightmargin=0.05\linewidth,
+	basicstyle=\scriptsize\linespread{0.8},
+	breaklines=true,
+	breakatwhitespace=false,
+	showstringspaces=false,
+	keepspaces=true,
+	showspaces=false,
+	showtabs=false, 
+	numbers=left,
+	numbersep=5pt,
+	numberstyle=\tiny\color{mygray}, 
+	rulecolor=\color{black},	
+	tabsize=6,
+	inputencoding=utf8,
+	extendedchars=true,
+	literate=%
+	{é}{{\'{e}}}1
+	{è}{{\`{e}}}1
+	{ê}{{\^{e}}}1
+	{ë}{{\¨{e}}}1
+	{É}{{\'{E}}}1
+	{Ê}{{\^{E}}}1
+	{û}{{\^{u}}}1
+	{ù}{{\`{u}}}1
+	{â}{{\^{a}}}1
+	{à}{{\`{a}}}1
+	{á}{{\'{a}}}1
+	{ã}{{\~{a}}}1
+	{Á}{{\'{A}}}1
+	{Â}{{\^{A}}}1
+	{Ã}{{\~{A}}}1
+	{ç}{{\c{c}}}1
+	{Ç}{{\c{C}}}1
+	{õ}{{\~{o}}}1
+	{ó}{{\'{o}}}1
+	{ô}{{\^{o}}}1
+	{Õ}{{\~{O}}}1
+	{Ó}{{\'{O}}}1
+	{Ô}{{\^{O}}}1
+	{î}{{\^{i}}}1
+	{Î}{{\^{I}}}1
+	{í}{{\'{i}}}1
+	{Í}{{\~{Í}}}1
+}
+
+
+
+%
+% Macros.
+%
+
+% The name of the method.
+\newcommand{\sabiox}{SABiOx\xspace}
+\newcommand{\sabioxfull}{Extended Systematic Approach for Building Ontologies\xspace}
+
+% Document meta-data.
+\newcommand{\ontologyacronym}{YA-O\xspace}
+\newcommand{\ontologyname}{Yet Another Ontology\xspace}
+\newcommand{\authorname}{\sabiox User\xspace}
+\newcommand{\documentversion}{0.1\xspace}
+
+
+% Title Page
+\title{\ontologyacronym: \ontologyname
+	\\{\large Ontology Specification Document}
+	\\{\normalsize Version: \documentversion}}
+\author{\authorname}
+
+
+
+% Document contents.
+\begin{document}
+\maketitle
+
+
+\section{Introduction}
+
+This document presents the specification of \ontologyname (\ontologyacronym) as result of the Requirements phase of \sabiox --- \sabioxfull~\cite{aguiar-souza:report24}.
+
+This document is organized as follows:
+Section~\ref{sec-purpose} describes the purpose and intended uses of the ontology;
+Section~\ref{sec-domain} sets the ontlogy domain;
+Section~\ref{sec-dimension} establishes the scope of the ontology on such domain, in both horizontal and vertical dimensions; finally, 
+sections~\ref{sec-freqs} and~\ref{sec-nfreqs} list the ontology's functional and non-functional requirements, respectively.
+
+
+
+\section{Purpose of the Ontology:}
+\label{sec-purpose}
+
+The purpose of the ontology is ...
+
+
+
+\section{Ontology Domain:}
+\label{sec-domain}
+
+Describe the domain of the ontology here.
+
+
+
+\section{Ontology Dimension:}
+\label{sec-dimension}
+
+In the horizontal dimension, the domain is defined as ...; for the vertical dimension, the domain is limited in representing ...
+
+
+
+\section{Functional Requirements:}
+\label{sec-freqs}
+
+% Define counter and ID for functional requirements.
+\newcounter{frcount}
+\renewcommand*\thefrcount{FR-\arabic{frcount}}
+\newcommand*\FR{\refstepcounter{frcount}\thefrcount}
+\setcounter{frcount}{0}
+
+% Define a macro for a functional requirement.
+\newcommand{\freq}[2]{\FR\label{#1} & #2 \\\hline}
+
+
+\subsection*{Subdomain: Some Subdomain}
+
+\begin{center}
+	\begin{small}
+		\begin{longtable}{ p{1cm}  p{10cm} }
+			\hline
+			\textbf{ID} & \textbf{Description} \\\hline
+			
+			\freq{fr-first-example}{
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc purus sem, rutrum eget enim eu, vestibulum maximus nisl. Phasellus tristique purus a magna aliquet dapibus.
+			}
+			
+			\freq{fr-second-example}{
+				Maecenas nunc diam, accumsan id commodo a, maximus ultrices metus. Sed molestie imperdiet massa, quis mollis felis facilisis ac. In vel turpis et diam sodales commodo eget sed enim.
+			}
+		\end{longtable}
+	\end{small}
+\end{center}
+
+
+\subsection*{Subdomain: Some Other Subdomain}
+
+\begin{center}
+\begin{small}
+	\begin{longtable}{ p{1cm}  p{10cm} }
+		\hline
+		\textbf{ID} & \textbf{Description} \\\hline
+		
+		\freq{fr-third-example}{
+			Proin sagittis arcu erat, at aliquam tellus egestas ac. Mauris pulvinar molestie dictum. 
+		}
+		
+		\freq{fr-fourth-example}{
+			Phasellus scelerisque orci id sapien molestie ullamcorper. Sed quis urna quis orci ultrices congue. 
+		}
+		
+		\freq{fr-fifth-example}{
+			Ut eu eros ut erat congue efficitur ac eget sem. Mauris porttitor ligula vulputate dui pulvinar condimentum. 
+		}
+	\end{longtable}
+\end{small}
+\end{center}
+
+
+
+\section{Non-Functional Requirements:}
+\label{sec-nfreqs}
+
+% Define counter and ID for non-functional requirements.
+\newcounter{nfrcount}
+\renewcommand*\thenfrcount{NFR-\arabic{nfrcount}}
+\newcommand*\NFR{\refstepcounter{nfrcount}\thenfrcount}
+\setcounter{nfrcount}{0}
+
+% Define a macro for a functional requirement.
+\newcommand{\nfreq}[2]{\NFR\label{#1} & #2 \\\hline}
+
+			
+\begin{center}
+	\begin{small}
+		\begin{longtable}{ p{1cm}  p{10cm} }
+			\hline
+			\textbf{ID} & \textbf{Description} \\\hline
+			
+			\nfreq{nfr-first-example}{
+				Mauris tempor orci at semper rhoncus.
+			}
+			
+			\nfreq{nfr-second-example}{
+				Mauris auctor, nulla ut malesuada tristique, purus tellus tempor lectus, aliquam aliquet enim tellus sit amet enim.
+			}
+		\end{longtable}
+	\end{small}
+\end{center}
+
+
+
+% Bibliography
+\bibliographystyle{alpha}
+\bibliography{bibliography}
+
+\end{document}          
