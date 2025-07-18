@@ -1,0 +1,214 @@
+\documentclass[table,usenames,dvipsnames]{article}
+
+%
+% LaTeX Packages
+%
+
+% Determines the paper size and the size of the contents.
+\usepackage[a4paper, total={170mm, 257mm}]{geometry}
+
+% To insert blank spaces in macros.
+\usepackage{xspace}
+
+% To insert colored comments so authors can collaborate on the content.
+\usepackage[colorinlistoftodos, textwidth=20mm, textsize=footnotesize]{todonotes}
+\newcommand{\camila}[1]{\todo[author=\textbf{Camila},color=green!30,caption={},inline]{#1}}
+\newcommand{\vitor}[1]{\todo[author=\textbf{Vítor},color=red!30,caption={},inline]{#1}}
+
+% To use the \hl{} command to highlight pieces of text.
+\usepackage{soulutf8}
+
+% To change the margins in paragraphs.
+\usepackage{changepage}
+
+% To define a box with colored background.
+\usepackage{tcolorbox}
+
+% To insert hyperlinks and use \nameref{}. Hides the default red boxes for links.
+\usepackage[hidelinks]{hyperref}
+
+% To include tables that span across pages.
+\usepackage{longtable}
+
+% To have cells span multiple rows in tables.
+\usepackage{multirow}
+
+% To include listings with the command \lstinputlisting{}.
+\usepackage{listings}
+\usepackage{caption}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\lstset{
+	xrightmargin=0.05\linewidth,
+	basicstyle=\scriptsize\linespread{0.8},
+	breaklines=true,
+	breakatwhitespace=false,
+	showstringspaces=false,
+	keepspaces=true,
+	showspaces=false,
+	showtabs=false, 
+	numbers=left,
+	numbersep=5pt,
+	numberstyle=\tiny\color{mygray}, 
+	rulecolor=\color{black},	
+	tabsize=6,
+	inputencoding=utf8,
+	extendedchars=true,
+	literate=%
+	{é}{{\'{e}}}1
+	{è}{{\`{e}}}1
+	{ê}{{\^{e}}}1
+	{ë}{{\¨{e}}}1
+	{É}{{\'{E}}}1
+	{Ê}{{\^{E}}}1
+	{û}{{\^{u}}}1
+	{ù}{{\`{u}}}1
+	{â}{{\^{a}}}1
+	{à}{{\`{a}}}1
+	{á}{{\'{a}}}1
+	{ã}{{\~{a}}}1
+	{Á}{{\'{A}}}1
+	{Â}{{\^{A}}}1
+	{Ã}{{\~{A}}}1
+	{ç}{{\c{c}}}1
+	{Ç}{{\c{C}}}1
+	{õ}{{\~{o}}}1
+	{ó}{{\'{o}}}1
+	{ô}{{\^{o}}}1
+	{Õ}{{\~{O}}}1
+	{Ó}{{\'{O}}}1
+	{Ô}{{\^{O}}}1
+	{î}{{\^{i}}}1
+	{Î}{{\^{I}}}1
+	{í}{{\'{i}}}1
+	{Í}{{\~{Í}}}1
+}
+
+
+
+%
+% Macros.
+%
+
+% The name of the method.
+\newcommand{\sabiox}{SABiOx\xspace}
+\newcommand{\sabioxfull}{Extended Systematic Approach for Building Ontologies\xspace}
+
+% Document meta-data.
+\newcommand{\ontologyacronym}{YA-O\xspace}
+\newcommand{\ontologyname}{Yet Another Ontology\xspace}
+\newcommand{\authorname}{\sabiox User\xspace}
+\newcommand{\documentversion}{0.1\xspace}
+
+
+% Title Page
+\title{\ontologyacronym: \ontologyname
+	\\{\large Operational Ontology Document}
+	\\{\normalsize Version: \documentversion}}
+\author{\authorname}
+
+
+
+% Document contents.
+\begin{document}
+\maketitle
+
+
+\section{Introduction}
+
+This document presents the design of the operational ontology \ontologyname (\ontologyacronym) as result of the Design phase of \sabiox: the \sabioxfull~\cite{aguiar-souza:report24}.
+
+This document is organized as follows:
+	Section~\ref{sec-premises} presents the ontology premises, namely codification language and vocabularies to reuse;
+	Section~\ref{sec-coderules} specifies the codification rules to be followed;
+	Section~\ref{sec-architecture} describes the operational ontology architecture.
+
+
+\section{Operational Ontology Premises:}
+\label{sec-premises}
+
+These are the premises for the operational ontology \ontologyacronym:
+
+
+\subsection{Codification Language:}
+\label{sec-premises-language}
+
+OWL.\footnote{\url{https://www.w3.org/TR/owl-features/}}
+
+
+
+\subsection{Vocabularies:}
+\label{sec-premises-vocabularies}
+
+\begin{center}
+	\begin{small}
+		\begin{longtable}{ p{20mm} p{140mm} }
+			\hline
+			\textbf{Prefix} & \textbf{Namespace URL} \\\hline
+			
+			\texttt{owl}  & \url{http://www.w3.org/2002/07/owl#} \\\hline
+			\texttt{rdf}  & \url{http://www.w3.org/1999/02/22-rdf-syntax-ns#} \\\hline
+			\texttt{rdfs} & \url{http://www.w3.org/2000/01/rdf-schema#} \\\hline
+			\texttt{xml}  & \url{http://www.w3.org/XML/1998/namespace} \\\hline
+			\texttt{xsd}  & \url{http://www.w3.org/2001/XMLSchema#} \\\hline
+		\end{longtable}
+	\end{small}
+\end{center}
+
+
+
+\section{Codification Rules:}
+\label{sec-coderules}
+
+\begin{center}
+	\begin{small}
+		\begin{longtable}{ p{20mm} p{140mm} }
+			\hline
+			\textbf{Rule} & \textbf{Definition} \\\hline
+			
+			(Rule name) 
+				& (Rule definition) 
+				\\\hline			
+		\end{longtable}
+	\end{small}
+\end{center}
+
+
+
+\section{Architecture:}
+\label{sec-architecture}
+
+\subsection{Ontologies:}
+\label{sec-architecture-ontologies}
+
+\begin{center}
+	\begin{small}
+		\begin{longtable}{ p{20mm} p{140mm} }
+			\hline
+			\textbf{Prefix} & \textbf{Description} \\\hline
+			
+			\texttt{(prefix)}
+				& (Description)
+				\\\hline
+		\end{longtable}
+	\end{small}
+\end{center}
+
+
+
+\subsection{Taxonomy:}
+\label{sec-architecture-taxonomy}
+
+\begin{itemize}
+	\item Concepts of the \emph{kind} and \emph{category} types are anchored in the \textsf{Class} class of OWL;
+
+	\item Concepts of the \emph{subkind} type are anchored to the respective kinds of the domain according to the conceptual model;
+
+	\item Concepts of type \emph{quality} are anchored to the \textsf{ObjectProperty} property of OWL, except for the concept name which is anchored in the \textsf{DatypeProperty} property of OWL.
+\end{itemize}
+
+
+% Bibliography
+\bibliographystyle{alpha}
+\bibliography{bibliography}
+
+\end{document}          
