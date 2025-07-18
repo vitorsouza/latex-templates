@@ -1,7 +1,7 @@
 % ==============================================================================
-% Modelo para Anteprojeto de Graduação - Ciência da Computação (em Português)
+% Modelo para Especificação de Requisitos de Software
 % Prof. Vítor E. Silva Souza - NEMO/UFES :: DI/UFES :: PPGI/UFES
-% Com alterações feitas pelo Colegiado de Engenharia de Computação / CT / UFES
+% Baseado em modelos cedidos pela Profª. Monalessa Perini Barcellos
 %
 % Baseado em abtex2-modelo-trabalho-academico.tex, v-1.9.2 laurocesar
 % Copyright 2012-2014 by abnTeX2 group at http://abntex2.googlecode.com/ 
@@ -19,23 +19,21 @@
 
 % Usa o estilo abntex2, configurando detalhes de formatação e hifenização.
 \documentclass[
-	12pt,				% Tamanho da fonte.
-	openright,			% Capítulos começam em página ímpar (insere página vazia caso preciso).
-	oneside,			% Para impressão em verso e anverso. Oposto a oneside.
-	a4paper,			% Tamanho do papel.
-	english,			% Idioma adicional para hifenização.
-	french,				% Idioma adicional para hifenização.
-	spanish,			% Idioma adicional para hifenização.
-	brazil				% O último idioma é o principal do documento.
-	]{abntex2}
-
+12pt,				
+oneside,		
+a4paper,			
+english,			% Idioma adicional para hifenização.
+french,				% Idioma adicional para hifenização.
+spanish,			% Idioma adicional para hifenização.
+brazil				% O último idioma é o principal do documento.
+]{abntex2}
 
 
 %%% Importação de pacotes. %%%
 
-% Conserta o erro "No room for a new \count"
+% Conserta o erro "No room for a new \count". 
+% O comando \reserveinserts deve ser comentado ou não, dependendo da versão do LaTeX.
 \usepackage{etex}
-% Em alguns sistemas operacionais, a linha \reserveinserts{28} pode ser necessária.
 %\reserveinserts{28}
 
 % Usa a fonte Latin Modern.
@@ -59,13 +57,13 @@
 % Inclusão de gráficos.
 \usepackage{graphicx}
 
-% Posicionamento de elementos.
-\usepackage{float}
-
-% Melhor controle de layout em tabelas.
+% Melhor controle de leiaute de tabelas.
 \usepackage{tabularx}
-\usepackage{multirow}
-\usepackage{hhline}
+\usepackage{colortbl}
+\usepackage{longtable}
+
+% Adds PDF support to the environment landscape.
+\usepackage{pdflscape}
 
 % Inclusão de páginas em PDF diretamente no documento (para uso nos apêndices).
 \usepackage{pdfpages}
@@ -80,19 +78,16 @@
 \renewcommand{\backref}{}										% Texto padrão antes do número das páginas.
 \renewcommand*{\backrefalt}[4]{									% Define os textos da citação.
 	\ifcase #1
-		Nenhuma citação no texto.
+	Nenhuma citação no texto.
 	\or
-		Citado na página #2.
+	Citado na página #2.
 	\else
-		Citado #1 vezes nas páginas #2.
+	Citado #1 vezes nas páginas #2.
 	\fi}
 
 % \rm is deprecated and should not be used in a LaTeX2e document
 % http://tex.stackexchange.com/questions/151897/always-textrm-never-rm-a-counterexample
 \renewcommand{\rm}{\textrm}
-
-% Pacotes não incluídos no template abntex2. 
-% Podem ser comentados caso não queira utilizá-los.
 
 % Inclusão de símbolos não padrão.
 \usepackage{amssymb}
@@ -114,16 +109,17 @@
 % Permite usar o comando \hl{} para evidenciar texto com fundo amarelo. Útil para chamar atenção a itens a fazer.
 \usepackage{soulutf8}
 
-% Permite inserir espaço em branco condicional (incluído no texto final só se necessário) em macros.
-\usepackage{xspace}
-
-% Permite inserir comentários para controle de revisão de documentos.
+% Colorinlistoftodos package: to insert colored comments so authors can collaborate on the content.
+% (*) Indicar o nome do aluno e substituir o nome do professor se for o caso.
 \usepackage[colorinlistoftodos, textwidth=20mm, textsize=footnotesize]{todonotes}
 \newcommand{\aluno}[1]{\todo[author=\textbf{Aluno},color=green!30,caption={},inline]{#1}}
-\newcommand{\professor}[1]{\todo[author=\textbf{Professor},color=red!30,caption={},inline]{#1}}
+\newcommand{\vitor}[1]{\todo[author=\textbf{Vítor},color=red!30,caption={},inline]{#1}}
 
 % Permite inserir espaço em branco condicional (incluído no texto final só se necessário) em macros.
 \usepackage{xspace}
+
+% Permite inserir barreiras para que elementos flutuantes pendentes sejam colocados antes.
+\usepackage{placeins}
 
 % Permite incluir listagens de código com o comando \lstinputlisting{}.
 \usepackage{listings}
@@ -142,76 +138,93 @@
 	rulecolor=\color{black},
 	showstringspaces=false,
 	tabsize=2,
-    inputencoding=utf8,
-    extendedchars=true,
-    literate=%
-    {é}{{\'{e}}}1
-    {è}{{\`{e}}}1
-    {ê}{{\^{e}}}1
-    {ë}{{\¨{e}}}1
-    {É}{{\'{E}}}1
-    {Ê}{{\^{E}}}1
-    {û}{{\^{u}}}1
-    {ù}{{\`{u}}}1
-    {â}{{\^{a}}}1
-    {à}{{\`{a}}}1
-    {á}{{\'{a}}}1
-    {ã}{{\~{a}}}1
-    {Á}{{\'{A}}}1
-    {Â}{{\^{A}}}1
-    {Ã}{{\~{A}}}1
-    {ç}{{\c{c}}}1
-    {Ç}{{\c{C}}}1
-    {õ}{{\~{o}}}1
-    {ó}{{\'{o}}}1
-    {ô}{{\^{o}}}1
-    {Õ}{{\~{O}}}1
-    {Ó}{{\'{O}}}1
-    {Ô}{{\^{O}}}1
-    {î}{{\^{i}}}1
-    {Î}{{\^{I}}}1
-    {í}{{\'{i}}}1
-    {Í}{{\~{Í}}}1
+	inputencoding=utf8,
+	extendedchars=true,
+	literate=%
+	{é}{{\'{e}}}1
+	{è}{{\`{e}}}1
+	{ê}{{\^{e}}}1
+	{ë}{{\¨{e}}}1
+	{É}{{\'{E}}}1
+	{Ê}{{\^{E}}}1
+	{û}{{\^{u}}}1
+	{ù}{{\`{u}}}1
+	{â}{{\^{a}}}1
+	{à}{{\`{a}}}1
+	{á}{{\'{a}}}1
+	{ã}{{\~{a}}}1
+	{Á}{{\'{A}}}1
+	{Â}{{\^{A}}}1
+	{Ã}{{\~{A}}}1
+	{ç}{{\c{c}}}1
+	{Ç}{{\c{C}}}1
+	{õ}{{\~{o}}}1
+	{ó}{{\'{o}}}1
+	{ô}{{\^{o}}}1
+	{Õ}{{\~{O}}}1
+	{Ó}{{\'{O}}}1
+	{Ô}{{\^{O}}}1
+	{î}{{\^{i}}}1
+	{Î}{{\^{I}}}1
+	{í}{{\'{i}}}1
+	{Í}{{\~{Í}}}1
 }
+
+% Atualização ABNT para referências bibliográficas.
+\bibliographystyle{abntex2-alf.bst}
+
 
 
 
 %%% Definição de variáveis. %%%
-
 % (*) Substituir os textos abaixo com as informações apropriadas.
-\titulo{Título do Trabalho}
+\titulo{Nome do Projeto}
 \autor{Nome do Aluno}
 \local{Vitória, ES}
 \data{\the\year}
-\orientador{Prof. Dr. Fulano de Tal}
-\coorientador{Prof. Dr. Ciclano de Tal}
-\instituicao{
-  Universidade Federal do Espírito Santo -- UFES
-  \par
-  Centro Tecnológico
-  \par
-  Colegiado do Curso de Ciência da Computação}
-\tipotrabalho{Monografia (PG)}
 
-% Preâmbulo (tipo do trabalho, objetivo, nome da instituição, área de concentração, etc.).
-% (*) Verificar se está correto (ex.: substituir por Engenharia de Computação se for o caso).
-\preambulo{Anteprojeto apresentado ao Colegiado do Curso de Ciência da Computação do Centro Tecnológico da Universidade Federal do Espírito Santo, como requisito para aprovação na Disciplina Projeto de Graduação I.}
+\instituicao{
+	Universidade Federal do Espírito Santo -- UFES
+	\par
+	Centro Tecnológico
+	\par
+	Departamento de Informática}
+\newcommand{\subtitulo}{Documento de Requisitos de Sistema}
+\newcommand{\versao}{1.0}
+
+% Define a capa.
+\renewcommand{\imprimircapa}{%
+	\begin{capa}%
+		\center
+		
+		{\ABNTEXchapterfont\large\subtitulo{}}
+		\vfill
+		\begin{center}
+			\ABNTEXchapterfont\bfseries\LARGE\imprimirtitulo
+		\end{center}
+		
+		\vfill
+		\large\imprimirlocal
+		\linebreak
+		\large\imprimirdata
+		\vspace*{1cm}
+	\end{capa}
+}
 
 % Macros específicas do trabalho.
 % (*) Inclua aqui termos que são utilizados muitas vezes e que demandam formatação especial.
-% Os exemplos abaixo incluem i* (substituindo o asterisco por uma estrela) e Java com TM em superscript.
+% Exemplo: Java com TM (trademark) em superscript.
 % Use sempre \xspace para que o LaTeX inclua espaço em branco após a macro somente quando necessário.
-\newcommand{\istar}{\textit{i}$^\star$\xspace}
 \newcommand{\java}{Java\texttrademark\xspace}
-\newcommand{\latex}{\LaTeX\xspace}
 
 
 
 
 %%% Configurações finais de aparência. %%%
 
-% Altera o aspecto da cor azul.
+% Altera o aspecto de algumas cores.
 \definecolor{blue}{RGB}{41,5,195}
+\definecolor{lightgray}{gray}{0.9}
 
 % Informações do PDF.
 \makeatletter
@@ -244,54 +257,62 @@
 % Inicia o documento.
 \begin{document}
 
-% Brasão da instituição.
-\begin{figure}
-\centering
-\includegraphics[width=.20\textwidth]{figuras/brasao.jpg} 
-\label{fig-brasao}
-\end{figure}
-
-\begin{center}
-\textbf{\textsf{UNIVERSIDADE FEDERAL DO ESPÍRITO SANTO}}
-
-\textbf{\textsf{CENTRO TECNOLÓGICO}}
-
-\textbf{\textsf{COLEGIADO DO CURSO DE CIÊNCIA DA COMPUTAÇÃO}}
-
-\large{\textbf{\textsf{  }}}
-
-\large{\textbf{\textsf{  }}}
-\end{center}
-
 % Retira espaço extra obsoleto entre as frases.
 \frenchspacing
+
+% Inclui o brasão da UFES.
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.055]{brasao.jpg}
+	\label{ppts3}
+\end{figure} 
 
 % Capa do trabalho.
 \imprimircapa
 
-% Folha de rosto (o * indica que haverá a ficha bibliográfica).
-\imprimirfolhaderosto*
-
-
+% (*) Incluir linhas no registro de alterações a cada nova versão.
+\begin{center}
+	{\large\bfseries Registro de Alterações:}
+	
+	\vspace{0.5cm}
+	\begin{tabular}{|c|p{45mm}|c|p{60mm}|} \hline
+		
+		\textbf{Versão} & \textbf{Responsável} & \textbf{Data}  & \textbf{Alterações} \\ \hline   
+		
+		1.0  & Nome do Responsável & dd/MM/yyyy & Versão inicial. \\\hline 
+	\end{tabular}
+\end{center}
+\newpage
 
 
 
 %%% Início da parte de conteúdo do documento. %%%
-
 % Marca o início dos elementos textuais.
 \textual
 
-% Inclusão dos capítulos.
-% (*) Para facilitar a organização, os capítulos foram divididos em arquivo separados e colocados dentro da.
-% pasta capitulos/. Caso o aluno prefira trabalhar com um só arquivo, basta substituir os comandos \include 
-% pelos conteúdos dos arquivos que estão sendo incluídos, excluindo a pasta capitulos/ em seguida.
-\include{capitulos/ch1-introducao}
-\include{capitulos/ch2-referencial}
+% Inclusão dos capítulos como seções (sem quebra de página).
+\begingroup
+\let\clearpage\relax
+
+\input{capitulos/ch1-introducao}
+\vspace*{1.5cm}
+
+\input{capitulos/ch2-estorias}
+\vspace*{1.5cm}
+
+\input{capitulos/ch3-subsistema}
+\vspace*{1.5cm}
+
+\input{capitulos/ch4-casodeuso}
+\vspace*{1.5cm}
+
+\input{capitulos/ch5-modeloestrutural}
+\vspace*{1.5cm}
+
+\input{capitulos/ch6-dicionario}
+\endgroup
 
 
-
-
-%%% Páginas finais do documento: bibliografia e anexos. %%%
 
 % Finaliza a parte no bookmark do PDF para que se inicie o bookmark na raiz e adiciona espaço de parte no sumário.
 \phantompart
@@ -299,12 +320,8 @@
 % Marca o início dos elementos pós-textuais.
 \postextual
 
-% Referências bibliográficas
-\bibliography{bibliografia}
-
-
-
-
+\phantompart
+\printindex
 
 % Fim do documento.
 \end{document}
