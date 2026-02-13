@@ -1,56 +1,111 @@
-% =====================================================================
-% Modelo para Relatório Parcial de Iniciação Científica (em Português)
-% Prof. Vítor E. Silva Souza - NEMO/UFES :: DI/UFES :: PPGI/UFES
+% ==============================================================
+% Modelo para Relatório Parcial de Iniciação Científica da UFES
+% Prof. Vítor E. Silva Souza - DI/CT/UFES :: PPGI/CT/UFES
 %
 % Baseado no modelo fornecido pela PRPPG/UFES:
 % https://prppg.ufes.br/programa-institucional-de-ic-piic
 %
-% This work may be distributed and/or modified under the conditions of 
-% the LaTeX Project Public License, either version 1.3 of this license 
-% or (at your option) any later version. The latest version of this 
-% license is in http://www.latex-project.org/lppl.txt.
-% =====================================================================
-\documentclass[10pt, a4paper]{article}
+% Procure por (*) para instruções de preenchimento.
+%
+% This work may be distributed and/or modified under the 
+% conditions of the LaTeX Project Public License, either version 
+% 1.3 of this license or (at your option) any later version. The 
+% latest version of this license is in 
+% http://www.latex-project.org/lppl.txt.
+% ==============================================================
+\documentclass[12pt, a4paper]{article}
 
+% Importa pacotes a serem utilizados no documento.
 \usepackage[pdftex]{graphicx,color}
 \usepackage[dvipsnames]{xcolor,colortbl}
 \usepackage[hidelinks]{hyperref}
 \usepackage{anysize}
 \usepackage{graphicx}
 \usepackage[utf8]{inputenc}
-\usepackage[portuges,brazilian]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
 \usepackage{fancyhdr}
 \usepackage{ifthen}
 \usepackage{array}
 \usepackage{natbib}
-%\usepackage{ tipa }
-\usepackage{amssymb}
 \usepackage{amsmath}
-%\usepackage[usenames,dvipsnames]{xcolor} %to allow for color changes
-%\definecolor{light-gray}{gray}{0.80} % defines the colour.
-%\usepackage{cite} % to allow line breaks inside citations
-
-%% Para redução de espaço entre os itens da bibliografia
-	\let\oldbibliography\thebibliography
-	\renewcommand{\thebibliography}[1]{\oldbibliography{#1}
-	\setlength{\itemsep}{0pt}}
-
-\usepackage{helvet}
-\renewcommand{\familydefault}{\rmdefault}
-
 \usepackage{enumerate}
 \usepackage{adjustbox}
+\usepackage{titlesec}
+\usepackage{mathptmx}
 
-\usepackage{parskip}% http://ctan.org/pkg/parskip
+% Reduz o espaço entre os itens da bibliografia
+\let\oldbibliography\thebibliography
+\renewcommand{\thebibliography}[1]{\oldbibliography{#1}
+\setlength{\itemsep}{0pt}}
+
+% Configura a fonte do documento.
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+% Configura espaçamento 1,5 entre linhas.
+\usepackage{setspace}
+\onehalfspacing
+
+% Configura espaçamento entre os parágrafos.
+\usepackage{parskip}
 \setlength{\parindent}{0pt}
-
+\setlength{\parskip}{6pt} 
 \linespread{1.25}
 
-\usepackage{titlesec}
-
+% Configura tamanho dos títulos.
 \titleformat{\section}
-  {\normalfont\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
+  {\normalfont\fontsize{14}{16}\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
 
+% Configura o tamanho e alinhamento das legendas.
+\usepackage{caption}
+\usepackage{subcaption}
+\captionsetup{font={small}}
+\captionsetup{singlelinecheck=false,justification=raggedright}
+\captionsetup[subfigure]{justification=centering, singlelinecheck=true}
+
+% Cria um tipo coluna com alinhamento à esquerda.
+\usepackage{tabularx}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+% Define os elementos gráfico e quadro.
+\usepackage{newfloat}
+\DeclareFloatingEnvironment[name={Gráfico}]{grafico}
+\DeclareFloatingEnvironment[name={Quadro}]{quadro}
+
+% Configura listas enumeradas.
+\usepackage{enumitem}
+\setlist[enumerate]{nosep}
+
+% Permite inclusão de notas, úteis para revisão.
+\usepackage[colorinlistoftodos, textwidth=20mm, textsize=footnotesize]{todonotes}
+\newcommand{\aluno}[1]{\todo[author=\textbf{Aluno},color=green!30,caption={},inline]{#1}}
+\newcommand{\professor}[1]{\todo[author=\textbf{Professor},color=red!30,caption={},inline]{#1}}
+
+% Permite usar o comando \hl{} para evidenciar texto.
+\usepackage{soulutf8}
+
+% Permite colocar espaços no final das macros quando necessário.
+\usepackage{xspace}
+
+% Definição de símbolos para o cronograma.
+\usepackage{amssymb}
+\usepackage{pifont}
+\usepackage{tikz}
+\newcommand{\totalmente}{\ding{51}\xspace}
+\newcommand{\parcialmente}{%
+\begin{tikzpicture}[baseline=-0.5ex]
+    \draw (0,0) circle (0.8ex);
+    \fill (0,0) -- (90:0.8ex) arc (90:270:0.8ex) -- cycle;
+\end{tikzpicture}}
+\newcommand{\naorealizada}{%
+\begin{tikzpicture}[baseline=0ex, line width=0.25ex]
+    \draw (0,0) -- (1.2ex,1.2ex);
+    \draw (0,1.2ex) -- (1.2ex,0);
+\end{tikzpicture}}
+
+
+% Definição de macros.
 \newcommand{\mnras}{Mon. Not. R. Astron. Soc.}
 \newcommand{\aap}{Astronomy $\&$ Astrophysics}
 \newcommand{\apjs}{ApJS}
@@ -59,146 +114,109 @@
 \newcommand{\aj}{Astron. J.}
 \newcommand{\pasa}{PASA}
 \newcommand{\nat}{Nature}
-
-\usepackage{mathptmx}
-\usepackage{tabularx}
-
-\usepackage{caption}
-\usepackage{subcaption}
-
-\usepackage{newfloat}
-\DeclareFloatingEnvironment[name={Gráfico}]{grafico}
-\DeclareFloatingEnvironment[name={Quadro}]{quadro}
-
-\usepackage{enumitem}
-\setlist[enumerate]{nosep}
-
-% Colorinlistoftodos package: to insert colored comments so authors can collaborate on the content.
-\usepackage[colorinlistoftodos, textwidth=20mm, textsize=footnotesize]{todonotes}
-\newcommand{\aluno}[1]{\todo[author=\textbf{Aluno},color=green!30,caption={},inline]{#1}}
-\newcommand{\professor}[1]{\todo[author=\textbf{Professor},color=red!30,caption={},inline]{#1}}
-
-% Permite usar o comando \hl{} para evidenciar texto com fundo amarelo. Útil para chamar atenção a itens a fazer.
-\usepackage{soulutf8}
-
-%\marginsize{left}{right}{top}{bottom}
-\marginsize{30mm}{20mm}{30mm}{20mm}
-
-%\renewcommand{\arraystretch}{1.5}
-
-
-\usepackage{fancyhdr}
-\usepackage{afterpage}
-\pagestyle{fancy}
-\fancyhf{} % clear all fields
-\fancyhead[R]{\color{Gray} Universidade Federal do Espírito Santo\\ Programa Institucional de Iniciação Científica\\ Relatório Parcial de Pesquisa\\ {\color{Red} Área do Conhecimento (CNPq)}}
-\setlength{\headheight}{40pt}
-\renewcommand{\headrulewidth}{0pt}
-
-%\pagenumbering{arabic}
-
-% Pacote xspace: para colocar espaços no final das macros quando necessário.
-\usepackage{xspace}
-
-\usepackage{tikz}
-\newcommand{\smiley}{\tikz[baseline=-0.75ex,black]{
-		\draw circle (1.8mm);
-		\node[fill,circle,inner sep=0.5pt] (left eye) at (135:0.8mm) {};
-		\node[fill,circle,inner sep=0.5pt] (right eye) at (45:0.8mm) {};
-		\draw (-145:0.9mm) arc (-120:-60:1.5mm);
-	}
-}
-\newcommand{\frownie}{\tikz[baseline=-0.75ex,black]{
-		\draw circle (1.8mm);
-		\node[fill,circle,inner sep=0.5pt] (left eye) at (135:0.8mm) {};
-		\node[fill,circle,inner sep=0.5pt] (right eye) at (45:0.8mm) {};
-		\draw (-145:0.9mm) arc (120:60:1.5mm);
-	}
-}
-\newcommand{\neutranie}{\tikz[baseline=-0.75ex,black]{
-		\draw circle (1.8mm);
-		\node[fill,circle,inner sep=0.5pt] (left eye) at (135:0.8mm) {};
-		\node[fill,circle,inner sep=0.5pt] (right eye) at (45:0.8mm) {};
-		\draw (-135:0.9mm) -- (-45:0.9mm);
-	}
-}
-
-
-% Definição de macros.
 \newcommand{\java}{Java\texttrademark\xspace}
 
+% Configuração das margens.
+\usepackage[a4paper, left=29mm, top=30mm, right=19mm, bottom=20mm, includehead, headsep=25mm]{geometry}
+\addtolength{\voffset}{-25mm}
+\addtolength{\textheight}{25mm}
 
+% Definição do cabeçalho.
+% (*) Substituir a área do conhecimento e remover o \color{Red}.
+\usepackage{afterpage}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\fontsize{10}{12}\selectfont\color{Gray} Universidade Federal do Espírito Santo\\ Programa Institucional de Iniciação Científica\\ Relatório Parcial de Pesquisa\\ {\color{Red} Área do Conhecimento (CNPq)}}
+\renewcommand{\headrulewidth}{0pt}
 
+% Definição do rodapé.
+\fancyfoot[R]{\thepage}
+\renewcommand{\footrulewidth}{0pt}
+
+% Início do documento.
 \begin{document}
 
-\afterpage{\cfoot{\thepage}}
-
-
-
-\begin{center}
- {\Large \bf  {\color{Red} Título do Subprojeto de Iniciação Científica -- PIIC/UFES}}
- \end{center}
-
-\vspace{.5cm}
-
-
+% (*) Preencher {\bf } com dados do projeto e subprojeto.
 \bgroup
-\def\arraystretch{1.3}
-\begin{tabularx}{\textwidth}{|>{\columncolor{gray!25}}l|X|}
+\def\arraystretch{1.1}
+\begin{tabularx}{\textwidth}{|>{\columncolor{gray!25}}L{61mm}|L{92mm}|}
 \hline
-{\bf Edital:} & Edital PIIC 20\_\_ /20\_\_ \\
+{\bf Edital:} & {\bf Edital PIIC 20\_\_ /20\_\_} \\
 \hline
-{\bf Área do Conhecimento (CNPq):} &  \\
+{\bf Área do Conhecimento (CNPq):} & {\bf } \\
 \hline
-{\bf Subárea do Conhecimento (CNPq):} &  \\
+{\bf Subárea do Conhecimento (CNPq):} & {\bf } \\
 \hline
-{\bf Título do Projeto:} &  \\
+{\bf Título do Projeto:} & {\bf } \\
 \hline
-{\bf Título do Subprojeto:} &  \\
+{\bf Título do Subprojeto:} & {\bf } \\
 \hline
-{\bf Professor(a) Orientador(a):}&   \\
+{\bf Orientador(a):} & {\bf } \\
 \hline
-{\bf Estudante:} &   \\
+{\bf Estudante:} & {\bf } \\
 \hline
 \end{tabularx}
 \egroup
+\vspace{2mm}
 
+% (*) Marcar X no lugar de \ do meio em (\ \ \ ).
+% (*) Preencher { } em \multicolumn{2}{|l|}{ } se for o caso.
+\bgroup
+\def\arraystretch{1.1}
+\begin{tabularx}{\textwidth}{|>{\columncolor{gray!25}}L{61mm}|L{44mm}|L{44mm}|}
+\hline
+{\bf Estudante apresenta alguma necessidade de acessibilidade?} & {\vspace{1mm} Sim (\ \ \ )} & {\vspace{1mm} Não (\ \ \ )} \\
+\hline
+{Se sim, informar o recurso ou suporte de acessibilidade que necessita.} & \multicolumn{2}{|l|}{ } \\
+\hline
+\end{tabularx}
+\egroup
 \vspace{.5cm}
 
-%\bigskip
+% (*) Ler as orientações gerais e excluí-las na versão final.
+{\color{Red} 
+{\bf Orientações Gerais (remover na versão final)}
+\begin{itemize}
+	\item Este relatório deve ser elaborado pelo(a) estudante sob supervisão do(a) orientador(a).
+	\item O relatório deve ser enviado pelo(a) orientador(a) via Sistema Acadêmico de Pesquisa (SAPPG), conforme as datas do edital.
+	\item O atraso no envio pode resultar na suspensão da bolsa e em restrições em edições futuras.
+	\item O relatório deve conter as seções: {\bf Introdução; Materiais e Métodos; Resultados e Discussão; Atividades Realizadas e Metas Futuras; Referências}.
+	\item Formatação mínima obrigatória:
+	\begin{itemize}
+		\item Tamanho A4; margens: 3 cm (superior e esquerda) e 2 cm (inferior e direita)
+		\item Fonte \textbf{Arial}, corpo \textbf{12} no texto e \textbf{14} nos títulos
+		\item Espaçamento \textbf{1,5} entre linhas
+		\item Alinhamento justificado
+		\item Sem recuo na primeira linha dos parágrafos
+		\item Cabeçalho em Arial 10
+		\item Inserir, na \textbf{quarta linha do cabeçalho}, a \textbf{área do conhecimento conforme classificação do CNPq}
+	\end{itemize}
+	\item O documento deve ser exportado em \textbf{PDF}
+\end{itemize}
+}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Início das seções.
+% (*) Ler as instruções e exemplos e escrever seu relatório.
 \section{Introdução}
 \label{sec-intro}
 
-O Relatório Parcial é individual e deve ser escrito pelo bolsista/voluntário de iniciação científica, sob a supervisão do seu orientador. O relatório deverá ser enviado pelo orientador através do sistema do Programa Institucional de Iniciação Científica no SAPPG até a data limite estabelecida no edital. O \textit{link} para envio do relatório está disponível no sistema do PIIC a partir do dia de início de envio estabelecido no edital. 
-
-O envio do Relatório Parcial após a data limite estabelecida implicará na suspensão do pagamento da bolsa de Iniciação Científica, como previsto no subitem 7.1 do edital do PIIC, podendo ainda implicar em impedimento de participação do(a) orientador(a) do(a)(s) bolsista(a)(s) ou voluntário(a)(s) em futuras edições do PIIC, conforme previsto no inciso V do Art. 11º do Regulamento Geral do PIIC, disponível no site da Pró-Reitoria de Pesquisa e Pós-Graduação (PRPPG).
-
-Este documento deve ser utilizado como modelo para a elaboração do Relatório Parcial de Pesquisa no âmbito do Programa Institucional de Iniciação Científica (PIIC) da UFES, que deve ser composto das seguintes seções: Introdução, Materiais e Métodos, Resultados e Discussão, Atividades Realizadas e Metas Futuras, e Referências Bibliográficas. 
-
-O texto do Relatório Parcial de Pesquisa deve ser preparado considerando que todas as seções que compõem o documento não excedam seus limites, em formato A4 com margens de 3 cm (esquerda e superior) e de 2 cm (direita e inferior), usando fonte Times New Roman, tamanho 10, com espaçamento entre linhas de 1,5, sem recuo na primeira linha de cada parágrafo e com alinhamento justificado. Já os títulos das seções também devem utilizar a fonte Times New Roman, mas com tamanho 12. Por fim, o cabeçalho de todas as páginas deve ser mantido de acordo com a formatação deste modelo (Times New Roman, tamanho 9, alinhado à direita), sendo que deve-se alterar para a cor preta e descrever a Área do Conhecimento do projeto segundo o Conselho Nacional de Desenvolvimento Científico e Tecnológico (CNPq) na quarta linha do cabeçalho, isto é, Ciências Exatas e da Terra, Ciências Biológicas, Engenharias, Ciências da Saúde, Ciências Agrárias, Ciências Sociais Aplicadas, Ciências Humanas ou Linguística, Letras e Artes. O título do Subprojeto de Iniciação Científica deve ser inserido no lugar de ``Título do Subprojeto de Iniciação Científica – PIIC/Ufes'' e sua cor, também trocada para a preta.
-
-A linguagem utilizada ao longo do trabalho deve ser técnica e impessoal, uma vez que se trata de um trabalho acadêmico. Deve-se evitar o uso de gírias e de termos de linguagem coloquial, bem como o uso das primeiras pessoas do singular e do plural (fiz ou fizemos...; obtive ou obtivemos...), e priorizar a estrutura passiva (fez-se...; foram obtidos...). 
-
-O conteúdo de cada seção deve estar de acordo com as recomendações descritas neste modelo. Na Introdução, o autor deve apresentar, de forma concisa, uma contextualização do tema de sua pesquisa, mostrando sua relevância, justificando o tema escolhido, e descrevendo claramente a sua pergunta ou seu problema de pesquisa. Deve-se também ressaltar a ligação do Subprojeto de Iniciação Científica com o Projeto de Pesquisa ao qual está vinculado. Esta seção deve conter, \textbf{no máximo, 30 linhas}.
+A linguagem utilizada ao longo do trabalho deve ser, sempre que possível, técnica e impessoal, uma vez que se trata de um trabalho acadêmico. Deve-se evitar o uso de gírias e de termos de linguagem coloquial, bem como o uso das primeiras pessoas do singular e do plural (fiz ou fizemos...; obtive ou obtivemos...), e priorizar a estrutura passiva (fez-se...; foram obtidos...). O conteúdo de cada seção deve estar de acordo com as recomendações descritas neste modelo. Na Introdução, o autor deve apresentar, de forma concisa, uma contextualização do tema de sua pesquisa, mostrando sua relevância, justificando o tema escolhido, e descrevendo claramente a sua pergunta ou seu problema de pesquisa. Deve-se também ressaltar a ligação do Subprojeto de Iniciação Científica com o Projeto de Pesquisa ao qual está vinculado. Esta seção deve conter, \textbf{no máximo, 30 linhas}.
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Materiais e Métodos}
 \label{sec-metodo}
 
-Nesta seção devem ser descritos, de maneira sucinta, \textbf{em até 30 linhas}, o detalhamento da metodologia utilizada no decorrer da pesquisa executada pelo discente no primeiro semestre de vinculação ao PIIC/UFES, bem como os procedimentos de trabalho adotados, os materiais que foram utilizados, o tratamento da informação realizado e o procedimento estatístico aplicado, se for o caso. Esta seção deve, entretanto, além de detalhar os aspectos da metodologia empregada nas atividades especificamente executadas pelo estudante, apresentar sua relação com o Projeto de Pesquisa ao qual o Subprojeto de Iniciação Científica está vinculado.
+Nesta seção devem ser descritos, de maneira sucinta, \textbf{em até 30 linhas}, o detalhamento da metodologia utilizada no decorrer da pesquisa executada pelo discente no primeiro semestre de vinculação ao PIIC/UFES, bem como os procedimentos de trabalho adotados, os materiais que foram utilizados, o tratamento da informação realizado e o procedimento estatístico aplicado, se for o caso.
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Resultados e Discussão}
 \label{sec-resultados}
 
-Esta seção deve explicitar, \textbf{em até 30 linhas}, os principais resultados obtidos no decorrer da pesquisa executada pelo discente no primeiro semestre de vinculação ao PIIC/UFES. Em todo o relatório, ilustrações (figuras, gráficos, fotos, fluxogramas, quadros e etc.) e tabelas podem também ser incluídas e devem ser utilizadas a fim de explicar ou complementar visualmente o texto. Deve-se destacar que tais ilustrações ou tabelas não são computadas como linhas do texto. Segundo a NBR 15287:2011, ``a ilustração deve ser citada no texto e inserida o mais próximo possível do trecho a que se refere.''~\citep[p. 8]{abnt:nbr15287}. Cabe ressaltar que a citação, no texto, sempre deve preceder a ilustração ou a tabela. Estes elementos devem estar centralizados na página, com identificação na parte superior e a indicação da fonte consultada (elemento obrigatório, mesmo que seja “produção do próprio autor”), com legenda, notas e outras informações necessárias à sua compreensão (se houver), na parte inferior (alinhados à borda esquerda da ilustração e limitados pela borda direita da mesma), como mostram a Figura~\ref{fig-exemplo} e o Gráfico~\ref{graf-exemplo}.
+Esta seção deve explicitar, \textbf{em até 30 linhas}, os principais resultados obtidos no decorrer da pesquisa executada pelo discente no primeiro semestre de vinculação ao PIIC/UFES. Em todo o relatório, ilustrações (figuras, gráficos, fotos, fluxogramas, quadros e etc.) e tabelas podem também ser incluídas e devem ser utilizadas a fim de de organizar os dados, realizar comparações, sintetizar informações e dar suporte às análises. \textbf{Deve-se destacar que tais ilustrações ou tabelas não são computadas como linhas do texto}. As ilustrações e tabelas devem ser inseridas imediatamente após o trecho ao qual fazem referência. Estes elementos devem estar centralizados na página, com identificação na parte superior, em fonte Arial 10. Na parte inferior, deve constar a indicação da fonte consultada (elemento obrigatório, mesmo que seja ``produção do próprio autor''), legenda, notas e/ou outras informações necessárias à compreensão (se houver). O texto da parte inferior também deve ser formatado em fonte Arial 10, alinhado à borda esquerda da ilustração e limitado pela borda direita da mesma, como mostra a Figura~\ref{fig-exemplo} e o Gráfico~\ref{graf-exemplo}.
 
 \begin{figure}[h!]
 	\centering
@@ -218,7 +236,18 @@ Esta seção deve explicitar, \textbf{em até 30 linhas}, os principais resultad
 		\label{fig-exemploB}
 	\end{subfigure}
 	\caption*{Fonte: \cite{toledo-pereira:clacs2004}.}
+	\caption*{\textit{Descrição da Figura~\ref{fig-exemplo}:} fotografia de um modelo reduzido de edificação e representação esquemática do comportamento do escoamento sobre a edificação.}
 \end{figure}
+
+No caso de figuras e tabelas, sugere-se a inserção de um \textbf{texto alternativo}, que é uma breve descrição textual que permite a pessoas com deficiência visual, que utilizam softwares leitores de tela, compreendam o conteúdo visual do relatório. 
+
+{\bf Orientações para a Redação do texto alternativo:}
+\begin{enumerate}
+	\item \textbf{Seja Objetivo:} Comece pela informação mais importante. Evite expressões como "Imagem de..." ou "Foto de...", pois o leitor de tela já identifica o elemento como gráfico.
+	\item \textbf{Hierarquia de Dados:} Em gráficos, descreva primeiro o tipo (ex: "Gráfico de barras"), o título e os valores de maior destaque ou tendência geral.
+	\item \textbf{Contexto Científico:} Descreva apenas o que é relevante para a pesquisa. Se uma cor no gráfico indica uma variável específica, mencione-a; se for apenas decorativa, não é necessário descrevê-la.
+	\item \textbf{Tabelas:} Certifique-se de que a descrição resuma a principal conclusão que os dados da tabela apresentam.
+\end{enumerate}
 
 \begin{grafico}[h!]
 	\centering
@@ -226,16 +255,17 @@ Esta seção deve explicitar, \textbf{em até 30 linhas}, os principais resultad
 	\label{graf-exemplo}
 	\includegraphics[width=.75\textwidth]{graf-exemplo}	
 	\caption*{Fonte: \cite{epe:ben2011}.}
+	\caption*{\textit{Descrição do Gráfico~\ref{graf-exemplo}:} gráfico de setores (estilo pizza) com efeito 3D, intitulado ``Consumo final de energia por fonte no Brasil em 2011''. O gráfico utiliza diversas cores para distinguir doze categorias de fontes energéticas. A maior fonte de consumo é o óleo diesel, com 19,1\%.}
 \end{grafico}
 
 As tabelas e os quadros, apesar de possuírem certa semelhança entre si, diferenciam-se não apenas no formato exigido, mas também pelo conteúdo que exibem:
 
 \begin{enumerate}[label=\alph*)]
 	\item um quadro apresenta informações ou resultados qualitativos, ou seja, em forma de texto, mesmo que este empregue números;
-	\item uma tabela apresenta informações ou resultados quantitativos, ou seja, números tratados estatisticamente.
+	\item uma tabela apresenta informações ou resultados quantitativos, ou seja, números tratados estatisticamente. 
 \end{enumerate}
 
-Quanto ao formato e à apresentação de tabelas e quadros, como se verifica na Tabela~\ref{tbl-exemplo} e no Quadro~\ref{qdr-exemplo}, devem-se observar as seguintes regras~\citep{fibge:nat1993}:
+Quanto ao formato e à apresentação de tabelas e quadros, como se verifica na Tabela~\ref{tbl-exemplo} e no Quadro~\ref{qdr-exemplo}, devem-se observar as seguintes regras:
 
 \begin{enumerate}[label=\alph*)]
 	\item a moldura das tabelas não deve ser fechada com traços verticais à esquerda e à direita;
@@ -244,27 +274,26 @@ Quanto ao formato e à apresentação de tabelas e quadros, como se verifica na 
 \end{enumerate}
 
 \begin{table}[h]
+	\fontsize{10}{12}
 	\centering
 	\caption{Exemplo de formatação de uma tabela para a apresentação de resultados}
 	\label{tbl-exemplo}
 	\begin{tabular}{ccc}
 		\hline
-		\textbf{Grupos de idade [meses]} & \textbf{Número de indivíduos no grupo} & \textbf{Indivíduos viáveis [\%]} \\
+		\textbf{Grupo de idade (em meses)} & \textbf{Número de indivíduos no grupo} & \textbf{Indivíduos viáveis [\%]} \\
 		\hline
-		0 -- 10		& 20	& 9,0
-\\
-		10 -- 15	& 20	& 10,0
-\\
-		15 -- 20	& 25	& 4,0
-\\
-		Acima de 20	& 15	& 3,4
-\\
-		\hline	
+		0--10		& 20	& 9,0  \\
+		10--15		& 20	& 10,0 \\
+		15--20		& 25	& 4,0  \\
+		Acima de 20	& 15	& 3,4  \\
+		\hline
 	\end{tabular}
 	\caption*{Fonte: Produção do(a) próprio(a) autor(a).}
+	\caption*{\textit{Descrição da Tabela~\ref{tbl-exemplo}:} tabela com bordas horizontais simples no topo e na base, com dados ilustrativos para demonstrar as normas de apresentação de dados.}
 \end{table}
 
 \begin{quadro}[h]
+	\fontsize{10}{12}
 	\centering
 	\caption{Dimensionamento dos elementos de um conversor \textit{boost}}
 	\label{qdr-exemplo}
@@ -292,40 +321,45 @@ Quanto ao formato e à apresentação de tabelas e quadros, como se verifica na 
 	\\\hline
 	\end{tabular}
 	\caption*{Fonte: \cite{menegaz:thesis2005}.}
+	\caption*{\textit{Descrição do Quadro~\ref{qdr-exemplo}:} ...}
 \end{quadro}
 
-Outros elementos textuais que podem fazer parte do subprojeto de pesquisa são as equações e fórmulas. Para facilitar a leitura, a NBR 15287:2011 exige que as equações sejam destacadas do texto e numeradas com algarismos arábicos entre parênteses, alinhados à margem direita da página, como mostra a Equação~\eqref{eqn-exemplo}. Assim como no caso de figuras, tabelas e quadros, a citação, ou a chamada, de todas as equações ou fórmulas no texto é obrigatória, e sua localização deve acontecer o mais próximo possível do trecho onde são mencionadas pela primeira vez.
+Outros elementos textuais que podem fazer parte do Relatório Parcial de Pesquisa são as equações e fórmulas. Para facilitar a leitura, recomenda-se que as equações sejam destacadas do texto e numeradas com algarismos arábicos entre parênteses, alinhados à margem direita da página, como mostra a Equação~\eqref{eqn-exemplo}. Assim como no caso de figuras, tabelas e quadros, a citação, ou a chamada, de todas as equações ou fórmulas no texto é obrigatória, e sua localização deve acontecer o mais próximo possível do trecho onde são mencionadas pela primeira vez.
 
 \begin{equation}
 	\label{eqn-exemplo}
 	v_{r}(t) = R \times i(t)
 \end{equation}
+{\small\textit{Descrição da Equação~\eqref{eqn-exemplo}:} equação matemática centralizada, identificada pelo número 1 entre parênteses à direita. A fórmula descreve uma relação ilustrativa para demonstrar as normas de apresentação dos dados.}
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Atividades Realizadas e Metas Futuras}
 \label{sec-atividades}
+
+Nesta seção deve-se resgatar as atividades previstas do Subprojeto de Pesquisa e explicitar aquelas que foram totalmente realizadas (\totalmente), parcialmente realizadas (\parcialmente) ou não foram realizadas (\naorealizada), conforme o Quadro~\ref{qdr-cronograma}:
 
 Nesta seção deve-se inicialmente resgatar as atividades previstas do Subprojeto de Pesquisa e explicitar aquelas que foram totalmente, parcialmente ou não foram executadas pelo discente, a exemplo do Quadro~\ref{qdr-cronograma} a seguir. 
 
 \begin{quadro}[h]
+	\fontsize{10}{12}
 	\centering
-	\caption{Cronograma de atividades previstas do subprojeto (set./20\_\_ a ago./20\_\_)}
+	\caption{Cronograma de atividades previstas e realizadas do Subprojeto (set./20\_\_ a ago./20\_\_)}
 	\label{qdr-cronograma}
 	\begin{tabular}{|p{2.7cm}|l|l|l|l|l|l|l|l|l|l|l|l|}
 		\hline
 		\rowcolor{lightgray}
 		Atividade & set. & out. & nov. & dez. & jan. & fev. & mar. & abr. & maio & jun. & jul. & ago. \\
 		\hline
-		a) Xxxx & \cellcolor{lightgray} \smiley &   &   &    &  &   &   &   &   &   &   &  \\
+		a) Xxxx & \cellcolor{lightgray}  &   &   &    &  &   &   &   &   &   &   &  \\
 		\hline
-		b) Yyyy & \cellcolor{lightgray} \frownie &   &   &   &   &   &    &    &   &   &   &  \\
+		b) Yyyy & \cellcolor{lightgray}  &   &   &   &   &   &    &    &   &   &   &  \\
 		\hline
 		c) Zzzzz &   &   &   &   &   &   &   &   &    &   &  & \\
 		\hline
 	\end{tabular}
-	\caption*{Fonte: Produção do próprio autor.\\Nota: Atividade prevista (\fcolorbox{black}{lightgray}{\phantom{x}}),  atividade totalmente realizada (\smiley), atividade parcialmente realizada (\neutranie) e atividade não realizada (\frownie).}
+	\caption*{Fonte: Produção do próprio autor.\\Nota: Atividade prevista (\fcolorbox{black}{lightgray}{\phantom{x}}),  atividade totalmente realizada (), atividade parcialmente realizada () e atividade não realizada ().}
 \end{quadro}
 
 A execução parcial ou a não realização de uma determinada atividade deve ser justificada. Além disso, as metas a serem alcançadas, nos 6 (seis) meses seguintes de vínculo do discente ao PIIC/UFES, devem também ser sucintamente descritas.
