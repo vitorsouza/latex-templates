@@ -60,13 +60,23 @@
 % Configura o tamanho e alinhamento das legendas.
 \usepackage{caption}
 \usepackage{subcaption}
-\captionsetup{font={small}}
+\captionsetup{font={footnotesize}, labelsep=endash}
 \captionsetup{singlelinecheck=false,justification=raggedright}
 \captionsetup[subfigure]{justification=centering, singlelinecheck=true}
+\captionsetup[figure]{skip=2pt}
+\captionsetup[grafico]{skip=2pt}
+\captionsetup[quadro]{skip=2pt}
+\captionsetup[table]{skip=2pt}
+
 
 % Cria um tipo coluna com alinhamento à esquerda.
 \usepackage{tabularx}
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+% Define opção de espaçamento interno em tabelas.
+\usepackage{cellspace}
+\setlength{\cellspacetoplimit}{10pt}
+\setlength{\cellspacebottomlimit}{10pt}
 
 % Define os elementos gráfico e quadro.
 \usepackage{newfloat}
@@ -181,7 +191,7 @@
 	\item O relatório deve ser enviado pelo(a) orientador(a) via Sistema Acadêmico de Pesquisa (SAPPG), conforme as datas do edital.
 	\item O atraso no envio pode resultar na suspensão da bolsa e em restrições em edições futuras.
 	\item O relatório deve conter as seções: {\bf Introdução; Materiais e Métodos; Resultados e Discussão; Atividades Realizadas e Metas Futuras; Referências}.
-	\item Formatação mínima obrigatória:
+	\item Formatação mínima obrigatória (já configurada neste modelo \LaTeX):
 	\begin{itemize}
 		\item Tamanho A4; margens: 3 cm (superior e esquerda) e 2 cm (inferior e direita)
 		\item Fonte \textbf{Arial}, corpo \textbf{12} no texto e \textbf{14} nos títulos
@@ -235,6 +245,7 @@ Esta seção deve explicitar, \textbf{em até 30 linhas}, os principais resultad
 		\caption{}
 		\label{fig-exemploB}
 	\end{subfigure}
+	\vspace{5pt}
 	\caption*{Fonte: \cite{toledo-pereira:clacs2004}.}
 	\caption*{\textit{Descrição da Figura~\ref{fig-exemplo}:} fotografia de um modelo reduzido de edificação e representação esquemática do comportamento do escoamento sobre a edificação.}
 \end{figure}
@@ -254,7 +265,9 @@ No caso de figuras e tabelas, sugere-se a inserção de um \textbf{texto alterna
 	\caption{Consumo final de energia por fonte no Brasil em 2011}
 	\label{graf-exemplo}
 	\includegraphics[width=.75\textwidth]{graf-exemplo}	
+	\vspace{5pt}
 	\caption*{Fonte: \cite{epe:ben2011}.}
+	\caption*{Nota: $^1$ Inclui biodiesel. $^2$ Inclui apenas gasolina A (automotiva). $^3$ Inclui gás de refinaria, coque de carvão mineral e carvão vegetal, dentre outros.}
 	\caption*{\textit{Descrição do Gráfico~\ref{graf-exemplo}:} gráfico de setores (estilo pizza) com efeito 3D, intitulado ``Consumo final de energia por fonte no Brasil em 2011''. O gráfico utiliza diversas cores para distinguir doze categorias de fontes energéticas. A maior fonte de consumo é o óleo diesel, com 19,1\%.}
 \end{grafico}
 
@@ -278,8 +291,7 @@ Quanto ao formato e à apresentação de tabelas e quadros, como se verifica na 
 	\centering
 	\caption{Exemplo de formatação de uma tabela para a apresentação de resultados}
 	\label{tbl-exemplo}
-	\begin{tabular}{ccc}
-		\hline
+	\begin{tabular}{S{c}S{c}S{c}}
 		\textbf{Grupo de idade (em meses)} & \textbf{Número de indivíduos no grupo} & \textbf{Indivíduos viáveis [\%]} \\
 		\hline
 		0--10		& 20	& 9,0  \\
@@ -288,6 +300,7 @@ Quanto ao formato e à apresentação de tabelas e quadros, como se verifica na 
 		Acima de 20	& 15	& 3,4  \\
 		\hline
 	\end{tabular}
+	\vspace{5pt}
 	\caption*{Fonte: Produção do(a) próprio(a) autor(a).}
 	\caption*{\textit{Descrição da Tabela~\ref{tbl-exemplo}:} tabela com bordas horizontais simples no topo e na base, com dados ilustrativos para demonstrar as normas de apresentação de dados.}
 \end{table}
@@ -320,6 +333,7 @@ Quanto ao formato e à apresentação de tabelas e quadros, como se verifica na 
 		Interruptor				& $IRFP360$	
 	\\\hline
 	\end{tabular}
+	\vspace{5pt}
 	\caption*{Fonte: \cite{menegaz:thesis2005}.}
 	\caption*{\textit{Descrição do Quadro~\ref{qdr-exemplo}:} ...}
 \end{quadro}
@@ -341,22 +355,27 @@ Outros elementos textuais que podem fazer parte do Relatório Parcial de Pesquis
 Nesta seção deve-se resgatar as atividades previstas do Subprojeto de Pesquisa e explicitar aquelas que foram totalmente realizadas (\totalmente), parcialmente realizadas (\parcialmente) ou não foram realizadas (\naorealizada), conforme o Quadro~\ref{qdr-cronograma}:
 
 \begin{quadro}[h]
-	\fontsize{10}{12}
 	\centering
 	\caption{Cronograma de atividades previstas e realizadas do Subprojeto (set./20\_\_ a ago./20\_\_)}
 	\label{qdr-cronograma}
-	\begin{tabular}{|p{2.7cm}|l|l|l|l|l|l|l|l|l|l|l|l|}
+	\footnotesize
+	\renewcommand{\arraystretch}{2}
+	\setlength{\tabcolsep}{3pt}
+	\begin{tabular}{| S{m{5.5cm}} *{12}{| c} |}
 		\hline
 		\rowcolor{lightgray}
-		Atividade & set. & out. & nov. & dez. & jan. & fev. & mar. & abr. & maio & jun. & jul. & ago. \\
+		\textbf{Atividade} & \textbf{set.} & \textbf{out.} & \textbf{nov.} & \textbf{dez.} & \textbf{jan.} & \textbf{fev.} & \textbf{mar.} & \textbf{abr.} & \textbf{mai.} & \textbf{jun.} & \textbf{jul.} & \textbf{ago.} \\
 		\hline
-		a) Xxxx & \cellcolor{lightgray}  &   &   &    &  &   &   &   &   &   &   &  \\
+		a) Xxxx xxx xxxxxx &  & \totalmente  &   &    &  &   &   &   &   &   &   &  \\
 		\hline
-		b) Yyyy & \cellcolor{lightgray}  &   &   &   &   &   &    &    &   &   &   &  \\
+		b) Yyyy yyy yyy yy yyy &  &   &   & \parcialmente  &   &   &    &    &   &   &   &  \\
 		\hline
-		c) Zzzzz &   &   &   &   &   &   &   &   &    &   &  & \\
+		c) Zzzzz z zzzz &   &   &   &   &   &   &   &   &    &   &  & \\
+		\hline
+		d) Wwww ww www wwww www & \naorealizada  &   &   &   &   &   &   &   &    &   &  & \\
 		\hline
 	\end{tabular}
+	\vspace{5pt}
 	\caption*{Fonte: Produção do próprio autor.\\Nota: atividade totalmente realizada (\totalmente), atividade parcialmente realizada (\parcialmente) e atividade não realizada (\naorealizada).}
 	\caption*{\textit{Descrição do Quadro~\ref{qdr-cronograma}:} Cronograma de atividades previstas e realizadas no período de vigência do subprojeto. As atividades devem ser registradas conforme execução (atividade totalmente realizada, atividade parcialmente realizada e atividade não realizada.}
 \end{quadro}
