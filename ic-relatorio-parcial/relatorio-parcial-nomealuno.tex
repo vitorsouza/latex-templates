@@ -74,9 +74,6 @@
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 
 % Define opção de espaçamento interno em tabelas.
-\usepackage{cellspace}
-\setlength{\cellspacetoplimit}{10pt}
-\setlength{\cellspacebottomlimit}{10pt}
 
 % Define os elementos gráfico e quadro.
 \usepackage{newfloat}
@@ -88,12 +85,13 @@
 \setlist[enumerate]{nosep}
 
 % Permite inclusão de notas, úteis para revisão.
+\setlength{\marginparwidth}{2cm}
 \usepackage[colorinlistoftodos, textwidth=20mm, textsize=footnotesize]{todonotes}
 \newcommand{\aluno}[1]{\todo[author=\textbf{Aluno},color=green!30,caption={},inline]{#1}}
 \newcommand{\professor}[1]{\todo[author=\textbf{Professor},color=red!30,caption={},inline]{#1}}
 
 % Permite usar o comando \hl{} para evidenciar texto.
-\usepackage{soulutf8}
+\usepackage{soul}
 
 % Permite colocar espaços no final das macros quando necessário.
 \usepackage{xspace}
@@ -291,7 +289,7 @@ Quanto ao formato e à apresentação de tabelas e quadros, como se verifica na 
 	\centering
 	\caption{Exemplo de formatação de uma tabela para a apresentação de resultados}
 	\label{tbl-exemplo}
-	\begin{tabular}{S{c}S{c}S{c}}
+	\begin{tabular}{c c c}
 		\textbf{Grupo de idade (em meses)} & \textbf{Número de indivíduos no grupo} & \textbf{Indivíduos viáveis [\%]} \\
 		\hline
 		0--10		& 20	& 9,0  \\
@@ -361,7 +359,7 @@ Nesta seção deve-se resgatar as atividades previstas do Subprojeto de Pesquisa
 	\footnotesize
 	\renewcommand{\arraystretch}{2}
 	\setlength{\tabcolsep}{3pt}
-	\begin{tabular}{| S{m{5.5cm}} *{12}{| c} |}
+	\begin{tabular}{| p{5.5cm} *{12}{| c} |}
 		\hline
 		\rowcolor{lightgray}
 		\textbf{Atividade} & \textbf{set.} & \textbf{out.} & \textbf{nov.} & \textbf{dez.} & \textbf{jan.} & \textbf{fev.} & \textbf{mar.} & \textbf{abr.} & \textbf{mai.} & \textbf{jun.} & \textbf{jul.} & \textbf{ago.} \\
@@ -376,7 +374,7 @@ Nesta seção deve-se resgatar as atividades previstas do Subprojeto de Pesquisa
 		\hline
 	\end{tabular}
 	\vspace{5pt}
-	\caption*{Fonte: Produção do próprio autor.\\Nota: atividade totalmente realizada (\totalmente), atividade parcialmente realizada (\parcialmente) e atividade não realizada (\naorealizada).}
+	\caption*{Fonte: Produção do próprio autor.\\Nota: atividade totalmente realizada (\totalmente), parcialmente realizada (\parcialmente) e não realizada (\naorealizada).}
 	\caption*{\textit{Descrição do Quadro~\ref{qdr-cronograma}:} Cronograma de atividades previstas e realizadas no período de vigência do subprojeto. As atividades devem ser registradas conforme execução (atividade totalmente realizada, atividade parcialmente realizada e atividade não realizada.}
 \end{quadro}
 
