@@ -4,7 +4,7 @@
 
 Esta seção descreve o resultado da atividade de levantamento de requisitos.
 A Subseção~\ref{sec-requisitos-minimundo} descreve o minimundo do sistema e seu propósito, apresentando superficialmente suas principais características. 
-A Subseção~\ref{sec-requisitos-usuario} lista os requisitos de usuário do sistema, na forma de estórias de usuário e requisitos não-funcionais. 
+A Subseção~\ref{sec-requisitos-usuario} lista os requisitos de usuário do sistema, na forma de histórias de usuário e requisitos não-funcionais. 
 
 
 
@@ -19,13 +19,13 @@ A Subseção~\ref{sec-requisitos-usuario} lista os requisitos de usuário do sis
 \section{Requisitos de Usuário}
 \label{sec-requisitos-usuario}
 
-\vitor{Listar os principais \textit{stakeholders} do projeto no parágrafo abaixo e preencher as tabelas de estórias de usuário, requisitos não-funcionais e regras de negócio, com atenção aos identificadores e \textit{labels}. Ao preencher as lacunas, remover a marcação em amarelo (comando \textbackslash hl\{\} no \LaTeX).}
+\vitor{Listar os principais \textit{stakeholders} do projeto no parágrafo abaixo e preencher as tabelas de histórias de usuário, requisitos não-funcionais e regras de negócio, com atenção aos identificadores e \textit{labels}. Ao preencher as lacunas, remover a \hl{marcação em amarelo} (comando \textbackslash hl\{\} no \LaTeX).}
 
-Tomando por base o contexto do sistema descrito na Seção~\ref{sec-requisitos-minimundo} e considerando como principais \textit{stakeholders} \hl{(listar aqui os principais stakeholders do projeto)}, foram identificadas estórias de usuário e requisitos não-funcionais.
+Tomando por base o contexto do sistema descrito na Seção~\ref{sec-requisitos-minimundo} e considerando como principais \textit{stakeholders} \hl{(listar aqui os principais stakeholders do projeto)}, foram identificadas histórias de usuário e requisitos não-funcionais.
 
-As estórias de usuário são apresentadas na Tabela~\ref{tbl-requisitos-uss} e os requisitos não-funcionais globais (ou seja, aqueles que não são caracterizados como critérios de aceitação de estórias de usuário específicas) na Tabela~\ref{tbl-requisitos-rnfs}.
+As histórias de usuário são apresentadas na Tabela~\ref{tbl-requisitos-uss} e os requisitos não-funcionais globais (ou seja, aqueles que não são caracterizados como critérios de aceitação de histórias de usuário específicas) na Tabela~\ref{tbl-requisitos-rnfs}.
 
-% Define contador e identificador para estórias de usuário.
+% Define contador e identificador para histórias de usuário.
 \newcounter{uscount}
 \renewcommand*\theuscount{US-\arabic{uscount}}
 \newcommand*\US{\refstepcounter{uscount}\theuscount}
@@ -33,7 +33,7 @@ As estórias de usuário são apresentadas na Tabela~\ref{tbl-requisitos-uss} e 
 
 % Define uma macro para as linhas de user stories.
 % Usar \userstory{label}{dependências}{prioridade}{descrição}{critérios de qualidade (usando \item)}.
-\newcommand{\userstory}[5]{
+\newcommand{\userstorybase}[5]{
 	\\\hline
 	\cellcolor{lightgray}\textbf{ID:} & \US\label{#1} & 
 	\cellcolor{lightgray}\textbf{Depende:} & #2 & 
@@ -48,28 +48,44 @@ As estórias de usuário são apresentadas na Tabela~\ref{tbl-requisitos-uss} e 
 			\end{enumerate}
 		}		
 	}\\\hline
+}
+\newcommand{\userstory}[5]{
+	\userstorybase{#1}{#2}{#3}{#4}{#5}
 	\multicolumn{6}{c}{}
 }
+\newcommand{\userstorywithscreen}[6]{
+	\userstorybase{#1}{#2}{#3}{#4}{#5}
+	\multicolumn{6}{l}{\rule{0pt}{1mm}}\\
+	\multicolumn{6}{l}{\textbf{Telas:}}\\
+    #6
+	\multicolumn{6}{l}{}	
+}
 
-\vitor{A Tabela~\ref{tbl-requisitos-uss} traz exemplos de estórias de usuário: genérico (\ref{us-exemplo-generico}), de cadastro/CRUD (\ref{us-exemplo-cadastro}) e de consulta (\ref{us-exemplo-consulta}). Note que:
+\vitor{A Tabela~\ref{tbl-requisitos-uss} traz exemplos de histórias de usuário: genérico (\ref{us-exemplo-generico}), de cadastro/CRUD (\ref{us-exemplo-cadastro}) e de consulta (\ref{us-exemplo-consulta}). Note que:
 	\begin{itemize}
-		\item As estórias possuem um \textit{label} (ex.: \texttt{us-exemplo-generico}). Sugere-se não utilizar números sequenciais (ex.: \texttt{us-01}, \texttt{us-02}, etc.) mas sim algo que identifique aquela estória (ex.: \texttt{us-cadastrar-usuarios}); 
-		\item Há um padrão de critérios de aceitação para estórias de cadastro e de consulta. Sugere-se seguir o padrão, preenchendo as lacunas e ajustando onde necessário;
-		\item As dependências são especificadas por meio dos IDs das outras estórias de usuário das quais aquela estória depende, separadas por vírgula;
-		\item Já a prioridade deve ser especificada com um dos seguintes valores: Alta, Média ou Baixa.
+		\item As histórias possuem um \textit{label} (ex.: \texttt{us-exemplo-generico}). Sugere-se não utilizar números sequenciais (ex.: \texttt{us-01}, \texttt{us-02}, etc.) mas sim algo que identifique aquela história (ex.: \texttt{us-cadastrar-usuarios}); 
+		\item Há um padrão de critérios de aceitação para histórias de cadastro e de consulta. Sugere-se seguir o padrão, preenchendo as lacunas e ajustando onde necessário;
+		\item As dependências são especificadas por meio dos IDs das outras histórias de usuário das quais aquela história depende, separadas por vírgula;
+		\item Já a prioridade deve ser especificada com um dos seguintes valores: Alta, Média ou Baixa;
+		\item Há dois tipos de comando \LaTeX\ para inserção de uma história de usuário no documento: \texttt{\textbackslash userstory} e \texttt{\textbackslash userstorywithscreen}. O segundo adiciona ao final da descrição da história um espaço para exibição de telas de protótipo. Recomenda-se a construção de protótipos de baixa ou alta fidelidade (ex.: usando Figma) e a inclusão das telas no documento após aprovação junto aos stakeholders. A primeira história exemplifica a inclusão de telas.
 	\end{itemize}}
 
 \begin{longtable}{|r|p{1.3cm}|r|p{4cm}|r|p{1.3cm}|}
-\caption{Estórias de Usuário.}
+\caption{Histórias de Usuário.}
 \label{tbl-requisitos-uss}
 
-% Especificar as estórias de usuário abaixo, utilizando a macro, substituindo os exemplos.
-\userstory{us-exemplo-generico}{}{Baixa}
+% Especificar as histórias de usuário abaixo, utilizando a macro, substituindo os exemplos.
+\userstorywithscreen{us-exemplo-generico}{}{Baixa}
 {Como \hl{ator}, quero \hl{função}, para \hl{finalidade}. \hl{(Genérico)}}
 {
 \item Critério de aceitação 1;
 \item Critério de aceitação 2;
 \item Critério de aceitação N.
+}
+{
+    \multicolumn{6}{c}{\includegraphics[width=\textwidth]{figuras/fig-us-exemplo-generico-01.jpg}} \\
+    
+    \multicolumn{6}{c}{\includegraphics[width=\textwidth]{figuras/fig-us-exemplo-generico-02.png}}
 }
 
 \userstory{us-exemplo-cadastro}{\ref{us-exemplo-generico}}{Média}
@@ -93,7 +109,7 @@ As estórias de usuário são apresentadas na Tabela~\ref{tbl-requisitos-uss} e 
 }
 \end{longtable}
 
-\vitor{A Tabela~\ref{tbl-requisitos-rnfs} deve ser preenchida com os requisitos não-funcionais, seguindo as mesmas recomendações quanto aos \textit{labels} e quanto à prioridade feita para as estórias de usuário. Na coluna \textbf{Categoria}, sugere-se usar características de qualidade definidas pelo modelo de qualidade de produtos de software da norma ISO/IEC 25010, conforme discutido por Falbo em suas Notas de Aula de Projeto de Sistemas, Seção 2.3.}
+\vitor{A Tabela~\ref{tbl-requisitos-rnfs} deve ser preenchida com os requisitos não-funcionais, seguindo as mesmas recomendações quanto aos \textit{labels} e quanto à prioridade feita para as histórias de usuário. Na coluna \textbf{Categoria}, sugere-se usar características de qualidade definidas pelo modelo de qualidade de produtos de software da norma ISO/IEC 25010, conforme discutido por Falbo em suas Notas de Aula de Projeto de Sistemas, Seção 2.3.}
 
 % Define contador e identificador para requisitos não funcionais.
 % Usar \RNF\label{rnf-nome-do-label} para cada requisito definido.
