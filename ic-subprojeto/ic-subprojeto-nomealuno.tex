@@ -10,45 +10,107 @@
 % or (at your option) any later version. The latest version of this 
 % license is in http://www.latex-project.org/lppl.txt.
 % =====================================================================
-\documentclass[10pt, a4paper]{article}
+\documentclass[12pt, a4paper]{article}
 
+% Importa pacotes a serem utilizados no documento.
 \usepackage[pdftex]{graphicx,color}
 \usepackage[dvipsnames]{xcolor,colortbl}
 \usepackage[hidelinks]{hyperref}
 \usepackage{anysize}
 \usepackage{graphicx}
 \usepackage[utf8]{inputenc}
-\usepackage[portuges,brazilian]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
 \usepackage{fancyhdr}
 \usepackage{ifthen}
 \usepackage{array}
 \usepackage{natbib}
-%\usepackage{ tipa }
-\usepackage{amssymb}
 \usepackage{amsmath}
-%\usepackage[usenames,dvipsnames]{xcolor} %to allow for color changes
-%\definecolor{light-gray}{gray}{0.80} % defines the colour.
-%\usepackage{cite} % to allow line breaks inside citations
-
-%% Para redução de espaço entre os itens da bibliografia
-	\let\oldbibliography\thebibliography
-	\renewcommand{\thebibliography}[1]{\oldbibliography{#1}
-	\setlength{\itemsep}{0pt}}
-
-\usepackage{helvet}
-\renewcommand{\familydefault}{\rmdefault}
-
 \usepackage{enumerate}
 \usepackage{adjustbox}
-
-\usepackage{parskip}% http://ctan.org/pkg/parskip
-\setlength{\parindent}{0pt}
-
 \usepackage{titlesec}
+\usepackage{mathptmx}
 
+% Reduz o espaço entre os itens da bibliografia
+\let\oldbibliography\thebibliography
+\renewcommand{\thebibliography}[1]{\oldbibliography{#1}
+\setlength{\itemsep}{0pt}}
+
+% Configura a fonte do documento.
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+% Configura espaçamento 1,5 entre linhas.
+\usepackage{setspace}
+\onehalfspacing
+
+% Configura espaçamento entre os parágrafos.
+\usepackage{parskip}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt} 
+\linespread{1.25}
+
+% Configura tamanho dos títulos.
 \titleformat{\section}
-  {\normalfont\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
+  {\normalfont\fontsize{14}{16}\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
 
+% Configura o tamanho e alinhamento das legendas.
+\usepackage{caption}
+\usepackage{subcaption}
+\captionsetup{font={footnotesize}, labelsep=endash}
+\captionsetup{singlelinecheck=false,justification=raggedright}
+\captionsetup[subfigure]{justification=centering, singlelinecheck=true}
+\captionsetup[figure]{skip=2pt}
+\captionsetup[grafico]{skip=2pt}
+\captionsetup[quadro]{skip=2pt}
+\captionsetup[table]{skip=2pt}
+
+
+% Cria um tipo coluna com alinhamento à esquerda.
+\usepackage{tabularx}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+% Define opção de espaçamento interno em tabelas.
+
+% Define os elementos gráfico e quadro.
+\usepackage{newfloat}
+\DeclareFloatingEnvironment[name={Gráfico}]{grafico}
+\DeclareFloatingEnvironment[name={Quadro}]{quadro}
+
+% Configura listas enumeradas.
+\usepackage{enumitem}
+\setlist[enumerate]{nosep}
+
+% Permite inclusão de notas, úteis para revisão.
+\setlength{\marginparwidth}{2cm}
+\usepackage[colorinlistoftodos, textwidth=20mm, textsize=footnotesize]{todonotes}
+\newcommand{\aluno}[1]{\todo[author=\textbf{Aluno},color=green!30,caption={},inline]{#1}}
+\newcommand{\professor}[1]{\todo[author=\textbf{Professor},color=red!30,caption={},inline]{#1}}
+
+% Permite usar o comando \hl{} para evidenciar texto.
+\usepackage{soul}
+
+% Permite colocar espaços no final das macros quando necessário.
+\usepackage{xspace}
+
+% Definição de símbolos para o cronograma.
+\usepackage{amssymb}
+\usepackage{pifont}
+\usepackage{tikz}
+\newcommand{\totalmente}{\ding{51}\xspace}
+\newcommand{\parcialmente}{%
+\begin{tikzpicture}[baseline=-0.5ex]
+    \draw (0,0) circle (0.8ex);
+    \fill (0,0) -- (90:0.8ex) arc (90:270:0.8ex) -- cycle;
+\end{tikzpicture}}
+\newcommand{\naorealizada}{%
+\begin{tikzpicture}[baseline=0ex, line width=0.25ex]
+    \draw (0,0) -- (1.2ex,1.2ex);
+    \draw (0,1.2ex) -- (1.2ex,0);
+\end{tikzpicture}}
+
+
+% Definição de macros.
 \newcommand{\mnras}{Mon. Not. R. Astron. Soc.}
 \newcommand{\aap}{Astronomy $\&$ Astrophysics}
 \newcommand{\apjs}{ApJS}
@@ -57,91 +119,97 @@
 \newcommand{\aj}{Astron. J.}
 \newcommand{\pasa}{PASA}
 \newcommand{\nat}{Nature}
-
-\usepackage{mathptmx}
-\usepackage{tabularx}
-
-\usepackage{caption}
-\usepackage{subcaption}
-
-\usepackage{newfloat}
-\DeclareFloatingEnvironment[name={Gráfico}]{grafico}
-\DeclareFloatingEnvironment[name={Quadro}]{quadro}
-
-\usepackage{enumitem}
-\setlist[enumerate]{itemsep=1pt,parsep=0pt,before={\parskip=6mm}}
-
-% Colorinlistoftodos package: to insert colored comments so authors can collaborate on the content.
-\usepackage[colorinlistoftodos, textwidth=20mm, textsize=footnotesize]{todonotes}
-\newcommand{\aluno}[1]{\todo[author=\textbf{Aluno},color=green!30,caption={},inline]{#1}}
-\newcommand{\professor}[1]{\todo[author=\textbf{Professor},color=red!30,caption={},inline]{#1}}
-
-%\marginsize{left}{right}{top}{bottom}
-\marginsize{30mm}{30mm}{15mm}{15mm}
-
-\renewcommand{\arraystretch}{1.5}
-
-
-\usepackage{fancyhdr}
-\usepackage{afterpage}
-\pagestyle{fancy}
-\fancyhf{} % clear all fields
-\fancyhead[R]{\color{Gray} Universidade Federal do Espírito Santo\\ Programa Institucional de Iniciação Científica\\ Subprojeto de Iniciação Científica}
-\setlength{\headheight}{30pt}
-\renewcommand{\headrulewidth}{0pt}
-
-%\pagenumbering{arabic}
-
-% Pacote xspace: para colocar espaços no final das macros quando necessário.
-\usepackage{xspace}
-
-
-% Definição de macros.
 \newcommand{\java}{Java\texttrademark\xspace}
 
+% Configuração das margens.
+\usepackage[a4paper, left=29mm, top=30mm, right=19mm, bottom=20mm, includehead, headsep=25mm]{geometry}
+\addtolength{\voffset}{-25mm}
+\addtolength{\textheight}{25mm}
 
+% Definição do cabeçalho.
+% (*) Substituir a área do conhecimento e remover o \color{Red}.
+\usepackage{afterpage}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\fontsize{10}{12}\selectfont\color{Gray} Universidade Federal do Espírito Santo\\ Programa Institucional de Iniciação Científica\\ Subprojeto de Iniciação Científica\\ {\color{Red} Área do Conhecimento (CNPq)}}
+\renewcommand{\headrulewidth}{0pt}
 
+% Definição do rodapé.
+\fancyfoot[R]{\thepage}
+\renewcommand{\footrulewidth}{0pt}
+
+% Início do documento.
 \begin{document}
 
-\afterpage{\cfoot{\thepage}}
-
-
-
 \begin{center}
- {\Large \bf  Subprojeto de Iniciação Científica - PIIC/UFES}
- \end{center}
+{\bf\large Subprojeto de Iniciação Científica}	
+\end{center}
 
-\vspace{.5cm}
-
-
+% (*) Preencher {\bf } com dados do projeto e subprojeto.
 \bgroup
-\def\arraystretch{2}
-\begin{tabularx}{\textwidth}{|>{\columncolor{gray!25}}l|X|}
+\def\arraystretch{1.1}
+\begin{tabularx}{\textwidth}{|>{\columncolor{gray!25}}L{61mm}|L{92mm}|}
 \hline
-{\bf Edital:} & Edital Piic 20\_\_ /20\_\_ \\
+{\bf Edital:} & {\bf Edital PIIC 20\_\_ /20\_\_} \\
 \hline
-{\bf Título do Projeto:} &  \\
+{\bf Área do Conhecimento (CNPq):} & {\bf } \\
 \hline
-{\bf Título do Subprojeto:} &  \\
+{\bf Subárea do Conhecimento (CNPq):} & {\bf } \\
 \hline
-{\bf Candidato a Orientador:}&   \\
+{\bf Título do Projeto:} & {\bf } \\
 \hline
-{\bf Candidato a Bolsista:} &   \\
+{\bf Título do Subprojeto:} & {\bf } \\
 \hline
-{\bf Membros da Equipe do Projeto:} &  \\
-\hline  
+{\bf Orientador(a):} & {\bf } \\
+\hline
+{\bf Estudante:} & {\bf } \\
+\hline
 \end{tabularx}
 \egroup
+\vspace{2mm}
 
+% (*) Marcar X no lugar de \ do meio em (\ \ \ ).
+% (*) Preencher { } em \multicolumn{2}{|l|}{ } se for o caso.
+\bgroup
+\def\arraystretch{1.1}
+\begin{tabularx}{\textwidth}{|>{\columncolor{gray!25}}L{61mm}|L{44mm}|L{44mm}|}
+\hline
+{Estudante apresenta alguma necessidade de acessibilidade?} & {\vspace{1mm} Sim (\ \ \ )} & {\vspace{1mm} Não (\ \ \ )} \\
+\hline
+{Se sim, informar o recurso ou suporte de acessibilidade que necessita.} & \multicolumn{2}{|l|}{ } \\
+\hline
+\end{tabularx}
+\egroup
 \vspace{.5cm}
 
-%\bigskip
+% (*) Ler as orientações gerais e excluí-las na versão final.
+{\color{Red} 
+{\bf Orientações Gerais (remover na versão final)}
+\begin{itemize}
+	\item Este documento deve ser utilizado como modelo para elaboração do subprojeto de iniciação científica.
+	\item O subprojeto deve ser enviado pelo(a) proponente via Sistema Acadêmico de Pesquisa (SAPPG), conforme as normas e o cronograma do edital do Piic.
+	\item O subprojeto deve conter as seções: {\bf Resumo; Introdução; Objetivos; Metodologia; Plano de Trabalho/Cronograma; Referências}.
+	\item Formatação mínima obrigatória (já configurada neste modelo \LaTeX):
+	\begin{itemize}
+		\item Tamanho A4; margens: 3 cm (superior e esquerda) e 2 cm (inferior e direita)
+		\item Fonte \textbf{Arial}, corpo \textbf{12} no texto e \textbf{14} nos títulos
+		\item Espaçamento \textbf{1,5} entre linhas
+		\item Alinhamento justificado
+		\item Sem recuo na primeira linha dos parágrafos
+		\item Cabeçalho em Arial 10
+		\item Inserir, na \textbf{quarta linha do cabeçalho}, a \textbf{área do conhecimento conforme classificação do CNPq}
+		\item O documento não deve exceder 15 páginas
+		\item O documento deve ser exportado em \textbf{PDF}
+	\end{itemize}
+\end{itemize}
+}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Resumo}
 
-A NBR 6028:2003 estabelece os requisitos para redação e apresentação de resumos, definindo-os como sendo uma ``apresentação concisa dos pontos relevantes de um documento''~\citep[p. 1]{abnt:nbr6028}. No caso do subprojeto de pesquisa, este resumo seria do tipo informativo, isto é, que deve informar ao leitor uma breve contextualização do trabalho proposto, as justificativas, os objetivos, a metodologia e os resultados esperados. O resumo deve ser composto de uma sequência de frases concisas, afirmativas (e não de enumeração de tópicos), em um parágrafo único. Por outro lado, devem-se evitar símbolos e contrações que não sejam de uso corrente, bem como fórmulas, equações, diagramas e etc. Quanto à sua extensão, o resumo deve ter de 150 a 500 palavras.
+Faça uma breve contextualização do trabalho proposto contendo as justificativas, os objetivos, a metodologia e os resultados esperados. O resumo deve ser composto de uma sequência de frases concisas, afirmativas (e não de enumeração de tópicos), em um parágrafo único. Devem-se evitar símbolos e contrações que não sejam de uso corrente, bem como fórmulas, equações, diagramas e etc. Quanto à sua extensão, o resumo deve ter de 150 a 300 palavras.
       
 {\bf Palavras-chave:} As palavras-chave devem figurar logo abaixo do resumo, antecedidas da expressão ``Palavras-chave:'', separadas entre si por ponto e finalizadas também por ponto. Podem ser informadas, no máximo, 06 (seis) palavras chave.
       
@@ -150,13 +218,13 @@ A NBR 6028:2003 estabelece os requisitos para redação e apresentação de resu
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introdução}
 
-Este documento deve ser utilizado como modelo para a elaboração do subprojeto de pesquisa no âmbito do Programa Institucional de Iniciação Científica (PIIC) da UFES. Deve ser composto das seguintes seções: resumo, introdução, objetivos, metodologia, plano de trabalho / cronograma e referências. O texto do subprojeto de pesquisa deve ser preparado considerando que as 6 (seis) seções que compõem o documento não excedam 10 páginas de formato A4 com margens de 3 cm (esquerda e superior) e de 2 cm (direita e inferior), usando fonte Times New Roman, tamanho da fonte 10, com espaçamento entre linhas de 1,5, sem recuo na primeira linha de cada parágrafo e com alinhamento justificado. Já os títulos das seções também devem utilizar a fonte Times New Roman, mas com tamanho 12. Por fim, o cabeçalho de todas as páginas deve ser mantido de acordo com a formatação deste modelo.
+Na Introdução, o(a) autor(a) deve apresentar uma descrição geral do tema de estudo, mostrando sua relevância e as lacunas existentes na literatura, citando, sempre que possível, trabalhos de outros autores para permitir a contextualização de sua pesquisa. Deve-se também ressaltar a ligação do subprojeto com o projeto de pesquisa ao qual está vinculado. 
 
-Os conteúdos de cada seção devem estar de acordo com as recomendações descritas neste modelo. Na introdução, o autor deve apresentar uma descrição geral do tema de estudo, mostrando sua relevância, citando, sempre que possível, trabalhos de outros autores para permitir a contextualização de sua pesquisa. Nesta seção, deve-se também ressaltar a ligação do subprojeto de Iniciação Científica com o projeto de pesquisa ao qual está vinculado.
+Em todo o documento, ilustrações (figuras, gráficos, fotos, fluxogramas, quadros e etc.) e tabelas podem também ser incluídas, em caráter complementar e opcional, a fim de contextualizar o tema de estudo. 
 
-Este documento pode ainda conter ilustrações (figuras, gráficos, fluxogramas, quadros e etc.) e tabelas a fim de explicar ou complementar visualmente o texto. Desta forma, torna-se obrigatória a inclusão de um comentário sobre a ilustração ou a tabela no texto. A NBR 15287:2011 reforça este fato quando diz que ``A ilustração deve ser citada no texto e inserida o mais próximo possível do trecho a que se refere.''~\citep[p. 8]{abnt:nbr15287}. Cabe ressaltar que a citação no texto sempre deve preceder a ilustração ou a tabela. Estes elementos devem estar centralizados na página, sua identificação na parte superior e a indicação da fonte consultada (elemento obrigatório, mesmo que seja produção do próprio autor), legenda, notas e outras informações necessárias à sua compreensão (se houver), na parte inferior (alinhados à borda esquerda da ilustração e limitados pela borda direita da mesma), como mostra a Figura~\ref{fig-exemplo} e o Gráfico~\ref{graf-exemplo}.
+As ilustrações e tabelas devem ser inseridas imediatamente após o trecho ao qual fazem referência. Estes elementos devem estar centralizados na página, com identificação na parte superior, em fonte Arial 10. Na parte inferior, deve constar a indicação da fonte consultada (elemento obrigatório, mesmo que seja ``produção do próprio autor''), legenda, notas e/ou outras informações necessárias à compreensão (se houver). O texto da parte inferior também deve ser formatado em fonte Arial 10, alinhado à borda esquerda da ilustração e limitado pela borda direita da mesma, como mostra a Figura~\ref{fig-exemplo} e o Gráfico~\ref{graf-exemplo}.
 
-\begin{figure}[h]
+\begin{figure}[h!]
 	\centering
 	\caption{(a) Fotografia do modelo de edificação utilizado no experimento e (b) representação esquemática do comportamento do escoamento sobre a edificação}
 	\label{fig-exemplo}
@@ -173,16 +241,31 @@ Este documento pode ainda conter ilustrações (figuras, gráficos, fluxogramas,
 		\caption{}
 		\label{fig-exemploB}
 	\end{subfigure}
+	\vspace{5pt}
 	\caption*{Fonte: \cite{toledo-pereira:clacs2004}.}
+	\caption*{\textit{Descrição da Figura~\ref{fig-exemplo}:} fotografia de um modelo reduzido de edificação e representação esquemática do comportamento do escoamento sobre a edificação.}
 \end{figure}
 
-\begin{grafico}[h]
+\begin{grafico}[h!]
 	\centering
 	\caption{Consumo final de energia por fonte no Brasil em 2011}
 	\label{graf-exemplo}
 	\includegraphics[width=.75\textwidth]{graf-exemplo}	
+	\vspace{5pt}
 	\caption*{Fonte: \cite{epe:ben2011}.}
+	\caption*{Nota: $^1$ Inclui biodiesel. $^2$ Inclui apenas gasolina A (automotiva). $^3$ Inclui gás de refinaria, coque de carvão mineral e carvão vegetal, dentre outros.}
+	\caption*{\textit{Descrição do Gráfico~\ref{graf-exemplo}:} gráfico de setores (estilo pizza) com efeito 3D, intitulado ``Consumo final de energia por fonte no Brasil em 2011''. O gráfico utiliza diversas cores para distinguir doze categorias de fontes energéticas. A maior fonte de consumo é o óleo diesel, com 19,1\%.}
 \end{grafico}
+
+No caso de figuras e tabelas, sugere-se a inserção de um {\bf texto alternativo}, que é uma breve descrição textual que permite a pessoas com deficiência visual, que utilizam softwares leitores de tela, compreendam o conteúdo visual do relatório. 
+
+{\bf Orientações para a redação do texto alternativo:}
+{\bf Seja Objetivo:} Comece pela informação mais importante. Evite expressões como ``Imagem de...'' ou ``Foto de...'', pois o leitor de tela já identifica o elemento como gráfico.
+\begin{enumerate}[label=\alph*)]
+	\item {\bf Hierarquia de Dados:} Em gráficos, descreva primeiro o tipo (ex: "Gráfico de barras"), o título e os valores de maior destaque ou tendência geral.
+	\item {\bf Contexto Científico:} Descreva apenas o que é relevante para a pesquisa. Se uma cor no gráfico indica uma variável específica, mencione-a; se for apenas decorativa, não é necessário descrevê-la.
+	\item {\bf Tabelas:} Certifique-se de que a descrição resuma a principal conclusão que os dados da tabela apresentam.
+\end{enumerate}
 
 As tabelas e os quadros, apesar de possuírem certa semelhança entre si, diferenciam-se não apenas no formato exigido, mas também pelo conteúdo que exibem:
 
@@ -191,7 +274,7 @@ As tabelas e os quadros, apesar de possuírem certa semelhança entre si, difere
 	\item uma tabela apresenta informações ou resultados quantitativos, ou seja, números tratados estatisticamente.
 \end{enumerate}
 
-Quanto ao formato e à apresentação de tabelas e quadros, como se verifica na Tabela~\ref{tbl-exemplo} e no Quadro~\ref{qdr-exemplo}, devem-se observar as seguintes regras~\citep{fibge:nat1993}:
+Quanto ao formato e à apresentação de tabelas e quadros, como se verifica na Tabela~\ref{tbl-exemplo} e no Quadro~\ref{qdr-exemplo}, devem-se observar as seguintes regras:
 
 \begin{enumerate}[label=\alph*)]
 	\item a moldura das tabelas não deve ser fechada com traços verticais à esquerda e à direita;
@@ -200,27 +283,26 @@ Quanto ao formato e à apresentação de tabelas e quadros, como se verifica na 
 \end{enumerate}
 
 \begin{table}[h]
+	\fontsize{10}{12}
 	\centering
 	\caption{Exemplo de formatação de uma tabela para a apresentação de resultados}
 	\label{tbl-exemplo}
-	\begin{tabular}{ccc}
+	\begin{tabular}{c c c}
+		\textbf{Grupo de idade (em meses)} & \textbf{Número de indivíduos no grupo} & \textbf{Indivíduos viáveis [\%]} \\
 		\hline
-		\textbf{Grupos de idade [meses]} & \textbf{Número de indivíduos no grupo} & \textbf{Indivíduos viáveis [\%]} \\
+		0--10		& 20	& 9,0  \\
+		10--15		& 20	& 10,0 \\
+		15--20		& 25	& 4,0  \\
+		Acima de 20	& 15	& 3,4  \\
 		\hline
-		0 -- 10		& 20	& 9,0
-\\
-		10 -- 15	& 20	& 10,0
-\\
-		15 -- 20	& 25	& 4,0
-\\
-		Acima de 20	& 15	& 3,4
-\\
-		\hline	
 	\end{tabular}
-	\caption*{Fonte: Produção do próprio autor.}
+	\vspace{5pt}
+	\caption*{Fonte: Produção do(a) próprio(a) autor(a).}
+	\caption*{\textit{Descrição da Tabela~\ref{tbl-exemplo}:} tabela com bordas horizontais simples no topo e na base, com dados ilustrativos para demonstrar as normas de apresentação de dados.}
 \end{table}
 
 \begin{quadro}[h]
+	\fontsize{10}{12}
 	\centering
 	\caption{Dimensionamento dos elementos de um conversor \textit{boost}}
 	\label{qdr-exemplo}
@@ -247,29 +329,32 @@ Quanto ao formato e à apresentação de tabelas e quadros, como se verifica na 
 		Interruptor				& $IRFP360$	
 	\\\hline
 	\end{tabular}
+	\vspace{5pt}
 	\caption*{Fonte: \cite{menegaz:thesis2005}.}
+	\caption*{\textit{Descrição do Quadro~\ref{qdr-exemplo}:} o quadro apresenta duas colunas e nove linhas com bordas pretas visíveis em todas as divisões, com dados ilustrativos para demonstrar as normas de apresentação de dados.}
 \end{quadro}
 
 Outros elementos textuais que podem fazer parte do subprojeto de pesquisa são as equações e fórmulas. Para facilitar a leitura, a NBR 15287:2011 exige que as equações sejam destacadas do texto e numeradas com algarismos arábicos entre parênteses, alinhados à margem direita da página, como mostra a Equação~\eqref{eqn-exemplo}. Assim como no caso de figuras, tabelas e quadros, a citação, ou a chamada, de todas as equações ou fórmulas no texto é obrigatória, e sua localização deve acontecer o mais próximo possível do trecho onde são mencionadas pela primeira vez.
 
-\begin{equation}
+\begin{gather}
 	\label{eqn-exemplo}
-	v_{r}(t) = R \times i(t)
-\end{equation}
+	v_{r}(t) = R \times i(t) \\[0.2cm]
+	\parbox{\textwidth}{\small\textit{Descrição da Equação~\eqref{eqn-exemplo}:} equação matemática centralizada, identificada pelo número 1 entre parênteses à direita. A fórmula descreve uma relação ilustrativa para demonstrar as normas de apresentação dos dados.}\nonumber
+\end{gather}
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Objetivos}
 
-Esta seção deve conter, de forma concisa, o objetivo geral e os objetivos específicos do subprojeto, ou seja, as hipóteses que se quer demonstrar, os dispositivos que se quer montar, os compostos que se deseja sintetizar, as ideias que se deseja corroborar ou refutar e etc. Também deve-se dar, de forma concisa, as razões pelas quais se quer atingir estes objetivos.
+Esta seção deve conter, de forma concisa, o objetivo geral e os objetivos específicos do subprojeto. Os objetivos devem se relacionar com as hipóteses a serem demonstradas, os dispositivos a serem montados, os compostos a serem sintetizados e as ideias a serem corroboradas ou refutadas. 
 
  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Metodologia}
 
-Deve-se definir, com base na revisão bibliográfica ou em trabalhos preliminares, a metodologia que deverá ser adotada para testar a hipótese formulada e atingir os objetivos estabelecidos. Apresentar o procedimento de trabalho, o material que deverá ser utilizado, o tratamento da informação e o procedimento estatístico, se for o caso. Esta seção deve, entretanto, detalhar os aspectos da metodologia empregada nas atividades especificamente a serem executadas pelo estudante e apresentar sua relação com o projeto de pesquisa ao qual o subprojeto está vinculado.
+Deve-se apresentar, com base na revisão bibliográfica ou em trabalhos preliminares, a metodologia que deverá ser adotada para testar a hipótese formulada e atingir os objetivos estabelecidos. Devem ser apresentados os procedimentos de trabalho, o material que deverá ser utilizado, o tratamento da informação e o tratamento estatístico, se for o caso. Esta seção deve, portanto, detalhar os aspectos da metodologia a ser empregada nas atividades especificamente a serem executadas pelo(a) estudante e apresentar sua relação com o projeto de pesquisa ao qual o subprojeto está vinculado.
 
 
 
@@ -278,49 +363,50 @@ Deve-se definir, com base na revisão bibliográfica ou em trabalhos preliminare
 
 Esta seção deve explicitar as atividades que serão desenvolvidas pelo estudante (Quadro~\ref{qdr-atividades}) e seu cronograma de execução (Quadro~\ref{qdr-cronograma}) para que os objetivos do subprojeto possam ser alcançados, especificando período de início e término. As atividades não devem ser apenas listadas, sendo necessário apresentar uma breve descrição de sua relevância para o subprojeto proposto e a forma de execução.
 
-O cronograma de trabalho de pesquisa deverá organizar a sequência das atividades planejadas. É obrigatório prever, para o mês de fevereiro de 2022, a elaboração, pelo estudante, do relatório parcial da pesquisa, e para o mês de agosto de 2022, a elaboração do relatório final.
+O cronograma de trabalho de pesquisa deverá organizar a sequência das atividades planejadas. É recomendado prever, para o mês de fevereiro, a elaboração, pelo estudante, do relatório parcial da pesquisa, e para o mês de agosto, a elaboração do relatório final.
 
 
 \begin{quadro}[h]
-	\centering
 	\caption{Lista de atividades previstas do subprojeto}
 	\label{qdr-atividades}
-	\begin{tabular}{|p{145mm}|}
+	\begin{tabular}{|p{.98\textwidth}|}
 	\hline
-	a) Xxxx -- xxxxxxxxx \\
+	a) [Nome da atividade]: [breve descrição de sua relevância e a forma de execução] \\
 	\hline
-	b) Yyyy -- yyyyyyyyy \\
+	b) [Nome da atividade]: [breve descrição de sua relevância e a forma de execução] \\
 	\hline
-	c) Zzzzz -- zzzzzzzz \\
+	c) [Nome da atividade]: [breve descrição de sua relevância e a forma de execução] \\
+	\hline
+	d) [Nome da atividade]: [breve descrição de sua relevância e a forma de execução] \\
+	\hline
+	e) [Nome da atividade]: [breve descrição de sua relevância e a forma de execução] \\
 	\hline
 	\end{tabular}
-	\caption*{Fonte: Produção do próprio autor.}
+	\caption*{[Insira quantas linhas for necessário, respeitando o limite de páginas do documento]}
 \end{quadro}
 
 \begin{quadro}[h]
 	\centering
-	\caption{Cronograma de atividades previstas do subprojeto (set./2021 a ago./2022)}
+	\caption{Cronograma de atividades previstas e realizadas do Subprojeto (set./20\_\_ a ago./20\_\_)}
 	\label{qdr-cronograma}
-	\begin{tabular}{|p{2.7cm}|l|l|l|l|l|l|l|l|l|l|l|l|}
-	\hline
-	Atividade & set. & out. & nov. & dez. & jan. & fev. & mar. & abr. & maio & jun. & jul. & ago. \\
-	\hline
-	a) Xxxx &   &   &   &    &  &   &   &   &   &   &   &  \\
-	\hline
-	b) Yyyy &   &   &   &   &   &   &    &    &   &   &   &  \\
-	\hline
-	c) Zzzzz &   &   &   &   &   &   &   &   &    &   &  & \\
-	\hline
+	\footnotesize
+	\renewcommand{\arraystretch}{2}
+	\setlength{\tabcolsep}{3pt}
+	\begin{tabular}{| p{6.8cm} *{12}{| c} |}
+		\hline
+		\rowcolor{lightgray}
+		\textbf{Atividade} & \textbf{set} & \textbf{out} & \textbf{nov} & \textbf{dez} & \textbf{jan} & \textbf{fev} & \textbf{mar} & \textbf{abr} & \textbf{mai} & \textbf{jun} & \textbf{jul} & \textbf{ago} \\
+		\hline
+		a) [Nome da atividade] &  &   &   &    &  &   &   &   &   &   &   &  \\
+		\hline
+		b) [Nome da atividade] &  &   &   &   &   &   &    &    &   &   &   &  \\
+		\hline
+		c) [Nome da atividade] &   &   &   &   &   &   &   &   &    &   &  & \\
+		\hline
 	\end{tabular}
-	\caption*{Fonte: Produção do próprio autor.}
+	\vspace{5pt}
+	\caption*{[Insira quantas linhas for necessário, respeitando o limite de páginas do documento]}
 \end{quadro}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{Declaração}
-
-Eu, professor(a) candidato(a) a orientador(a), declaro que o subprojeto de pesquisa aqui proposto é passível de ser realizado ainda que as condições de isolamento social a que ora estamos submetidos se estendam durante toda a vigência do edital PIIC 2021/2022.
 
 
 %\bibliographystyle{apalike2}
