@@ -23,7 +23,7 @@ A Subseção~\ref{sec-requisitos-usuario} lista os requisitos de usuário do sis
 
 Tomando por base o contexto do sistema descrito na Seção~\ref{sec-requisitos-minimundo} e considerando como principais \textit{stakeholders} \hl{(listar aqui os principais stakeholders do projeto)}, foram identificadas histórias de usuário e requisitos não-funcionais.
 
-As histórias de usuário são apresentadas na Tabela~\ref{tbl-requisitos-uss} e os requisitos não-funcionais globais (ou seja, aqueles que não são caracterizados como critérios de aceitação de histórias de usuário específicas) na Tabela~\ref{tbl-requisitos-rnfs}.
+As histórias de usuário são apresentadas nas tabelas~\ref{tbl-us-exemplo-generico} a~\ref{tbl-us-exemplo-consulta} e os requisitos não-funcionais globais (ou seja, aqueles que não são caracterizados como critérios de aceitação de histórias de usuário específicas) na Tabela~\ref{tbl-requisitos-rnfs}.
 
 % Define contador e identificador para histórias de usuário.
 \newcounter{uscount}
@@ -31,65 +31,97 @@ As histórias de usuário são apresentadas na Tabela~\ref{tbl-requisitos-uss} e
 \newcommand*\US{\refstepcounter{uscount}\theuscount}
 \setcounter{uscount}{0}
 
-% Define uma macro para as linhas de user stories.
+% Separa os critérios de aceitação (cada \item) em linhas próprias da tabela, para que o
+% longtable possa quebrar a página entre um critério e outro.
+\ExplSyntaxOn
+\seq_new:N \l__us_items_seq
+\tl_new:N \l__us_rows_tl
+\int_new:N \l__us_count_int
+\cs_new_protected:Npn \usbuildrows #1
+  {
+    \seq_set_split:Nnn \l__us_items_seq { \item } { #1 }
+    \seq_remove_all:Nn \l__us_items_seq { }
+    \tl_clear:N \l__us_rows_tl
+    \int_zero:N \l__us_count_int
+    \seq_map_inline:Nn \l__us_items_seq
+      {
+        \int_incr:N \l__us_count_int
+        \tl_put_right:Nx \l__us_rows_tl
+          { \exp_not:N \uscriterion { \int_use:N \l__us_count_int } { \exp_not:n { ##1 } } }
+      }
+  }
+\cs_new:Npn \usrows { \tl_use:N \l__us_rows_tl }
+\ExplSyntaxOff
+
+% Uma linha de critério. A primeira coluna é cinza em todas as linhas; o rótulo fica inteiro na
+% primeira, alinhado ao topo. O \vskip negativo sobrepõe as linhas em meio ponto, para não aparecer
+% filete branco entre os fundos cinza; o \penalty10000 antes dele, no primeiro critério, impede a
+% quebra de página entre o primeiro e o segundo critério.
+\newcommand{\uscriterion}[2]{%
+    \cellcolor{lightgray}\ifnum#1=1 \parbox[t]{2.5cm}{\raggedleft\textbf{Critérios de\newline Aceitação:}}\fi
+    & \multicolumn{5}{|p{12cm}|}{\hangindent=15mm\hangafter=1\noindent\makebox[15mm][l]{-- CA#1:}#2}\tabularnewline
+    \noalign{\ifnum#1=1 \penalty10000 \fi\vskip-.5pt}}
+
+% Régua horizontal que não oferece ponto de quebra de página. O \hline do longtable cria, de
+% propósito, um ponto de quebra preferido no meio da régua; aqui a régua é uma linha de tabela simples,
+% cercada de \penalty10000, para que a página não quebre dentro do cabeçalho da história.
+\def\usrule{\noalign{\penalty10000}\multispan6\leaders\hrule height\arrayrulewidth\hfill\cr\noalign{\penalty10000}}
+
+% Define uma macro para as histórias de usuário. Cada história é apresentada em uma
+% tabela própria, seguida das figuras dos protótipos de interface correspondentes.
 % Usar \userstory{label}{dependências}{prioridade}{descrição}{critérios de qualidade (usando \item)}.
-\newcommand{\userstorybase}[5]{
-	\\\hline
-	\cellcolor{lightgray}\textbf{ID:} & \US\label{#1} & 
-	\cellcolor{lightgray}\textbf{Depende:} & #2 & 
-	\cellcolor{lightgray}\textbf{Prioridade:} & #3 \\\hline
-	\cellcolor{lightgray}\textbf{Descrição:} & 
-	\multicolumn{5}{|p{12cm}|}{#4}\\\hline
-	\cellcolor{lightgray}\parbox{2.5cm}{\raggedleft \textbf{Critérios de\\Aceitação:}} & 
-	\multicolumn{5}{|p{12cm}|}{
-		\parbox{12cm}{
-			\begin{enumerate}[leftmargin=15mm,label=-- CA\arabic*:]\itemsep-2mm
-				#5
-			\end{enumerate}
-		}		
-	}\\\hline
-}
+% A legenda, a linha do ID, a descrição e os dois primeiros critérios ficam sempre na mesma página.
 \newcommand{\userstory}[5]{
-	\userstorybase{#1}{#2}{#3}{#4}{#5}
-	\multicolumn{6}{c}{}
-}
-\newcommand{\userstorywithscreen}[6]{
-	\userstorybase{#1}{#2}{#3}{#4}{#5}
-	\multicolumn{6}{l}{\rule{0pt}{1mm}}\\
-	\multicolumn{6}{l}{\textbf{Telas:}}\\
-    #6
-	\multicolumn{6}{l}{}	
+    \refstepcounter{uscount}\label{#1}
+    \usbuildrows{#5}
+    \begin{longtable}{|r|p{1.3cm}|r|p{4cm}|r|p{1.3cm}|}
+    \caption{História de usuário \theuscount.}
+    \label{tbl-#1} \\*
+    \usrule
+    \cellcolor{lightgray}\textbf{ID:} & \theuscount &
+    \cellcolor{lightgray}\textbf{Depende:} & #2 &
+    \cellcolor{lightgray}\textbf{Prioridade:} & #3 \\*
+    \usrule
+    \cellcolor{lightgray}\textbf{Descrição:} &
+    \multicolumn{5}{|p{12cm}|}{#4}\\*
+    \usrule
+    \usrows
+    \hline
+    \end{longtable}
 }
 
-\vitor{A Tabela~\ref{tbl-requisitos-uss} traz exemplos de histórias de usuário: genérico (\ref{us-exemplo-generico}), de cadastro/CRUD (\ref{us-exemplo-cadastro}) e de consulta (\ref{us-exemplo-consulta}). Note que:
+\vitor{As tabelas~\ref{tbl-us-exemplo-generico} a~\ref{tbl-us-exemplo-consulta} trazem exemplos de histórias de usuário: genérico (\ref{us-exemplo-generico}), de cadastro/CRUD (\ref{us-exemplo-cadastro}) e de consulta (\ref{us-exemplo-consulta}). Note que:
 	\begin{itemize}
 		\item As histórias possuem um \textit{label} (ex.: \texttt{us-exemplo-generico}). Sugere-se não utilizar números sequenciais (ex.: \texttt{us-01}, \texttt{us-02}, etc.) mas sim algo que identifique aquela história (ex.: \texttt{us-cadastrar-usuarios}); 
 		\item Há um padrão de critérios de aceitação para histórias de cadastro e de consulta. Sugere-se seguir o padrão, preenchendo as lacunas e ajustando onde necessário;
 		\item As dependências são especificadas por meio dos IDs das outras histórias de usuário das quais aquela história depende, separadas por vírgula;
 		\item Já a prioridade deve ser especificada com um dos seguintes valores: Alta, Média ou Baixa;
-		\item Há dois tipos de comando \LaTeX\ para inserção de uma história de usuário no documento: \texttt{\textbackslash userstory} e \texttt{\textbackslash userstorywithscreen}. O segundo adiciona ao final da descrição da história um espaço para exibição de telas de protótipo. Recomenda-se a construção de protótipos de baixa ou alta fidelidade (ex.: usando Figma) e a inclusão das telas no documento após aprovação junto aos stakeholders. A primeira história exemplifica a inclusão de telas.
+		\item Recomenda-se a construção de protótipos de baixa ou alta fidelidade (ex.: usando Figma) e a inclusão das telas no documento após aprovação junto aos stakeholders. A primeira história exemplifica a inclusão de telas, logo abaixo da tabela da respectiva história de usuário.
 	\end{itemize}}
 
-\begin{longtable}{|r|p{1.3cm}|r|p{4cm}|r|p{1.3cm}|}
-\caption{Histórias de Usuário.}
-\label{tbl-requisitos-uss}
 
 % Especificar as histórias de usuário abaixo, utilizando a macro, substituindo os exemplos.
-\userstorywithscreen{us-exemplo-generico}{}{Baixa}
-{Como \hl{ator}, quero \hl{função}, para \hl{finalidade}. \hl{(Genérico)}}
+\userstory{us-exemplo-generico}{}{Baixa}
+{Como \hl{ator}, quero \hl{função}, para \hl{finalidade}.}
 {
 \item Critério de aceitação 1;
 \item Critério de aceitação 2;
 \item Critério de aceitação N.
 }
-{
-    \multicolumn{6}{c}{\includegraphics[width=\textwidth]{figuras/fig-us-exemplo-generico-01.jpg}} \\
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{figuras/fig-us-exemplo-generico-01.jpg}
+\end{figure}
     
-    \multicolumn{6}{c}{\includegraphics[width=\textwidth]{figuras/fig-us-exemplo-generico-02.png}}
-}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{figuras/fig-us-exemplo-generico-02.jpg}
+\end{figure}
+
 
 \userstory{us-exemplo-cadastro}{\ref{us-exemplo-generico}}{Média}
-{Como \hl{ator}, quero cadastrar \hl{objeto}, para \hl{finalidade}.  \hl{(Cadastro)}}
+{Como \hl{ator}, quero cadastrar \hl{objeto}, para \hl{finalidade}.}
 {
 \item O sistema deve prover funcionalidades ``CRUD'';
 \item No cadastro (C), devem ser informados: \hl{campos obrigatórios}. Opcionalmente, podem ser informados: \hl{campos opcionais}. O sistema deve registrar automaticamente: \hl{campos com valores gerados automaticamente, se houver};
@@ -102,12 +134,12 @@ As histórias de usuário são apresentadas na Tabela~\ref{tbl-requisitos-uss} e
 }
 
 \userstory{us-exemplo-consulta}{\ref{us-exemplo-generico}, \ref{us-exemplo-cadastro}}{Alta}
-{Como \hl{ator}, quero consultar \hl{informações}, para \hl{finalidade}. \hl{(Consulta)}}
+{Como \hl{ator}, quero consultar \hl{informações}, para \hl{finalidade}.}
 {
 \item Para realizar a consulta, o usuário deve informar como parâmetros: \hl{parâmetros};
 \item Devem ser apresentadas as seguintes informações para o usuário: \hl{objetos e seus dados, relacionados aos parâmetros informados}.
 }
-\end{longtable}
+
 
 \vitor{A Tabela~\ref{tbl-requisitos-rnfs} deve ser preenchida com os requisitos não-funcionais, seguindo as mesmas recomendações quanto aos \textit{labels} e quanto à prioridade feita para as histórias de usuário. Na coluna \textbf{Categoria}, sugere-se usar características de qualidade definidas pelo modelo de qualidade de produtos de software da norma ISO/IEC 25010, conforme discutido por Falbo em suas Notas de Aula de Projeto de Sistemas, Seção 2.3.}
 
